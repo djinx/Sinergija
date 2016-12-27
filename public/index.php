@@ -12,4 +12,8 @@ Twig_Autoloader::register();
 $loader = new Twig_Loader_Filesystem('../templates/');
 $twig = new Twig_Environment($loader, array());
 
-echo $twig->render('home.html');
+if(isset($_SESSION['username'])){
+    echo $twig->render('home.html');
+}else{
+    echo $twig->render('login.php');
+}
