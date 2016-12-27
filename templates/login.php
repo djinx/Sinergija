@@ -1,11 +1,3 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Admin
- * Date: 27.12.2016
- * Time: 15:55
- */
-?>
 <html lang="sr" ng-app="application">
 
 <head>
@@ -25,18 +17,21 @@
         <div class="medium-3 columns hide-for-small-only">&nbsp;</div>
         <div class="small-12 medium-6 columns">
             <img src="../public/assets/logo.png" alt="Sinergija logo" />
-            <label>Korisničko ime
-                <input type="text" id="username" name="username" placeholder="Korisničko ime" required pattern="alpha_numeric">
-                <span class="form-error">
-                    Popunjavanje ovog polja je obavezno!
-                </span>
-            </label>
-            <label>Lozinka
-                <input type="password" id="password" name="password" placeholder="Lozinka" required >
-                <span class="form-error">
-                    Popunjavanje ovog polja je obavezno!
-                </span>
-            </label>
+            <form action="../sql/logovanje.php" method="post">
+                <label>Korisničko ime
+                    <input type="text" id="username" name="username" placeholder="Korisničko ime" required>
+                    <span class="form-error">
+                        Popunjavanje ovog polja je obavezno!
+                    </span>
+                </label>
+                <label>Lozinka
+                    <input type="password" id="password" name="password" placeholder="Lozinka" required >
+                    <span class="form-error">
+                        Popunjavanje ovog polja je obavezno!
+                    </span>
+                </label>
+                <button type="submit" name="login-credentials" class="expanded button">Uloguj se</button>
+            </form>
         </div>
         <div class="medium-3 columns hide-for-small-only">&nbsp;</div>
     </div>

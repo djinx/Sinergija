@@ -8,5 +8,20 @@
  */
 class Database
 {
+    private static $db = null;
+
+    public static function getInstance(){
+        if(!Database::$db){
+            Database::$db = new mysqli('localhost', 'omikron', '123456', 'Sinergija');
+            if(Database::$db->connect_errno){
+                die("Problem sa povezivanjem!");
+            }
+            return Database::$db;
+        }else{
+            return Database::$db;
+        }
+    }
+
+    private function __construct(){}
 
 }

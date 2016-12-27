@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base.php' %}
 
 {% block title %}Početna{% endblock %}
 
@@ -14,6 +14,9 @@
             <tr><td>063734xxxx</td></tr>
             <tr><td>ajzenhamernikola@gmail.com</td></tr>
         </table>
+        <form action="../sql/odjavljivanje.php" method="post">
+            <button type="submit" class="expanded button">Izloguj se</button>
+        </form>
 
     </div>
     <div class="small-12 medium-9 columns">

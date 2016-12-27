@@ -41,9 +41,9 @@ class Twig_Tests_Loader_ChainTest extends PHPUnit_Framework_TestCase
         $this->assertSame('', $loader->getSourceContext('errors/index.php')->getPath());
         $this->assertEquals('baz', $loader->getSourceContext('errors/index.php')->getCode());
 
-        $this->assertEquals('errors/base.html', $loader->getSourceContext('errors/base.html')->getName());
-        $this->assertEquals(realpath($path.'/errors/base.html'), realpath($loader->getSourceContext('errors/base.html')->getPath()));
-        $this->assertNotEquals('baz', $loader->getSourceContext('errors/base.html')->getCode());
+        $this->assertEquals('errors/base.php', $loader->getSourceContext('errors/base.php')->getName());
+        $this->assertEquals(realpath($path.'/errors/base.php'), realpath($loader->getSourceContext('errors/base.php')->getPath()));
+        $this->assertNotEquals('baz', $loader->getSourceContext('errors/base.php')->getCode());
     }
 
     /**

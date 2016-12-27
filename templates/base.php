@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+<!DOCTYPE html>
 <html lang="sr" ng-app="application">
 
 <head>
