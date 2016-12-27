@@ -59,6 +59,7 @@ if (isset($_POST['login-credentials'])) {
             header("Location:../public/");
         } else {
             $_SESSION['bad_password'] = true;
+
             header("Location:../public/");
         }
     }
