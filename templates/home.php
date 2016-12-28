@@ -6,6 +6,12 @@
 
 <div class="row" id="main-row">
     <div class="medium-3 columns show-for-medium">
+        <img id="korisnik_slika" src=" {{ session['Slika'] }}">
+        <form  enctype="multipart/form-data"  method="post" action="../sql/upload.php" name="upload" id="upload">
+            <input type="file" name="nova_slika" required>
+            <input type="hidden" name="nadimak" value="{{ session['Nadimak'] }}">
+            <input type="submit" name="izmeni" value="Izmeni"><br>
+        </form>
         <table>
             <tr><td id="ime"> {{ session['Ime'] ~ ' ' ~ session['Prezime'] }} </td></tr>
             <tr><td id="telefon"> {{ session['Telefon'] }}  </td></tr>
