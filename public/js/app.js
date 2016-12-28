@@ -36,7 +36,7 @@ $(document).ready(function () {
 
     hover_slicice.each(function () {
 
-        var sirina_slike = $(this).find('img').width();
+        var sirina_slike = $(this).find('img').innerWidth();
         var visina_slike = $(this).find('img').innerHeight();
         var klasa_slike = $(this).attr("class");
         $(this).prepend('<span class="imagemask ' + klasa_slike + '"></span>');
