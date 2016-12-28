@@ -4,16 +4,16 @@
 
 {% block body %}
 
-<div class="row">
+<div class="row" id="main-row">
     <div class="medium-3 columns show-for-medium">
-        <img id="korisnik_slika" src=" {{ session['Slika'] }}">
+        <img id="korisnik_slika" src=" {{ session['Slika'] }} ">
         <table>
             <tr><td id="ime"> {{ session['Ime'] ~ ' ' ~ session['Prezime'] }} </td></tr>
             <tr><td id="telefon"> {{ session['Telefon'] }}  </td></tr>
             <tr><td id="email"> {{ session['Email'] }}  </td></tr>
         </table>
         <form action="../sql/odjavljivanje.php" method="post">
-            <button type="submit" class="expanded button">Izloguj se</button>
+            <button type="submit" class="expanded button">Odjavi se</button>
         </form>
 
     </div>
@@ -21,6 +21,9 @@
 
         <ul class="tabs" data-tabs id="home-tabs">
             <li class="tabs-title is-active"><a href="#tab-obaveze">Obaveze</a></li>
+            {% if session['Tip'] == 'u' %}
+            <li class="tabs-title"><a href="#tab-administracija">Administracija</a></li>
+            {% endif %}
         </ul>
         <div class="tabs-content" data-tabs-content="home-tabs">
             <div class="tabs-panel is-active" id="tab-obaveze">
@@ -51,7 +54,18 @@
                 <a class="expanded button" href="#0">Učitaj još</a>
             </div>
         </div>
+        {% if session['Tip'] == 'u' %}
+        <div class="tabs-content" data-tabs-content="home-tabs">
+            <div class="tabs-panel" id="tab-administracija">
+                <label>Članovi
+                    <br>
+                    <button type="button" class="button" name="kreirajClana" id="kreirajClana">Kreiraj novog člana</button>
+                </label>
 
+            </div>
+        </div>
+
+        {% endif %}
     </div>
 </div>
 {% endblock %}
