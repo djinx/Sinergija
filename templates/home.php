@@ -6,7 +6,7 @@
 
 <div class="row" id="main-row">
     <div class="medium-3 columns show-for-medium">
-        <img id="korisnik_slika" src=" {{ session['Slika'] }}">
+        <p><span class="frame alignleft"><a class="image_effect photo" href="#0"><img id="korisnik_slika" src=" {{ session['Slika'] }}"></a></span></p>
         <form  enctype="multipart/form-data"  method="post" action="../sql/upload.php" name="upload" id="upload">
             <input type="file" name="nova_slika" required>
             <input type="hidden" name="nadimak" value="{{ session['Nadimak'] }}">
