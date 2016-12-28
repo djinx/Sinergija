@@ -3,16 +3,14 @@
 {% block title %}Početna{% endblock %}
 
 {% block body %}
+
 <div class="row">
     <div class="medium-3 columns show-for-medium">
-
-        <img src="http://alas.matf.bg.ac.rs/~mi13050/images/me.jpg">
+        <img id="korisnik_slika" src=" {{ session['Slika'] }}">
         <table>
-            <tr><td>Nikola Ajzenhamer</td></tr>
-            <tr><td>Upravni odbor</td></tr>
-            <tr><td>PR</td></tr>
-            <tr><td>063734xxxx</td></tr>
-            <tr><td>ajzenhamernikola@gmail.com</td></tr>
+            <tr><td id="ime"> {{ session['Ime'] ~ ' ' ~ session['Prezime'] }} </td></tr>
+            <tr><td id="telefon"> {{ session['Telefon'] }}  </td></tr>
+            <tr><td id="email"> {{ session['Email'] }}  </td></tr>
         </table>
         <form action="../sql/odjavljivanje.php" method="post">
             <button type="submit" class="expanded button">Izloguj se</button>

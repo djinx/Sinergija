@@ -12,6 +12,9 @@ Twig_Autoloader::register();
 
 $loader = new Twig_Loader_Filesystem('../templates/');
 $twig = new Twig_Environment($loader, array());
+if(isset($_SESSION['username'])){
+    $twig->addGlobal('session', $_SESSION['username']);
+}
 
 if(isset($_SESSION['bad_password']) && $_SESSION['bad_password']){
     echo $twig->render('bad_password.php');
