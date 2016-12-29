@@ -74,9 +74,9 @@ $("#kreirajClana").on("click", function () {
     });
 
     // Dugme za pohranjivanje podataka za novog clana
-    $("#forma-noviClan").on("submit", function (e) {
+    /*$("#forma-noviClan").on("submit", function (e) {
         e.preventDefault();
-    })
+    })*/
 });
 
 $("#kreirajObavezu").on("click", function () {

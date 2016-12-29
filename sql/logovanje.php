@@ -17,13 +17,13 @@ if (isset($_POST['login-credentials'])) {
 
     // Provera da li su polja popunjena na strani servera
     if (empty($_POST['username'])) {
-        $errors[] = "Please enter your username";
+        $errors[] = "Molimo unesite Vaše ime";
     } else {
         $username = $db->real_escape_string($_POST['username']);
     }
 
     if (empty($_POST['password'])) {
-        $errors[] = "Please enter your password";
+        $errors[] = "Molimo unesite Vašu lozinku";
     } else {
         $password = trim($_POST['password']);
     }
@@ -45,8 +45,7 @@ if (isset($_POST['login-credentials'])) {
             header("Location:../public/");
         }*/
         if (password_verify($password, $Sifra)) {
-            // Poklapaju se lozinke, sesija moze da pocne
-
+            // Poklapaju se lozinke, sesija može da počne
             $_SESSION['username']['idKorisnika'] = $idKorisnika;
             $_SESSION['username']['Ime'] = $Ime;
             $_SESSION['username']['Prezime'] = $Prezime;
@@ -58,6 +57,7 @@ if (isset($_POST['login-credentials'])) {
 
             header("Location:../public/");
         } else {
+            // Lozinka je loša, idi na stranicu za grešku
             $_SESSION['bad_password'] = true;
 
             header("Location:../public/");
