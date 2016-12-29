@@ -26,11 +26,13 @@ CREATE TABLE IF NOT EXISTS `sinergija`.`korisnik` (
   `Prezime` VARCHAR(45) NOT NULL,
   `Telefon` VARCHAR(45) NOT NULL,
   `E-mail` VARCHAR(45) NOT NULL,
-  `Slika` VARCHAR(4096) NOT NULL,
-  `Nadimak` VARCHAR(45) NULL DEFAULT NULL,
+  `Slika` VARCHAR(4096) NOT NULL DEFAULT '../uploads/novi.png',
+  `Nadimak` VARCHAR(45) NOT NULL,
   `Sifra` VARCHAR(1024) NOT NULL,
   `Tip` VARCHAR(2) NOT NULL DEFAULT 'c',
-  PRIMARY KEY (`idKorisnika`))
+  PRIMARY KEY (`idKorisnika`),
+  UNIQUE INDEX `E-mail_UNIQUE` (`E-mail` ASC),
+  UNIQUE INDEX `Nadimak_UNIQUE` (`Nadimak` ASC))
 ENGINE = InnoDB
 AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8;
@@ -42,7 +44,7 @@ DEFAULT CHARACTER SET = utf8;
 DROP TABLE IF EXISTS `sinergija`.`tim` ;
 
 CREATE TABLE IF NOT EXISTS `sinergija`.`tim` (
-  `idTima` INT(11) NOT NULL,
+  `idTima` INT(11) NOT NULL AUTO_INCREMENT,
   `Naziv` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idTima`))
 ENGINE = InnoDB
@@ -55,7 +57,7 @@ DEFAULT CHARACTER SET = utf8;
 DROP TABLE IF EXISTS `sinergija`.`obaveza` ;
 
 CREATE TABLE IF NOT EXISTS `sinergija`.`obaveza` (
-  `idObaveze` INT(11) NOT NULL,
+  `idObaveze` INT(11) NOT NULL AUTO_INCREMENT,
   `Naziv` VARCHAR(45) NOT NULL,
   `Opis` VARCHAR(4086) NOT NULL,
   `Datum_pocetka` DATE NOT NULL,
@@ -105,7 +107,7 @@ DEFAULT CHARACTER SET = utf8;
 DROP TABLE IF EXISTS `sinergija`.`projekat` ;
 
 CREATE TABLE IF NOT EXISTS `sinergija`.`projekat` (
-  `idProjekta` INT(11) NOT NULL,
+  `idProjekta` INT(11) NOT NULL AUTO_INCREMENT,
   `naziv` VARCHAR(250) NOT NULL,
   `opis` VARCHAR(1024) NOT NULL,
   `Pocetak_rada` DATE NOT NULL,
@@ -155,7 +157,7 @@ DEFAULT CHARACTER SET = utf8;
 DROP TABLE IF EXISTS `sinergija`.`prijatelji` ;
 
 CREATE TABLE IF NOT EXISTS `sinergija`.`prijatelji` (
-  `idPrijatelja` INT(11) NOT NULL,
+  `idPrijatelja` INT(11) NOT NULL AUTO_INCREMENT,
   `Naziv` VARCHAR(256) NOT NULL,
   `Tip` VARCHAR(45) NOT NULL,
   `Podtip` VARCHAR(45) NOT NULL,
@@ -269,7 +271,22 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `sinergija`;
-INSERT INTO `sinergija`.`korisnik` (`idKorisnika`, `Ime`, `Prezime`, `Telefon`, `E-mail`, `Slika`, `Nadimak`, `Sifra`, `Tip`) VALUES (1, 'Nikola', 'Ajzenhamer', '060 734 3333', 'ajzenhamernikola@gmail.com', 'http://alas.matf.bg.ac.rs/~mi13050/images/me.jpg', 'Ajzen', '$2y$10$CbouRMdpUqUDP3Q0f7x1YeBXXfgeh2Zdz/r0nuhVunf4u41GPPo6m', 'u');
+INSERT INTO `sinergija`.`korisnik` (`idKorisnika`, `Ime`, `Prezime`, `Telefon`, `E-mail`, `Slika`, `Nadimak`, `Sifra`, `Tip`) VALUES (1000, 'Nikola', 'Ajzenhamer', '060 734 3333', 'ajzenhamernikola@gmail.com', '../uploads/novi.png', 'Ajzen', '$2y$10$CbouRMdpUqUDP3Q0f7x1YeBXXfgeh2Zdz/r0nuhVunf4u41GPPo6m', 'u');
+INSERT INTO `sinergija`.`korisnik` (`idKorisnika`, `Ime`, `Prezime`, `Telefon`, `E-mail`, `Slika`, `Nadimak`, `Sifra`, `Tip`) VALUES (1001, 'ImePrimer', 'PrezimePrimer', '060 000 0000', 'primer@email.com', '../uploads/novi.png', 'Primer', '$2y$10$CbouRMdpUqUDP3Q0f7x1YeBXXfgeh2Zdz/r0nuhVunf4u41GPPo6m', 'c');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `sinergija`.`tim`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `sinergija`;
+INSERT INTO `sinergija`.`tim` (`idTima`, `Naziv`) VALUES (2000, 'Fundraising (FR)');
+INSERT INTO `sinergija`.`tim` (`idTima`, `Naziv`) VALUES (2001, 'Public Relations (PR)');
+INSERT INTO `sinergija`.`tim` (`idTima`, `Naziv`) VALUES (2002, 'Project Management (PM)');
+INSERT INTO `sinergija`.`tim` (`idTima`, `Naziv`) VALUES (2003, 'Logistics (LO)');
+INSERT INTO `sinergija`.`tim` (`idTima`, `Naziv`) VALUES (2004, 'Human Resources (HR)');
 
 COMMIT;
 

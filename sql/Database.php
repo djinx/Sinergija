@@ -12,7 +12,7 @@ class Database
 
     public static function getInstance(){
         if(!Database::$db){
-            Database::$db = new mysqli('localhost', 'omikron', '123456', 'Sinergija');
+            Database::$db = new mysqli('localhost', 'root', '', 'Sinergija');
             if(Database::$db->connect_errno){
                 die("Problem sa povezivanjem!");
             }
