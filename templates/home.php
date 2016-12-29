@@ -77,4 +77,7 @@
         {% endif %}
     </div>
 </div>
+
+{{ include('create_user.html') }}
+
 {% endblock %}
