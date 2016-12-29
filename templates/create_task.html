@@ -1,7 +1,6 @@
 <div id='formular-novaObaveza' style="display: none;">
     <div class='row column'>
-        <form id="forma-novaObaveza" data-abide novalidate>
-
+        <form id="forma-novaObaveza" data-abide novalidate action="../sql/nova_obaveza.php"  method="post">
             <div data-abide-error class='alert callout' style='display: none;'>
                 <p><i class='fi-alert'></i> Postoje greške u formularu.</p>
             </div>
@@ -26,11 +25,13 @@
                     <input type='text' id='Deadline' name='Deadline' required>
                 </label>
                 <label>Odaberi tim
-                    <select id='Tim' required>
+                    <select id='Tim' name='Tim' required>
                         <option value=''></option>
-                        <option value='1'>Logistika</option>
-                        <option value='2'>PR</option>
-                        <option value='3'>Neki</option>
+                        <option value='2000'> Fundraising (FR) </option>
+                        <option value='2001'> Public Relations (PR) </option>
+                        <option value='2002'> Project Management (PM) </option>
+                        <option value='2003'> Logistics (LO) </option>
+                        <option value='2004'> Human Resources (HR) </option>
                     </select>
                 </label>
             </div>

@@ -27,35 +27,35 @@ $(document).ready(function () {
     });
 
     /*$.ajax({
-        url: '../sql/user_info.php',
-        method: 'GET',
-        data: {akcija:'prikazi_podatke'},
-        success: function(rezultat){
-        console.log("primljeni podaci");
-        console.log(rezultat);
-        var podaci = rezultat.split(">");
-        var rez = "";
-        var ime = podaci[1];
-        var prezime = podaci[2];
-        var tel = podaci[3];
-        var email = podaci[4];
-        var slika = podaci[5];
-        var tip = podaci[6];
-        rez = ime.concat(" ").concat(prezime).concat(" ");
-        console.log(rez);
-        $("#ime").text(rez);
+     url: '../sql/user_info.php',
+     method: 'GET',
+     data: {akcija:'prikazi_podatke'},
+     success: function(rezultat){
+     console.log("primljeni podaci");
+     console.log(rezultat);
+     var podaci = rezultat.split(">");
+     var rez = "";
+     var ime = podaci[1];
+     var prezime = podaci[2];
+     var tel = podaci[3];
+     var email = podaci[4];
+     var slika = podaci[5];
+     var tip = podaci[6];
+     rez = ime.concat(" ").concat(prezime).concat(" ");
+     console.log(rez);
+     $("#ime").text(rez);
 
-        if(tip == 'u')
-        $("#tip").text("Upravni odbor");
-        else
-        $("#tip").text("Clan");
-        $("#telefon").text(tel);
-        $("#email").text(email);
+     if(tip == 'u')
+     $("#tip").text("Upravni odbor");
+     else
+     $("#tip").text("Clan");
+     $("#telefon").text(tel);
+     $("#email").text(email);
 
-        document.getElementById("korisnik_slika").src = slika;
+     document.getElementById("korisnik_slika").src = slika;
 
-        }
-    });*/
+     }
+     });*/
 
     $.ajax({
         url: '../sql/task_info.php',
@@ -88,8 +88,8 @@ $("#kreirajClana").on("click", function () {
 
     // Dugme za pohranjivanje podataka za novog clana
     /*$("#forma-noviClan").on("submit", function (e) {
-        e.preventDefault();
-    })*/
+     e.preventDefault();
+     })*/
 });
 
 $("#kreirajObavezu").on("click", function () {
@@ -102,14 +102,14 @@ $("#kreirajObavezu").on("click", function () {
     });
 
     // Dugme za pohranjivanje podataka za novu obavezu
-    $("#novaObaveza").on("click", function (e) {
+    /*$("#novaObaveza").on("click", function (e) {
         e.preventDefault();
         console.log("Kreirana obaveza!");
         var naziv = document.getElementById("NazivObaveze").value;
         console.log(naziv);
-        /*$.ajax({
-        });*/
-    })
+        $.ajax({
+         });
+    })*/
 });
 
 // podesavanje efekta prelaza preko profilne slike
