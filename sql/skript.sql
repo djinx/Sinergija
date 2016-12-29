@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `sinergija`.`obaveza` (
   `Naziv` VARCHAR(45) NOT NULL,
   `Opis` VARCHAR(4086) NOT NULL,
   `Datum_pocetka` DATE NOT NULL,
-  `Datum_zavrsetka` DATE NOT NULL,
+  `Datum_zavrsetka` DATE NULL DEFAULT NULL,
   `Deadline` DATE NOT NULL,
   `Odradjena` TINYINT(1) NOT NULL,
   `idTima` INT(11) NOT NULL,
