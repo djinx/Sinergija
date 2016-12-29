@@ -1,0 +1,59 @@
+<div id='formular-noviClan' style="display: none;">
+    <div class='row column'>
+        <form id="forma-noviClan" data-abide novalidate action="../sql/create_user.php" method="post">
+
+            <div data-abide-error class='alert callout' style='display: none;'>
+                <p><i class='fi-alert'></i> Postoje greške u formularu.</p>
+            </div>
+
+            <div class='small-12 medium-6 columns'>
+                <label>
+                    Ime
+                    <input type='text' id='ImeClana' name='ImeClana' required>
+                </label>
+                <label>
+                    Prezime
+                    <input type='text' id='PrezimeClana' name='PrezimeClana' required>
+                </label>
+                <label>
+                    Broj telefona
+                    <input type='text' id='BrojTelefonaClana' name='BrojTelefonaClana' required>
+                </label>
+                <label>
+                    Nadimak
+                    <input type='text' id='NadimakClana' name='NadimakClana' required>
+                </label>
+            </div>
+
+            <div class='small-12 medium-6 columns'>
+                <label>
+                    E-mail
+                    <input type='email' id='EmailClana' name='EmailClana' required>
+                </label>
+                <label>
+                    Lozinka
+                    <input type='password' id='password' name='password' required>
+                </label>
+                <label>
+                    Ponovi lozinku
+                    <input type='password' name="passwordAgain" required data-equalto='password'>
+                </label>
+                <span class='form-error'>
+                    Lozinke moraju biti jednake!
+                </span>
+                <label>
+                    Odaberite tip korisnika
+                    <select name="tipClana" id='select' required>
+                       <option value=''></option>
+                       <option value='c'>Član udruženja</option>
+                       <option value='u'>Član upravnog odbora</option>
+                    </select>
+                </label>
+            </div>
+
+            <button type='submit' name='noviClan' id='noviClan' class='expanded button'>Kreiraj novog člana</button>
+            <a href='#0' id='odustaniOdNovogClana' class='expanded button'>Odustani</a>
+
+        </form>
+    </div>
+</div>

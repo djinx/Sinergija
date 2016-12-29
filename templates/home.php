@@ -77,4 +77,9 @@
         {% endif %}
     </div>
 </div>
+
+{{ include('create_user.html') }}
+
+{{ include('create_task.html') }}
+
 {% endblock %}
