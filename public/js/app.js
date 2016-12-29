@@ -1,36 +1,30 @@
 $(document).foundation();
 
-function podesi_photo_ikonicu() {
-    var hover_slicice = $("a.image_effect");
-
-    hover_slicice.each(function () {
-
-        var sirina_slike = $(this).find('img').innerWidth();
-        var visina_slike = $(this).find('img').innerHeight();
-        var klasa_slike = $(this).attr("class");
-        $(this).prepend('<span class="imagemask ' + klasa_slike + '"></span>');
-
-        var slika = $(this).find('img');
-        var pozicija = slika.position();
-        var poz_top = parseInt(slika.css("margin-top")) + pozicija.top;
-        var poz_left = parseInt(slika.css("margin-left")) + pozicija.left;
-        if (!poz_left) {
-            poz_left = pozicija.left
-        }
-
-        $(this).find('.imagemask').css("top", poz_top);
-        $(this).find('.imagemask').css("left", poz_left);
-
-        $('.imagemask', this).css({
-            "width":sirina_slike,
-            "height":visina_slike,
-            "backgroundPosition":"center center"
-        });
-
-    });
-}
+var $formaNoviClan, $formaNovaObaveza;
 
 $(document).ready(function () {
+
+    $formaNoviClan = $("#formular-noviClan");
+    $formaNovaObaveza = $("#formular-novaObaveza");
+
+    $formaNoviClan.css({
+        "position": "absolute",
+        "top": "40px",
+        "z-index": "2",
+        "background-color": "white",
+        "border": "10px solid #e6e6e6",
+        "border-radius": "5px",
+        "width": "100%"
+    });
+    $formaNovaObaveza.css({
+        "position": "absolute",
+        "top": "40px",
+        "z-index": "2",
+        "background-color": "white",
+        "border": "10px solid #e6e6e6",
+        "border-radius": "5px",
+        "width": "100%"
+    });
 
     /*$.ajax({
         url: '../sql/user_info.php',
@@ -72,86 +66,31 @@ $(window).resize(function () {
 
 $("#kreirajClana").on("click", function () {
 
-    var $forma = $("#formular-noviClan");
-    $forma.css({
-        "position": "absolute",
-        "top": "40px",
-        "z-index": "2",
-        "background-color": "white",
-        "border": "10px solid #e6e6e6",
-        "border-radius": "5px",
-        "width": "100%"
-    });
-    $forma.fadeIn("fast");
+    $formaNoviClan.fadeIn("fast");
 
     // Dugme za odustajanje
-    $("#odustani").on("click", function () {
-        $forma.fadeOut("fast");
+    $("#odustaniOdNovogClana").on("click", function () {
+        $formaNoviClan.fadeOut("fast");
     });
 
     // Dugme za pohranjivanje podataka za novog clana
-    $("#noviClan").on("submit", function () {
-
+    $("#forma-noviClan").on("submit", function (e) {
+        e.preventDefault();
     })
 });
 
 $("#kreirajObavezu").on("click", function () {
-    var formular =
-        "<div id='formular-novaObaveza'>" +
-        "       <div class='row column'>" +
-        "           <form data-abide novalidate>" +
-        "           <div data-abide-error class='alert callout' style='display: none;'>" +
-        "               <p><i class='fi-alert'></i> Postoje greške u formularu.</p>" +
-        "           </div>" +
-        "               <div class='small-12 medium-6 columns'>" +
-        "                   <label>Naziv" +
-        "                   <input type='text' id='NazivObaveze' name='NazivObaveze' required></label>" +
-        "                   <label>Opis" +
-        "                   <input type='text' id='OpisObaveze' name='OpisObaveze' required></label>" +
-        "                   <label>Datum početka" +
-        "                   <input type='text' id='DatumPocetkaObaveze' name='DatumPocetkaObaveze' required</label>" +
-        "               </div>" +
-        "               <div class='small-12 medium-6 columns'>" +
-        "                   <label>Rok za završavanje obaveze" +
-        "                   <input type='text' id='Deadline' name='Deadline' required</label>" +
-        "                   <label>Odaberi tim" +
-        "                       <select id='Tim' required>" +
-        "                           <option value=''></option>" +
-        "                           <option value='1'>Logistika</option>" +
-        "                           <option value='2'>PR</option>" +
-        "                           <option value='3'>Neki</option>" +
-        "                       </select></label>" +
-        "               </div>" +
-        "               <button type='submit' name='novaObaveza' id='novaObaveza' class='expanded button'>Kreiraj novu obavezu</button>" +
-        "               <a href='#0' id='odustani' name='odustani' class='expanded button'>Odustani</a>" +
-        "           </form>" +
-        "       </div>" +
-        "</div>";
 
-    // dodaje se formular u DOM
-    $("#main-row").after(formular);
-    var $forma = $("#formular-novaObaveza");
-    $forma.css({
-        "display": "none",
-        "position": "absolute",
-        "top": "40px",
-        "z-index": "2",
-        "background-color": "white",
-        "border": "10px solid #e6e6e6",
-        "border-radius": "5px",
-        "width": "100%"
-    });
-    $forma.fadeIn("fast");
+    $formaNovaObaveza.fadeIn("fast");
 
     // Dugme za odustajanje
-    $("#odustani").on("click", function () {
-        $forma.fadeOut("fast", function () {
-            $forma.remove();
-        });
+    $("#odustaniOdNoveObaveze").on("click", function () {
+        $formaNovaObaveza.fadeOut("fast");
     });
 
-    // Dugme za pohranjivanje podataka za novog clana
-    $("#novaObaveza").on("click", function () {
+    // Dugme za pohranjivanje podataka za novu obavezu
+    $("#novaObaveza").on("click", function (e) {
+        e.preventDefault();
         console.log("Kreirana obaveza!");
         var naziv = document.getElementById("NazivObaveze").value;
         console.log(naziv);
@@ -181,3 +120,34 @@ efekat_slike.mouseover(function () {
         "opacity":"1"
     }, 300);
 });
+
+// podesavanje pozicije photo ikonice preko profilne slike
+function podesi_photo_ikonicu() {
+    var hover_slicice = $("a.image_effect");
+
+    hover_slicice.each(function () {
+
+        var sirina_slike = $(this).find('img').innerWidth();
+        var visina_slike = $(this).find('img').innerHeight();
+        var klasa_slike = $(this).attr("class");
+        $(this).prepend('<span class="imagemask ' + klasa_slike + '"></span>');
+
+        var slika = $(this).find('img');
+        var pozicija = slika.position();
+        var poz_top = parseInt(slika.css("margin-top")) + pozicija.top;
+        var poz_left = parseInt(slika.css("margin-left")) + pozicija.left;
+        if (!poz_left) {
+            poz_left = pozicija.left
+        }
+
+        $(this).find('.imagemask').css("top", poz_top);
+        $(this).find('.imagemask').css("left", poz_left);
+
+        $('.imagemask', this).css({
+            "width":sirina_slike,
+            "height":visina_slike,
+            "backgroundPosition":"center center"
+        });
+
+    });
+}

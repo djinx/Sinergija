@@ -1,0 +1,43 @@
+<div id='formular-novaObaveza' style="display: none;">
+    <div class='row column'>
+        <form id="forma-novaObaveza" data-abide novalidate>
+
+            <div data-abide-error class='alert callout' style='display: none;'>
+                <p><i class='fi-alert'></i> Postoje greške u formularu.</p>
+            </div>
+
+            <div class='small-12 medium-6 columns'>
+                <label>
+                    Naziv
+                    <input type='text' id='NazivObaveze' name='NazivObaveze' required>
+                </label>
+                <label>
+                    Opis
+                    <input type='text' id='OpisObaveze' name='OpisObaveze' required>
+                </label>
+                <label>
+                    Datum početka
+                    <input type='text' id='DatumPocetkaObaveze' name='DatumPocetkaObaveze' required>
+                </label>
+            </div>
+
+            <div class='small-12 medium-6 columns'>
+                <label>Rok za završavanje obaveze
+                    <input type='text' id='Deadline' name='Deadline' required>
+                </label>
+                <label>Odaberi tim
+                    <select id='Tim' required>
+                        <option value=''></option>
+                        <option value='1'>Logistika</option>
+                        <option value='2'>PR</option>
+                        <option value='3'>Neki</option>
+                    </select>
+                </label>
+            </div>
+
+        <button type='submit' name='novaObaveza' id='novaObaveza' class='expanded button'>Kreiraj novu obavezu</button>
+        <a href='#0' id='odustaniOdNoveObaveze' name='odustaniOdNoveObaveze' class='expanded button'>Odustani</a>
+
+        </form>
+    </div>
+</div>
