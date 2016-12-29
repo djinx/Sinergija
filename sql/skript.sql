@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `sinergija`.`obaveza` (
   `Naziv` VARCHAR(45) NOT NULL,
   `Opis` VARCHAR(4086) NOT NULL,
   `Datum_pocetka` DATE NOT NULL,
-  `Datum_zavrsetka` DATE NULL DEFAULT NULL,
+  `Datum_zavrsetka` DATE NULL,
   `Deadline` DATE NOT NULL,
   `Odradjena` TINYINT(1) NOT NULL,
   `idTima` INT(11) NOT NULL,
@@ -287,6 +287,26 @@ INSERT INTO `sinergija`.`tim` (`idTima`, `Naziv`) VALUES (2001, 'Public Relation
 INSERT INTO `sinergija`.`tim` (`idTima`, `Naziv`) VALUES (2002, 'Project Management (PM)');
 INSERT INTO `sinergija`.`tim` (`idTima`, `Naziv`) VALUES (2003, 'Logistics (LO)');
 INSERT INTO `sinergija`.`tim` (`idTima`, `Naziv`) VALUES (2004, 'Human Resources (HR)');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `sinergija`.`obaveza`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `sinergija`;
+INSERT INTO `sinergija`.`obaveza` (`idObaveze`, `Naziv`, `Opis`, `Datum_pocetka`, `Datum_zavrsetka`, `Deadline`, `Odradjena`, `idTima`) VALUES (3000, 'Pingovati kompanije za logo', 'Poslati mejl svakoj kompaniji da dostavi svoj logo u vektorskom i rasterskom formatu.', '2016-12-29', NULL, '2017-01-05', 0, 2001);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `sinergija`.`ima obavezu`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `sinergija`;
+INSERT INTO `sinergija`.`ima obavezu` (`idKorisnika`, `idObaveze`) VALUES (1000, 3000);
 
 COMMIT;
 

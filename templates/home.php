@@ -32,29 +32,8 @@
         </ul>
         <div class="tabs-content" data-tabs-content="home-tabs">
             <div class="tabs-panel is-active" id="tab-obaveze">
-                <div class="callout alert">
-                    <h5>Završiti ponudu za robno sponzorstvo</h5>
-                    <p>Deadline: 20.12.2016.</p>
-                    <div class="button-group">
-                        <a href="#0" class="button">Pročitaj detalje</a>
-                        <a href="#0" class="button">Završi obavezu</a>
-                    </div>
-                </div>
-                <div class="callout alert">
-                    <h5>Poslati ponudu za robno sponzorstvo</h5>
-                    <p>Deadline: 21.12.2016.</p>
-                    <div class="button-group">
-                        <a href="#0" class="button">Pročitaj detalje</a>
-                        <a href="#0" class="button">Završi obavezu</a>
-                    </div>
-                </div>
-                <div class="callout warning">
-                    <h5>Pingovati kompanije za logo</h5>
-                    <p>Deadline: 31.12.2016.</p>
-                    <div class="button-group">
-                        <a href="#0" class="button">Pročitaj detalje</a>
-                        <a href="#0" class="button">Završi obavezu</a>
-                    </div>
+                <div class="listaObaveza">
+
                 </div>
                 <a class="expanded button" href="#0">Učitaj još</a>
             </div>

@@ -57,6 +57,19 @@ $(document).ready(function () {
         }
     });*/
 
+    $.ajax({
+        url: '../sql/task_info.php',
+        success: function(rezultat){
+            console.log("Dohvaćene su obaveze!");
+            $(".listaObaveza").append(rezultat);
+        },
+        error: function (rezultat) {
+            console.log("Javila se greška pri dohvatanju obaveza!");
+            console.log(rezultat);
+        },
+        dataType: 'html'
+    });
+
     podesi_photo_ikonicu();
 });
 
