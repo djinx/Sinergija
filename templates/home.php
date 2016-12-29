@@ -66,6 +66,10 @@
                     <br>
                     <button type="button" class="button" name="kreirajClana" id="kreirajClana">Kreiraj novog člana</button>
                 </label>
+                <label>Obaveze
+                    <br>
+                    <button type="button" class="button" name="kreirajObavezu" id="kreirajObavezu">Kreiraj novu obavezu</button>
+                </label>
 
             </div>
         </div>
