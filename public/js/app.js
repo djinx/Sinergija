@@ -44,13 +44,16 @@ $(document).ready(function () {
      rez = ime.concat(" ").concat(prezime).concat(" ");
      console.log(rez);
      $("#ime").text(rez);
+
      if(tip == 'u')
      $("#tip").text("Upravni odbor");
      else
      $("#tip").text("Clan");
      $("#telefon").text(tel);
      $("#email").text(email);
+
      document.getElementById("korisnik_slika").src = slika;
+
      }
      });*/
 
@@ -86,14 +89,14 @@ $("#kreirajObavezu").on("click", function () {
     });
 
     // Dugme za pohranjivanje podataka za novu obavezu
-    $("#novaObaveza").on("click", function (e) {
+    /*$("#novaObaveza").on("click", function (e) {
         e.preventDefault();
         console.log("Kreirana obaveza!");
         var naziv = document.getElementById("NazivObaveze").value;
         console.log(naziv);
-        /*$.ajax({
-         });*/
-    })
+        $.ajax({
+         });
+    })*/
 });
 
 // podesavanje efekta prelaza preko profilne slike
