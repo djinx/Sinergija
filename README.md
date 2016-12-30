@@ -12,6 +12,7 @@ Sinergija je veb aplikacija čija je namena ubrzanje i poboljšanje praćenja ra
 Sinergija je platforma u razvitku. Trenutno su razvijene naredne mogućnosti:
 - Pristupanje sistemu
 - Kreiranje novih članova
+- Kreiranje novih obaveza
 
 ## Razvijaoci
 Sinergija je projekat koji se razvija od strane narednih programera:
