@@ -35,7 +35,7 @@
                 <div class="listaObaveza">
 
                 </div>
-                <a class="expanded button" href="#0">Učitaj još</a>
+                <button id="ucitajJos" class="expanded button" href="#0">Učitaj još</button>
             </div>
         </div>
         {% if session['Tip'] == 'u' %}

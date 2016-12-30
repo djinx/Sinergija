@@ -1,11 +1,13 @@
 $(document).foundation();
 
 var $formaNoviClan, $formaNovaObaveza;
+var num;
 
 $(document).ready(function () {
 
     $formaNoviClan = $("#formular-noviClan");
     $formaNovaObaveza = $("#formular-novaObaveza");
+    num = 3;
 
     $formaNoviClan.css({
         "position": "absolute",
@@ -59,6 +61,7 @@ $(document).ready(function () {
 
     $.ajax({
         url: '../sql/task_info.php',
+        data: {num: num},
         success: function(rezultat){
             console.log("Dohvaćene su obaveze!");
             $(".listaObaveza").append(rezultat);
@@ -157,6 +160,25 @@ $("#kreirajObavezu").on("click", function () {
         $.ajax({
          });
     })*/
+});
+
+$("#ucitajJos").on("click", function () {
+    num+=2;
+    $.ajax({
+        url: '../sql/task_info.php',
+        data: {num: num},
+        success: function(rezultat){
+            console.log("Dohvaćene su obaveze!");
+            $(".listaObaveza").html("");
+            $(".listaObaveza").append(rezultat);
+        },
+        error: function (rezultat) {
+            console.log("Javila se greška pri dohvatanju obaveza!");
+            console.log(rezultat);
+        },
+        dataType: 'html'
+    });
+
 });
 
 // podesavanje efekta prelaza preko profilne slike
