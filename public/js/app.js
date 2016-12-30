@@ -70,6 +70,32 @@ $(document).ready(function () {
         dataType: 'html'
     });
 
+
+    $.ajax({
+        url: '../sql/info.php',
+        method: 'GET',
+        data: {akcija: 'citaj_timove'},
+        success: function(rezultat) {
+            console.log("Dohvaceni su nazivi timova");
+            var timovi = rezultat.split("::");
+
+            /* popunjavamo select listu podacima */
+            for(var i=0; i<timovi.length-1; i++){
+                /* iz tekuceg elementa niza izdvajamo ime prezime i indeks */
+                var tim = timovi[i].split("+");
+                var id = tim[0];
+                var naziv = tim[1];
+
+                /* pa dodajemo podatke select listi */
+                $("#Tim").append("<option value='"+id+"'>"+ naziv +" </option>");
+            }
+        },
+        error: function (rezultat) {
+            console.log("Javila se greška pri dohvatanju naziva timova!");
+            console.log(rezultat);
+        }
+    });
+
     podesi_photo_ikonicu();
 });
 
