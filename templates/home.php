@@ -66,4 +66,6 @@
 
 {{ include('create_task.html') }}
 
+<script src="../public/js/pages/home.js"></script>
+
 {% endblock %}

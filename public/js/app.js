@@ -1,7 +1,6 @@
 $(document).foundation();
 
 var $formaNoviClan, $formaNovaObaveza;
-var num;
 
 function ucitaj(stranica) {
     $.ajax({
@@ -17,7 +16,6 @@ $(document).ready(function () {
 
     $formaNoviClan = $("#formular-noviClan");
     $formaNovaObaveza = $("#formular-novaObaveza");
-    num = 3;
 
     $formaNoviClan.css({
         "position": "absolute",
@@ -69,19 +67,7 @@ $(document).ready(function () {
      }
      });*/
 
-    $.ajax({
-        url: '../sql/task_info.php',
-        data: {num: num},
-        success: function(rezultat){
-            console.log("Dohvaćene su obaveze!");
-            $(".listaObaveza").append(rezultat);
-        },
-        error: function (rezultat) {
-            console.log("Javila se greška pri dohvatanju obaveza!");
-            console.log(rezultat);
-        },
-        dataType: 'html'
-    });
+    dohvati_obaveze(num);
 
     //citanje naziva timova iz baze
     $.ajax({
@@ -172,8 +158,7 @@ $("#kreirajObavezu").on("click", function () {
     })*/
 });
 
-$("#ucitajJos").on("click", function () {
-    num+=2;
+function dohvati_obaveze(num) {
     $.ajax({
         url: '../sql/task_info.php',
         data: {num: num},
@@ -188,7 +173,11 @@ $("#ucitajJos").on("click", function () {
         },
         dataType: 'html'
     });
+}
 
+$("#ucitajJos").on("click", function () {
+    num += 2;
+    dohvati_obaveze(num);
 });
 
 $("#prikazi-forma-promeniSliku").on("click", function () {

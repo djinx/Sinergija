@@ -20,4 +20,6 @@
 
 {{ include('main_frame.html') }}
 
+<script src="../public/js/pages/tasks.js"></script>
+
 {% endblock %}
