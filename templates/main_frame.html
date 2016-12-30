@@ -7,31 +7,46 @@
 
 <div class="row">
     <div class="small-12 medium-6 large-4 columns" id="firstColumn">
-        <ul class="accordion" data-accordion role="tablist">
-            <li class="accordion-item is-active">
+        <ul class="accordion" id="firstColumnAcc" data-accordion="firstColumnAcc" data-allow-all-closed="true" data-multi-expand="true">
+            {% if firstColumnActive == true %}
+                <li class="accordion-navigation is-active" data-accordion-item="" role="presentation">
+            {% endif %}
+            {% if firstColumnActive != true %}
+                <li class="accordion-navigation" data-accordion-item="" role="presentation">
+            {% endif %}
                 <a href="#firstColumnData" role="tab" class="accordion-title" id="firstColumn-heading" aria-controls="firstColumnData">{{ firstColumnTitle }}</a>
                 <div id="firstColumnData" class="accordion-content" role="tabpanel" data-tab-content aria-labelledby="firstColumn-heading">
-                    {{ firstColumnData }}
+                    {{ firstColumnData|raw }}
                 </div>
             </li>
         </ul>
     </div>
     <div class="small-12 medium-6 large-4 columns" id="secondColumn">
-        <ul class="accordion" data-accordion role="tablist">
-            <li class="accordion-item is-active">
+        <ul class="accordion" id="secondColumnAcc" data-accordion="secondColumnAcc" role="tablist" data-allow-all-closed="true" data-multi-expand="true">
+            {% if secondColumnActive == true %}
+                <li class="accordion-navigation is-active" data-accordion-item="" role="presentation">
+            {% endif %}
+            {% if secondColumnActive != true %}
+                <li class="accordion-navigation" data-accordion-item="" role="presentation">
+            {% endif %}
                 <a href="#secondColumnData" role="tab" class="accordion-title" id="secondColumn-heading" aria-controls="firstColumnData">{{ secondColumnTitle }}</a>
                 <div id="secondColumnData" class="accordion-content" role="tabpanel" data-tab-content aria-labelledby="secondColumn-heading">
-                    {{ secondColumnData }}
+                    {{ secondColumnData|raw }}
                 </div>
             </li>
         </ul>
     </div>
     <div class="small-12 medium-6 large-4 columns" id="thirdColumn">
-        <ul class="accordion" data-accordion role="tablist">
-            <li class="accordion-item is-active">
-                <a href="#thirdColumnData" role="tab" class="accordion-title" id="thirdColumn-heading" aria-controls="thirdColumnData">{{ thirdColumnTitle }}</a>
-                <div id="thirdColumnData" class="accordion-content" role="tabpanel" data-tab-content aria-labelledby="thirdColumn-heading">
-                    {{ thirdColumnData }}
+        <ul class="accordion" id="thirdColumnAcc" data-accordion="thirdColumnAcc" role="tablist" data-allow-all-closed="true" data-multi-expand="true">
+            {% if thirdColumnActive == true %}
+            <li class="accordion-item is-active" data-accordion-item="" role="presentation">
+            {% endif %}
+            {% if thirdColumnActive != true %}
+            <li class="accordion-item" data-accordion-item="" role="presentation">
+            {% endif %}
+                <a href="#thirdColumnData" class="accordion-title" role="tab"  id="thirdColumn-heading" aria-controls="thirdColumnData">{{ thirdColumnTitle }}</a>
+                <div id="thirdColumnData" data-tab-content=""  class="accordion-content" role="tabpanel" aria-labelledby="thirdColumn-heading">
+                    {{ thirdColumnData|raw }}
                 </div>
             </li>
         </ul>

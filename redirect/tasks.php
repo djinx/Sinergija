@@ -7,7 +7,8 @@
  */
 session_start();
 
-$_SESSION['pages'] = array();
+unset($_SESSION['pages']);
+//$_SESSION['pages'] = array();
 $_SESSION['pages']['tasks'] = true;
 
 return true;
