@@ -191,6 +191,10 @@ $("#ucitajJos").on("click", function () {
 
 });
 
+$("#prikazi-forma-promeniSliku").on("click", function () {
+    $("#forma-promeniSliku").toggle();
+});
+
 // podesavanje efekta prelaza preko profilne slike
 var efekat_slike = $("a.image_effect");
 efekat_slike.mouseover(function () {

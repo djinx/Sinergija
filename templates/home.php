@@ -6,12 +6,17 @@
 
 <div class="row" id="main-row">
     <div class="medium-3 columns show-for-medium">
-        <p><span class="frame alignleft"><a class="image_effect photo" href="#0"><img id="korisnik_slika" src=" {{ session['Slika'] }}"></a></span></p>
-        <form  enctype="multipart/form-data"  method="post" action="../sql/upload.php" name="upload" id="upload">
-            <input type="file" name="nova_slika" required>
-            <input type="hidden" name="nadimak" value="{{ session['Nadimak'] }}">
-            <input type="submit" name="izmeni" value="Izmeni"><br>
-        </form>
+        <p><span id="prikazi-forma-promeniSliku" class="frame alignleft"><a class="image_effect photo" href="#0"><img id="korisnik_slika" src=" {{ session['Slika'] }}"></a></span></p>
+        <div id="forma-promeniSliku" style="display: none;">
+            <form enctype="multipart/form-data" method="post" action="../sql/upload.php" name="upload" id="upload">
+                <div class="button-group">
+                    <label for="novaSlikaUpload" class="button">Odaberi fotografiju</label>
+                    <input type="submit" class="button" name="izmeni" value="Izmeni"><br>
+                </div>
+                <input type="file" id="novaSlikaUpload" name="nova_slika" class="show-for-sr" required>
+                <input type="hidden" name="nadimak" value="{{ session['Nadimak'] }}">
+            </form>
+        </div>
         <table>
             <tr><td id="ime"> {{ session['Ime'] ~ ' ' ~ session['Prezime'] }} </td></tr>
             <tr><td id="telefon"> {{ session['Telefon'] }}  </td></tr>
