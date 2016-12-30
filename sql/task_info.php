@@ -14,10 +14,10 @@ $db = Database::getInstance();
 if(isset($_SESSION['username'])){
 
     $idKorisnika = intval($_SESSION['username']['idKorisnika']);
-
-    $query = "SELECT o.Naziv, o.Opis, o.Datum_pocetka, o.Deadline, t.Naziv FROM `ima obavezu` io JOIN obaveza o ON io.idObaveze = o.idObaveze JOIN tim t ON t.idTima = o.idTima WHERE o.Odradjena = 0 AND io.idKorisnika = ? ORDER BY o.Deadline LIMIT 3";
+    $num = $_GET['num'];
+    $query = "SELECT o.Naziv, o.Opis, o.Datum_pocetka, o.Deadline, t.Naziv FROM `ima obavezu` io JOIN obaveza o ON io.idObaveze = o.idObaveze JOIN tim t ON t.idTima = o.idTima WHERE o.Odradjena = 0 AND io.idKorisnika = ? ORDER BY o.Deadline LIMIT ?";
     if($preparedQuery = $db->prepare($query)){
-        $preparedQuery->bind_param("i", $idKorisnika);
+        $preparedQuery->bind_param("ii", $idKorisnika, $num);
         if($preparedQuery->execute()){
             $preparedQuery->bind_result($naziv, $opis, $datumPocetka, $deadline, $tim);
             while($preparedQuery->fetch()){
@@ -35,7 +35,7 @@ if(isset($_SESSION['username'])){
                     <p>Deadline: <?php echo $deadline; ?></p>
                     <div class="button-group">
                         <a href="#0" class="button">Pročitaj detalje</a>
-                        <a href="#0" class="button">Završi obavezu</a>
+                        <button type="button" class="button">Završi obavezu</button>
                     </div>
                 </div>
                 <?php
