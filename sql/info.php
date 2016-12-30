@@ -19,10 +19,10 @@ $akcija = $_GET['akcija'];
 
 switch($akcija){
     case 'citaj_timove':
-        $query = "SELECT idTima, Naziv FROM `tim`";
+        $query = "SELECT `idTima`, `Naziv` FROM `tim`";
         $result=mysqli_query($db, $query) or die("Problem prilikom izvrsavanja upita");
 
-        /* sve podatke koje citamo formatiracemo na nivou niske */
+        // odgovor koji se salje
         $message="";
         while($row=mysqli_fetch_assoc($result)){
             $message.=$row['idTima']."+".$row['Naziv']."::";
@@ -30,7 +30,14 @@ switch($akcija){
 
         break;
     case 'citaj_korisnike':
-        echo "";
+        $query = "SELECT `idKorisnika`, `Ime`, `Prezime` FROM `korisnik`";
+        $result=mysqli_query($db, $query) or die("Problem prilikom izvrsavanja upita");
+
+        // odgovor koji se salje
+        $message="";
+        while($row=mysqli_fetch_assoc($result)){
+            $message.=$row['idKorisnika']."+".$row['Ime']."+".$row['Prezime']."::";
+        }
         break;
     default:
         break;
