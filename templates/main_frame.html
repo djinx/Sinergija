@@ -1,37 +1,37 @@
 <div class="row">
     <div class="small-12 columns">
-        <h1>{% block pageTitle %}{% endblock %}</h1>
-        <hr>
+        <h2 style="border-bottom: 1px solid #e6e6e6;">{{ pageTitle }}</h2>
+        <br>
     </div>
 </div>
 
 <div class="row">
-    <div class="small-12 medium-6 large-3 columns" id="firstColumn">
+    <div class="small-12 medium-6 large-4 columns" id="firstColumn">
         <ul class="accordion" data-accordion role="tablist">
             <li class="accordion-item is-active">
-                <a href="#firstColumnData" role="tab" class="accordion-title" id="firstColumn-heading" aria-controls="firstColumnData">{% block firstColumnTitle %}{% endblock %}</a>
+                <a href="#firstColumnData" role="tab" class="accordion-title" id="firstColumn-heading" aria-controls="firstColumnData">{{ firstColumnTitle }}</a>
                 <div id="firstColumnData" class="accordion-content" role="tabpanel" data-tab-content aria-labelledby="firstColumn-heading">
-                    {% block firstColumnData %}{% endblock %}
+                    {{ firstColumnData }}
                 </div>
             </li>
         </ul>
     </div>
-    <div class="small-12 medium-6 large-3 columns" id="secondColumn">
+    <div class="small-12 medium-6 large-4 columns" id="secondColumn">
         <ul class="accordion" data-accordion role="tablist">
             <li class="accordion-item is-active">
-                <a href="#secondColumnData" role="tab" class="accordion-title" id="secondColumn-heading" aria-controls="firstColumnData">{% block secondColumnTitle %}{% endblock %}</a>
+                <a href="#secondColumnData" role="tab" class="accordion-title" id="secondColumn-heading" aria-controls="firstColumnData">{{ secondColumnTitle }}</a>
                 <div id="secondColumnData" class="accordion-content" role="tabpanel" data-tab-content aria-labelledby="secondColumn-heading">
-                    {% block secondColumnData %}{% endblock %}
+                    {{ secondColumnData }}
                 </div>
             </li>
         </ul>
     </div>
-    <div class="small-12 medium-6 large-3 columns" id="thirdColumn">
+    <div class="small-12 medium-6 large-4 columns" id="thirdColumn">
         <ul class="accordion" data-accordion role="tablist">
             <li class="accordion-item is-active">
-                <a href="#thirdColumnData" role="tab" class="accordion-title" id="thirdColumn-heading" aria-controls="thirdColumnData">{% block thirdColumnTitle %}{% endblock %}</a>
+                <a href="#thirdColumnData" role="tab" class="accordion-title" id="thirdColumn-heading" aria-controls="thirdColumnData">{{ thirdColumnTitle }}</a>
                 <div id="thirdColumnData" class="accordion-content" role="tabpanel" data-tab-content aria-labelledby="thirdColumn-heading">
-                    {% block thirdColumnData %}{% endblock %}
+                    {{ thirdColumnData }}
                 </div>
             </li>
         </ul>
