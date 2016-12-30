@@ -70,7 +70,7 @@ $(document).ready(function () {
         dataType: 'html'
     });
 
-
+    //citanje naziva timova iz baze
     $.ajax({
         url: '../sql/info.php',
         method: 'GET',
@@ -79,19 +79,40 @@ $(document).ready(function () {
             console.log("Dohvaceni su nazivi timova");
             var timovi = rezultat.split("::");
 
-            /* popunjavamo select listu podacima */
+            // popunjanje select liste podacima
             for(var i=0; i<timovi.length-1; i++){
-                /* iz tekuceg elementa niza izdvajamo ime prezime i indeks */
                 var tim = timovi[i].split("+");
                 var id = tim[0];
                 var naziv = tim[1];
-
-                /* pa dodajemo podatke select listi */
                 $("#Tim").append("<option value='"+id+"'>"+ naziv +" </option>");
             }
         },
         error: function (rezultat) {
             console.log("Javila se greška pri dohvatanju naziva timova!");
+            console.log(rezultat);
+        }
+    });
+
+    //citanje imena korisnika iz baze
+    $.ajax({
+        url: '../sql/info.php',
+        method: 'GET',
+        data: {akcija: 'citaj_korisnike'},
+        success: function(rezultat) {
+            console.log("Dohvacena su imena korisnika");
+            var korisnici = rezultat.split("::");
+
+            // popunjanje select liste podacima
+            for(var i=0; i<korisnici.length-1; i++){
+                var korisnik = korisnici[i].split("+");
+                var id = korisnik[0];
+                var ime = korisnik[1];
+                var prezime = korisnik[2];
+                $("#Korisnik").append("<option value='"+id+"'>"+ ime +" " + prezime +"</option>");
+            }
+        },
+        error: function (rezultat) {
+            console.log("Javila se greška pri dohvatanju podataka o korisnicima!");
             console.log(rezultat);
         }
     });
