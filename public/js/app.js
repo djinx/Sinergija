@@ -2,6 +2,12 @@ $(document).foundation();
 
 var $formaNoviClan, $formaNovaObaveza;
 
+function ucitaj(stranica) {
+    $.ajax({url : '../redirect/' + stranica + '.php'});
+    console.log("Vrsim redirekciju");
+    window.location.reload(true);
+}
+
 $(document).ready(function () {
 
     $formaNoviClan = $("#formular-noviClan");

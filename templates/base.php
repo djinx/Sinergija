@@ -26,8 +26,8 @@
                 </button>
                 <!-- Your menu or Off-canvas content goes here -->
                 <ul  class="mobile-ofc vertical menu">
-                    <li><a href="#">Projekti</a></li>
-                    <li><a href="#">Obaveze</a></li>
+                    <li><button class="button" id="pocetnaLink" onclick="ucitaj('home')">Početna</button></li>
+                    <li><button class="button" id="obavezeLink" onclick="ucitaj('tasks')">Obaveze</button></li>
                     <li><a href="#">Izloguj se</a></li>
                 </ul>
             </div>

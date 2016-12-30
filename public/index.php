@@ -16,6 +16,18 @@ if(isset($_SESSION['username'])){
     $twig->addGlobal('session', $_SESSION['username']);
 }
 
+if(isset($_SESSION['pages'])){
+    if(isset($_SESSION['pages']['home'])){
+        echo $twig->render('home.php');
+    }else if(isset($_SESSION['pages']['tasks'])){
+        echo $twig->render('tasks.php');
+    }else{
+
+    }
+
+    return;
+}
+
 if(isset($_SESSION['bad_password']) && $_SESSION['bad_password']){
     echo $twig->render('bad_password.php');
     session_unset();
