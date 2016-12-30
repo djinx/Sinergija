@@ -25,7 +25,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
                 <!-- Your menu or Off-canvas content goes here -->
-                <ul  class="mobile-ofc vertical menu">
+                <ul class="mobile-ofc vertical menu">
                     <li><button class="expanded button" id="pocetnaLink" onclick="ucitaj('home')">Početna</button></li>
                     <li><button class="expanded button" id="obavezeLink" onclick="ucitaj('tasks')">Obaveze</button></li>
                     <li><a href="#">Izloguj se</a></li>

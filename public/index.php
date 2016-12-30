@@ -17,9 +17,9 @@ if(isset($_SESSION['username'])){
 }
 
 if(isset($_SESSION['pages'])){
-    if(isset($_SESSION['pages']['home'])){
+    if($_SESSION['pages']['home']){
         echo $twig->render('home.php');
-    }else if(isset($_SESSION['pages']['tasks'])){
+    }else if($_SESSION['pages']['tasks']){
         echo $twig->render('tasks.php');
     }else{
 

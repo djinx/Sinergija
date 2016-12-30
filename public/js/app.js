@@ -4,8 +4,12 @@ var $formaNoviClan, $formaNovaObaveza;
 
 function ucitaj(stranica) {
     $.ajax({
-        url : '../redirect/' + stranica + '.php'
-    }).done(window.location.reload());
+        url : '../redirect/' + stranica + '.php',
+        success: function (rezultat) {
+            //console.log(rezultat);
+            window.location.assign("../public/");
+        }
+    });
 }
 
 $(document).ready(function () {
