@@ -1,0 +1,44 @@
+<div id='formular-novProjekat' style="display: none;">
+    <div class='row column'>
+        <form id="forma-novProjekat" data-abide novalidate action="../sql/create_project.php" method="post">
+
+            <div data-abide-error class='alert callout' style='display: none;'>
+                <p><i class='fi-alert'></i> Postoje greške u formularu.</p>
+            </div>
+
+            <div class='small-12 medium-6 columns'>
+                <label>
+                    Naziv
+                    <input type='text' id='NazivProjekta' name='NazivProjekta' required>
+                </label>
+                <label>
+                    Opis
+                    <input type='text' id='OpisProjekta' name='OpisProjekta' required>
+                </label>
+                <label>
+                    Datum početka rada na projektu
+                    <input type='date' id='DatumPocetkaRadaProjekta' name='DatumPocetkaRadaProjekta' required>
+                </label>
+            </div>
+
+            <div class='small-12 medium-6 columns'>
+                <label>
+                    Datum kraja rada na projektu
+                    <input type='date' id='DatumKrajaRadaProjekta' name='DatumKrajaRadaProjekta' required>
+                </label>
+                <label>
+                    Datum početka događaja
+                    <input type='date' id='DatumPocetkaDogadjaja' name='DatumPocetkaDogadjaja' required>
+                </label>
+                <label>
+                    Datum kraja događaja
+                    <input type='date' id='DatumKrajaDogadjaja' name='DatumKrajaDogadjaja' required>
+                </label>
+            </div>
+
+            <button type='submit' name='novProjekat' id='novProjekat' class='expanded button'>Kreiraj nov projekat</button>
+            <a href='#0' id='odustaniOdNovogProjekta' class='expanded button'>Odustani</a>
+
+        </form>
+    </div>
+</div>
