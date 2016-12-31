@@ -39,7 +39,7 @@ $preparedQuery->bind_param("ii", $korisnik, $row[0]);
 
 $preparedQuery->execute();
 
-echo $korisnik." ".$row[0];
+//echo $korisnik." ".$row[0];
 
 header("Location: ../public/");
 ?>
