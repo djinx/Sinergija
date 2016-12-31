@@ -54,6 +54,10 @@
                     <br>
                     <button type="button" class="button" name="kreirajObavezu" id="kreirajObavezu">Kreiraj novu obavezu</button>
                 </label>
+                <label>Projekti
+                    <br>
+                    <button type="button" class="button" name="kreirajProjekat" id="kreirajProjekat">Kreiraj nov projekat</button>
+                </label>
 
             </div>
         </div>
@@ -65,6 +69,8 @@
 {{ include('create_user.html') }}
 
 {{ include('create_task.html') }}
+
+{{ include('create_project.html') }}
 
 <script src="../public/js/pages/home.js"></script>
 
