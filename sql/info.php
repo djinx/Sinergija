@@ -39,8 +39,16 @@ switch($akcija){
             $message.=$row['idKorisnika']."+".$row['Ime']."+".$row['Prezime']."::";
         }
         break;
+    case 'zavrsi_obavezu':
+        $id = $_GET['id'];
+        $query = "UPDATE Obaveza SET `Datum_zavrsetka`=CURRENT_DATE , `Odradjena`=1 WHERE idObaveze=?";
+        $preparedQuery = $db->prepare($query);
+        $preparedQuery->bind_param("i", $id);
+        $preparedQuery->execute();
+        break;
     default:
         break;
+
 }
 
 echo $message;
