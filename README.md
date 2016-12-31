@@ -13,6 +13,7 @@ Sinergija je platforma u razvitku. Trenutno su razvijene naredne mogućnosti:
 - Pristupanje sistemu
 - Kreiranje novih članova
 - Kreiranje novih obaveza
+- Kreiranje novih projekata
 
 ## Razvijaoci
 Sinergija je projekat koji se razvija od strane narednih programera:
