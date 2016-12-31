@@ -1,6 +1,6 @@
 $(document).foundation();
 
-var $formaNoviClan, $formaNovaObaveza;
+var $formaNoviClan, $formaNovaObaveza, $formaNovProjekat;
 
 function ucitaj(stranica) {
     $.ajax({
@@ -16,6 +16,7 @@ $(document).ready(function () {
 
     $formaNoviClan = $("#formular-noviClan");
     $formaNovaObaveza = $("#formular-novaObaveza");
+    $formaNovProjekat = $("#formular-novProjekat");
 
     $formaNoviClan.css({
         "position": "absolute",
@@ -27,6 +28,15 @@ $(document).ready(function () {
         "width": "100%"
     });
     $formaNovaObaveza.css({
+        "position": "absolute",
+        "top": "40px",
+        "z-index": "2",
+        "background-color": "white",
+        "border": "10px solid #e6e6e6",
+        "border-radius": "5px",
+        "width": "100%"
+    });
+    $formaNovProjekat.css({
         "position": "absolute",
         "top": "40px",
         "z-index": "2",
@@ -149,13 +159,30 @@ $("#kreirajObavezu").on("click", function () {
 
     // Dugme za pohranjivanje podataka za novu obavezu
     /*$("#novaObaveza").on("click", function (e) {
+     e.preventDefault();
+     console.log("Kreirana obaveza!");
+     var naziv = document.getElementById("NazivObaveze").value;
+     console.log(naziv);
+     $.ajax({
+     });
+     })*/
+});
+
+$("#kreirajProjekat").on("click", function () {
+
+    $formaNovProjekat.fadeIn("fast");
+
+    // Dugme za odustajanje
+    $("#odustaniOdNovogProjekta").on("click", function () {
+        $formaNovProjekat.fadeOut("fast");
+    });
+
+    // Dugme za pohranjivanje podataka za novu obavezu
+    /*$("#novaObaveza").on("click", function (e) {
         e.preventDefault();
-        console.log("Kreirana obaveza!");
-        var naziv = document.getElementById("NazivObaveze").value;
-        console.log(naziv);
         $.ajax({
-         });
-    })*/
+        });
+     })*/
 });
 
 function dohvati_obaveze(num) {
