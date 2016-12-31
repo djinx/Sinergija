@@ -250,3 +250,7 @@ function zavrsi_obavezu(id){
     });
     dohvati_obaveze(num);
 }
+
+function procitaj_detalje(id){
+    $("#" + id).slideToggle("slow");
+}
