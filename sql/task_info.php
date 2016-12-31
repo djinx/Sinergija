@@ -28,6 +28,7 @@ if(isset($_SESSION['username'])){
 
         if($preparedQuery->execute()){
             $preparedQuery->bind_result($idObaveze, $naziv, $opis, $datumPocetka, $deadline, $tim);
+            $ordnum = 1;
             while($preparedQuery->fetch()){
                 $type = "";
                 $date1 = new DateTime($deadline);
@@ -40,13 +41,19 @@ if(isset($_SESSION['username'])){
                 ?>
                 <div class="callout <?php echo $type; ?>">
                     <h5><?php echo $naziv; ?></h5>
+                    <?php $idDiv = "d".$ordnum; ?>
+                    <div id="<?php echo $idDiv; ?>" style="display: none;">
+                        <p> <?php echo $opis; ?> </p>
+                        <p> Datum početka: <?php echo $datumPocetka; ?> </p>
+                    </div>
                     <p>Deadline: <?php echo $deadline; ?></p>
                     <div class="button-group">
-                        <a href="#0" class="button">Pročitaj detalje</a>
-                        <button type="button" class="button" onclick="zavrsi_obavezu(<?php echo $idObaveze ?>)" >Završi obavezu</button>
+                        <button type="button" class="button" onclick="procitaj_detalje('<?php echo $idDiv; ?>')">Pročitaj detalje</button>
+                        <button type="button" class="button" onclick="zavrsi_obavezu(<?php echo $idObaveze; ?>)" >Završi obavezu</button>
                     </div>
                 </div>
                 <?php
+                    $ordnum++;
             }
             $preparedQuery->close();
             return true;
