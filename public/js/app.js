@@ -236,3 +236,17 @@ function podesi_photo_ikonicu() {
 
     });
 }
+
+function zavrsi_obavezu(id){
+    $.ajax({
+        url: "../sql/info.php",
+        data: {akcija: 'zavrsi_obavezu', id: id},
+        success: function() {
+            console.log("Obaveza uspesno zavrsena");
+        },
+        error: function () {
+            console.log("Obaveza neuspesno zavrsena");
+        }
+    });
+    dohvati_obaveze(num);
+}
