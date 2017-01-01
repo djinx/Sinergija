@@ -1,6 +1,7 @@
 $(document).foundation();
 
 var $formaNoviClan, $formaNovaObaveza, $formaNovProjekat;
+var $formaBrisanjeClana;
 
 function ucitaj(stranica) {
     $.ajax({
@@ -12,13 +13,41 @@ function ucitaj(stranica) {
     });
 }
 
+//citanje imena korisnika iz baze
+function ucitajKorisnike() {
+    $.ajax({
+        url: '../sql/info.php',
+        method: 'GET',
+        data: {akcija: 'citaj_korisnike'},
+        success: function(rezultat) {
+            console.log("Dohvacena su imena korisnika");
+            var korisnici = rezultat.split("::");
+
+            // popunjanje select liste podacima
+            for(var i=0; i<korisnici.length-1; i++){
+                var korisnik = korisnici[i].split("+");
+                var id = korisnik[0];
+                var ime = korisnik[1];
+                var prezime = korisnik[2];
+                $(".listaKorisnika").append("<option value='"+id+"'>"+ ime +" " + prezime +"</option>");
+            }
+        },
+        error: function (rezultat) {
+            console.log("Javila se greška pri dohvatanju podataka o korisnicima!");
+            console.log(rezultat);
+        }
+    });
+}
+
 $(document).ready(function () {
 
     $formaNoviClan = $("#formular-noviClan");
     $formaNovaObaveza = $("#formular-novaObaveza");
     $formaNovProjekat = $("#formular-novProjekat");
 
-    $formaNoviClan.css({
+    $formaBrisanjeClana = $("#formular-brisanjeClana");
+
+    var stilSkrivenihFormulara = {
         "position": "absolute",
         "top": "40px",
         "z-index": "2",
@@ -26,25 +55,13 @@ $(document).ready(function () {
         "border": "10px solid #e6e6e6",
         "border-radius": "5px",
         "width": "100%"
-    });
-    $formaNovaObaveza.css({
-        "position": "absolute",
-        "top": "40px",
-        "z-index": "2",
-        "background-color": "white",
-        "border": "10px solid #e6e6e6",
-        "border-radius": "5px",
-        "width": "100%"
-    });
-    $formaNovProjekat.css({
-        "position": "absolute",
-        "top": "40px",
-        "z-index": "2",
-        "background-color": "white",
-        "border": "10px solid #e6e6e6",
-        "border-radius": "5px",
-        "width": "100%"
-    });
+    };
+
+    $formaNoviClan.css(stilSkrivenihFormulara);
+    $formaNovaObaveza.css(stilSkrivenihFormulara);
+    $formaNovProjekat.css(stilSkrivenihFormulara);
+
+    $formaBrisanjeClana.css(stilSkrivenihFormulara);
 
     /*$.ajax({
      url: '../sql/user_info.php',
@@ -102,29 +119,7 @@ $(document).ready(function () {
         }
     });
 
-    //citanje imena korisnika iz baze
-    $.ajax({
-        url: '../sql/info.php',
-        method: 'GET',
-        data: {akcija: 'citaj_korisnike'},
-        success: function(rezultat) {
-            console.log("Dohvacena su imena korisnika");
-            var korisnici = rezultat.split("::");
-
-            // popunjanje select liste podacima
-            for(var i=0; i<korisnici.length-1; i++){
-                var korisnik = korisnici[i].split("+");
-                var id = korisnik[0];
-                var ime = korisnik[1];
-                var prezime = korisnik[2];
-                $("#Korisnik").append("<option value='"+id+"'>"+ ime +" " + prezime +"</option>");
-            }
-        },
-        error: function (rezultat) {
-            console.log("Javila se greška pri dohvatanju podataka o korisnicima!");
-            console.log(rezultat);
-        }
-    });
+    ucitajKorisnike();
 
     podesi_photo_ikonicu();
 });
@@ -140,6 +135,21 @@ $("#kreirajClana").on("click", function () {
     // Dugme za odustajanje
     $("#odustaniOdNovogClana").on("click", function () {
         $formaNoviClan.fadeOut("fast");
+    });
+
+    // Dugme za pohranjivanje podataka za novog clana
+    /*$("#forma-noviClan").on("submit", function (e) {
+     e.preventDefault();
+     })*/
+});
+
+$("#obrisiClana").on("click", function () {
+
+    $formaBrisanjeClana.fadeIn("fast");
+
+    // Dugme za odustajanje
+    $("#odustaniOdBrisanjaClana").on("click", function () {
+        $formaBrisanjeClana.fadeOut("fast");
     });
 
     // Dugme za pohranjivanje podataka za novog clana

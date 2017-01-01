@@ -1,0 +1,21 @@
+<div id='formular-brisanjeClana' style="display: none;">
+    <div class='row column'>
+        <form id="forma-brisanjeClana" data-abide novalidate action="../sql/brisanje.php"  method="post">
+            <div data-abide-error class='alert callout' style='display: none;'>
+                <p><i class='fi-alert'></i> Postoje greške u formularu.</p>
+            </div>
+
+            <label>Odaberi korisnika
+                <select class="listaKorisnika" name='Korisnik' required>
+                    <option value=''></option>
+                </select>
+            </label>
+
+            <input type="hidden" name="akcija" value="korisnik">
+
+            <button type='submit' name='brisanjeClana' id='brisanjeClana' class='expanded button'>Obriši člana</button>
+            <a href='#0' id='odustaniOdBrisanjaClana' name='odustaniOdBrisanjaClana' class='expanded button'>Odustani</a>
+
+        </form>
+    </div>
+</div>

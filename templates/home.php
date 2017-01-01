@@ -48,7 +48,10 @@
             <div class="tabs-panel" id="tab-administracija">
                 <label>Članovi
                     <br>
-                    <button type="button" class="button" name="kreirajClana" id="kreirajClana">Kreiraj novog člana</button>
+                    <div class="button-group">
+                        <button type="button" class="button" name="kreirajClana" id="kreirajClana">Kreiraj novog člana</button>
+                        <button type="button" class="button" name="obrisiClana" id="obrisiClana">Obriši člana</button>
+                    </div>
                 </label>
                 <label>Obaveze
                     <br>
@@ -71,6 +74,8 @@
 {{ include('create_task.html') }}
 
 {{ include('create_project.html') }}
+
+{{ include('obrisi_korisnika.html') }}
 
 <script src="../public/js/pages/home.js"></script>
 
