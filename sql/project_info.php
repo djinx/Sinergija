@@ -20,6 +20,7 @@ if(isset($_SESSION['username'])){
     $query = $query."FROM projekat p, ucestvuje u, tim t, koordinira ko, korisnik k  ";
     $query = $query."WHERE u.idKorisnika = ? AND p.idProjekta = u.idProjekta  ";
     $query = $query."AND t.idTima = u.idTima AND ko.idProjekta = p.idProjekta AND k.idKorisnika = ko.idKorisnika  ";
+    $query = $query."AND p.kraj_rada IS NULL  ";
 
     if(intval($_GET['num']) != -1){
         $query = $query." LIMIT ?";
