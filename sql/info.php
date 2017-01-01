@@ -47,6 +47,13 @@ switch($akcija){
         $preparedQuery->bind_param("i", $id);
         $preparedQuery->execute();
         break;
+    case 'odustani_od_obaveze':
+        $id = $_GET['id'];
+        $query = "UPDATE Obaveza SET `Datum_zavrsetka`=CURRENT_DATE WHERE idObaveze=?";
+        $preparedQuery = $db->prepare($query);
+        $preparedQuery->bind_param("i", $id);
+        $preparedQuery->execute();
+        break;
     case 'zavrsi_projekat':
         $id = $_GET['id'];
         $query = "UPDATE `projekat` SET `Kraj_rada`=CURRENT_DATE WHERE idProjekta=?";
