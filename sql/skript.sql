@@ -34,20 +34,7 @@ CREATE TABLE IF NOT EXISTS `sinergija`.`korisnik` (
   UNIQUE INDEX `E-mail_UNIQUE` (`E-mail` ASC),
   UNIQUE INDEX `Nadimak_UNIQUE` (`Nadimak` ASC))
 ENGINE = InnoDB
-AUTO_INCREMENT = 2
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `sinergija`.`tim`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `sinergija`.`tim` ;
-
-CREATE TABLE IF NOT EXISTS `sinergija`.`tim` (
-  `idTima` INT(11) NOT NULL AUTO_INCREMENT,
-  `Naziv` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idTima`))
-ENGINE = InnoDB
+AUTO_INCREMENT = 1004
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -61,11 +48,25 @@ CREATE TABLE IF NOT EXISTS `sinergija`.`projekat` (
   `naziv` VARCHAR(250) NOT NULL,
   `opis` VARCHAR(1024) NOT NULL,
   `Pocetak_rada` DATE NOT NULL,
-  `Kraj_rada` DATE NOT NULL,
+  `Kraj_rada` DATE NULL DEFAULT NULL,
   `Pocetak_dogadjaja` DATE NOT NULL,
   `Kraj_dogadjaja` DATE NOT NULL,
   PRIMARY KEY (`idProjekta`))
 ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `sinergija`.`tim`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `sinergija`.`tim` ;
+
+CREATE TABLE IF NOT EXISTS `sinergija`.`tim` (
+  `idTima` INT(11) NOT NULL AUTO_INCREMENT,
+  `Naziv` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idTima`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 2005
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -79,25 +80,24 @@ CREATE TABLE IF NOT EXISTS `sinergija`.`obaveza` (
   `Naziv` VARCHAR(45) NOT NULL,
   `Opis` VARCHAR(4086) NOT NULL,
   `Datum_pocetka` DATE NOT NULL,
-  `Datum_zavrsetka` DATE NULL,
+  `Datum_zavrsetka` DATE NULL DEFAULT NULL,
   `Deadline` DATE NOT NULL,
   `Odradjena` TINYINT(1) NOT NULL,
   `idTima` INT(11) NOT NULL,
-  `idProjekta` INT NULL,
+  `idProjekta` INT(11) NULL DEFAULT NULL,
   PRIMARY KEY (`idObaveze`),
   INDEX `fk_Obaveza_Tim1_idx` (`idTima` ASC),
   INDEX `fk_Obaveza_Projekat1_idx` (`idProjekta` ASC),
+  CONSTRAINT `fk_Obaveza_Projekat1`
+    FOREIGN KEY (`idProjekta`)
+    REFERENCES `sinergija`.`projekat` (`idProjekta`)
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_Obaveza_Tim1`
     FOREIGN KEY (`idTima`)
     REFERENCES `sinergija`.`tim` (`idTima`)
-    ON DELETE RESTRICT
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_Obaveza_Projekat1`
-    FOREIGN KEY (`idProjekta`)
-    REFERENCES `Sinergija`.`Projekat` (`idProjekta`)
-    ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB
+AUTO_INCREMENT = 3003
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -120,7 +120,6 @@ CREATE TABLE IF NOT EXISTS `sinergija`.`ima obavezu` (
   CONSTRAINT `fk_Korisnik_has_Obaveza_Obaveza1`
     FOREIGN KEY (`idObaveze`)
     REFERENCES `sinergija`.`obaveza` (`idObaveze`)
-    ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
@@ -172,6 +171,7 @@ CREATE TABLE IF NOT EXISTS `sinergija`.`prijatelji` (
   `Email` VARCHAR(256) NULL DEFAULT NULL,
   `Veb_sajt` VARCHAR(45) NULL DEFAULT NULL,
   `Ime_kontakta` VARCHAR(256) NULL DEFAULT NULL,
+  `Adresa` VARCHAR(256) NULL DEFAULT NULL,
   PRIMARY KEY (`idPrijatelja`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
@@ -241,8 +241,8 @@ GRANT USAGE ON *.* TO omikron;
 SET SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 CREATE USER 'omikron' IDENTIFIED BY '123456';
 
-GRANT SELECT, INSERT, TRIGGER, UPDATE, DELETE ON TABLE `sinergija`.* TO 'omikron';
 GRANT SELECT, INSERT, TRIGGER ON TABLE `sinergija`.* TO 'omikron';
+GRANT SELECT, INSERT, TRIGGER, UPDATE, DELETE ON TABLE `sinergija`.* TO 'omikron';
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
@@ -253,10 +253,20 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `sinergija`;
-INSERT INTO `sinergija`.`korisnik` (`idKorisnika`, `Ime`, `Prezime`, `Telefon`, `E-mail`, `Slika`, `Nadimak`, `Sifra`, `Tip`) VALUES (1000, 'Nikola', 'Ajzenhamer', '060 734 3333', 'ajzenhamernikola@gmail.com', '../uploads/novi.png', 'Ajzen', '$2y$10$CbouRMdpUqUDP3Q0f7x1YeBXXfgeh2Zdz/r0nuhVunf4u41GPPo6m', 'u');
-INSERT INTO `sinergija`.`korisnik` (`idKorisnika`, `Ime`, `Prezime`, `Telefon`, `E-mail`, `Slika`, `Nadimak`, `Sifra`, `Tip`) VALUES (1001, 'Vojislav', 'Stankovic', '060 000 0000', 'voja94@gmail.com', '../uploads/novi.png', 'Voja', '$2y$10$CbouRMdpUqUDP3Q0f7x1YeBXXfgeh2Zdz/r0nuhVunf4u41GPPo6m', 'c');
-INSERT INTO `sinergija`.`korisnik` (`idKorisnika`, `Ime`, `Prezime`, `Telefon`, `E-mail`, `Slika`, `Nadimak`, `Sifra`, `Tip`) VALUES (1002, 'Anja', 'Bukurov', '064 111 1111', 'njica94@gmail.com', '../uploads/novi.png', 'Njica', '$2y$10$CbouRMdpUqUDP3Q0f7x1YeBXXfgeh2Zdz/r0nuhVunf4u41GPPo6m', 'c');
-INSERT INTO `sinergija`.`korisnik` (`idKorisnika`, `Ime`, `Prezime`, `Telefon`, `E-mail`, `Slika`, `Nadimak`, `Sifra`, `Tip`) VALUES (1003, 'Dusica', 'Krstic', '065 222 2222', 'dusmanin@gmail.com', '../uploads/novi.png', 'Du', '$2y$10$CbouRMdpUqUDP3Q0f7x1YeBXXfgeh2Zdz/r0nuhVunf4u41GPPo6m', 'u');
+INSERT INTO `sinergija`.`korisnik` (`idKorisnika`, `Ime`, `Prezime`, `Telefon`, `E-mail`, `Slika`, `Nadimak`, `Sifra`, `Tip`) VALUES (1000, 'Nikola', 'Ajzenhamer', '0607343333', 'ajzenhamernikola@gmail.com', '../uploads/novi.png', 'Ajzen', '$2y$10$CbouRMdpUqUDP3Q0f7x1YeBXXfgeh2Zdz/r0nuhVunf4u41GPPo6m', 'u');
+INSERT INTO `sinergija`.`korisnik` (`idKorisnika`, `Ime`, `Prezime`, `Telefon`, `E-mail`, `Slika`, `Nadimak`, `Sifra`, `Tip`) VALUES (1001, 'Ana', 'Jovanović', '0111234567', 'ana.jovanovic@gmail.com', '../uploads/novi.png', 'Ana', '$2y$10$CbouRMdpUqUDP3Q0f7x1YeBXXfgeh2Zdz/r0nuhVunf4u41GPPo6m', 'c');
+INSERT INTO `sinergija`.`korisnik` (`idKorisnika`, `Ime`, `Prezime`, `Telefon`, `E-mail`, `Slika`, `Nadimak`, `Sifra`, `Tip`) VALUES (1002, 'Milica', 'Milovanović', '0601111111', 'm.m@gmail.com', '../uploads/novi.png', 'Milica', '$2y$10$CbouRMdpUqUDP3Q0f7x1YeBXXfgeh2Zdz/r0nuhVunf4u41GPPo6m', 'c');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `sinergija`.`projekat`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `sinergija`;
+INSERT INTO `sinergija`.`projekat` (`idProjekta`, `naziv`, `opis`, `Pocetak_rada`, `Kraj_rada`, `Pocetak_dogadjaja`, `Kraj_dogadjaja`) VALUES (3000, 'MatHackathon 2016', 'Hakaton je timsko takmičenje programera, osmišljeno tako da se programerske sposobnosti, kreativnost i uklopivost u timskom radu testiraju do krajnjih granica. Tokom 24 sata, od četvoročlanih timova mladih programera i dizajnera, očekuje se da, od \"nule\", stvore softver koji će biti upotrebljiv, zanimljiv i originalan, a u skladu sa temom koja će im zvanično biti saopštena na dan takmičenja. Ne postoji ograničenje u vidu platforme na kojoj (i za koju) se željeni softver programira; takmičari mogu koristiti sve od softverskih, hardverskih i online alata što im se učini korisnim i potrebnim. Jedino što jeste zabranjeno, to je odustajanje i loša volja.', '2016-03-07', '2016-05-15', '2016-04-22', '2016-04-24');
+INSERT INTO `sinergija`.`projekat` (`idProjekta`, `naziv`, `opis`, `Pocetak_rada`, `Kraj_rada`, `Pocetak_dogadjaja`, `Kraj_dogadjaja`) VALUES (3001, 'JobPrep Workshop 2016', 'JobPrep Workshop 2016 je dvodnevni projekat sa radionicama i predavanjima namenjenim studentima završnih godina osnovnih studija, kao i studentima master studija. Ideja projekta jeste pripremanje studenata - budućih stručnjaka - za proces zapošljavanja.', '2016-12-01', NULL, '2017-02-25', '2017-03-04');
 
 COMMIT;
 
@@ -280,9 +290,10 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `sinergija`;
-INSERT INTO `sinergija`.`obaveza` (`idObaveze`, `Naziv`, `Opis`, `Datum_pocetka`, `Datum_zavrsetka`, `Deadline`, `Odradjena`, `idTima`, `idProjekta`) VALUES (3000, 'Pingovati kompanije za logo', 'Poslati mejl svakoj kompaniji da dostavi svoj logo u vektorskom i rasterskom formatu.', '2016-12-29', NULL, '2017-01-05', 0, 2001, NULL);
-INSERT INTO `sinergija`.`obaveza` (`idObaveze`, `Naziv`, `Opis`, `Datum_pocetka`, `Datum_zavrsetka`, `Deadline`, `Odradjena`, `idTima`, `idProjekta`) VALUES (NULL, 'PrimerObaveze', 'Opis obaveze. Uraditi nesto.', '2017-01-01', NULL, '2017-01-05', 0, 2002, NULL);
-INSERT INTO `sinergija`.`obaveza` (`idObaveze`, `Naziv`, `Opis`, `Datum_pocetka`, `Datum_zavrsetka`, `Deadline`, `Odradjena`, `idTima`, `idProjekta`) VALUES (NULL, 'Obaveza2', 'Napisati neki kreativan opis obaveze', '2017-01-01', NULL, '2017-01-25', 0, 2003, NULL);
+INSERT INTO `sinergija`.`obaveza` (`idObaveze`, `Naziv`, `Opis`, `Datum_pocetka`, `Datum_zavrsetka`, `Deadline`, `Odradjena`, `idTima`, `idProjekta`) VALUES (6000, 'Pingovati kompanije za logo', 'oslati mejl svakoj kompaniji da dostavi svoj logo u vektorskom i rasterskom formatu.', '2016-12-29', NULL, '2017-01-05', 0, 2001, NULL);
+INSERT INTO `sinergija`.`obaveza` (`idObaveze`, `Naziv`, `Opis`, `Datum_pocetka`, `Datum_zavrsetka`, `Deadline`, `Odradjena`, `idTima`, `idProjekta`) VALUES (6001, 'Odabrati logo', 'Pregledaj sve logoe koji su ti poslati, pa odaberi neki koji ti se čini najzanimljivijim.', '2016-12-20', '2016-12-25', '2016-12-31', 1, 2001, 3001);
+INSERT INTO `sinergija`.`obaveza` (`idObaveze`, `Naziv`, `Opis`, `Datum_pocetka`, `Datum_zavrsetka`, `Deadline`, `Odradjena`, `idTima`, `idProjekta`) VALUES (6002, 'Napiši saopštenje za JobPrep Workshop', 'Napiši saopštenje za JobPrep Workshop', '2016-12-30', NULL, '2017-01-17', 0, 2001, NULL);
+INSERT INTO `sinergija`.`obaveza` (`idObaveze`, `Naziv`, `Opis`, `Datum_pocetka`, `Datum_zavrsetka`, `Deadline`, `Odradjena`, `idTima`, `idProjekta`) VALUES (6003, 'Pregledaj izveštaje PR člančića', 'Na gmail-u se nalaze.', '2016-12-30', NULL, '2017-01-10', 0, 2001, 3001);
 
 COMMIT;
 
@@ -292,9 +303,23 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `sinergija`;
-INSERT INTO `sinergija`.`ima obavezu` (`idKorisnika`, `idObaveze`) VALUES (1000, 3000);
-INSERT INTO `sinergija`.`ima obavezu` (`idKorisnika`, `idObaveze`) VALUES (1000, 3001);
-INSERT INTO `sinergija`.`ima obavezu` (`idKorisnika`, `idObaveze`) VALUES (1000, 3002);
+INSERT INTO `sinergija`.`ima obavezu` (`idKorisnika`, `idObaveze`) VALUES (1000, 6000);
+INSERT INTO `sinergija`.`ima obavezu` (`idKorisnika`, `idObaveze`) VALUES (1000, 6001);
+INSERT INTO `sinergija`.`ima obavezu` (`idKorisnika`, `idObaveze`) VALUES (1000, 6002);
+INSERT INTO `sinergija`.`ima obavezu` (`idKorisnika`, `idObaveze`) VALUES (1000, 6003);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `sinergija`.`prijatelji`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `sinergija`;
+INSERT INTO `sinergija`.`prijatelji` (`idPrijatelja`, `Naziv`, `Tip`, `Podtip`, `Broj_telefona`, `Email`, `Veb_sajt`, `Ime_kontakta`, `Adresa`) VALUES (4000, 'City Magazine', 'Mediji', 'Magazini', '011 3286088', 'marija.milosavljevic@citymagazine.rs ', 'http://citymagazine.rs/', 'Marija Milosavljević', NULL);
+INSERT INTO `sinergija`.`prijatelji` (`idPrijatelja`, `Naziv`, `Tip`, `Podtip`, `Broj_telefona`, `Email`, `Veb_sajt`, `Ime_kontakta`, `Adresa`) VALUES (4001, 'PC Press', 'Mediji', 'Magazini', '011 2080220', 'pc@pcpress.rs, ana@pcpress.rs, marketing@pcpress.rs', 'www.pcpress.rs', 'Ana', NULL);
+INSERT INTO `sinergija`.`prijatelji` (`idPrijatelja`, `Naziv`, `Tip`, `Podtip`, `Broj_telefona`, `Email`, `Veb_sajt`, `Ime_kontakta`, `Adresa`) VALUES (4002, 'RTS', 'Mediji', 'Televizije', '011 3212000, 011 3249000, 011 3225678 (Marketing)', 'marketing.office@rts.rs', 'www.rts.rs/', NULL, NULL);
+INSERT INTO `sinergija`.`prijatelji` (`idPrijatelja`, `Naziv`, `Tip`, `Podtip`, `Broj_telefona`, `Email`, `Veb_sajt`, `Ime_kontakta`, `Adresa`) VALUES (4003, 'Puzzle Software d.o.o.', 'Kompanije', 'Sponzori', '011 3911245', 'zorana.katnic@puzzlesoftware.rs', 'http://puzzlesoftware.rs/Home', 'Zorana Katnić', 'Jove Ilića 55, 11000 Beograd, Srbija');
 
 COMMIT;
 
