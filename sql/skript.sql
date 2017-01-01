@@ -178,31 +178,6 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `sinergija`.`sadrzi`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `sinergija`.`sadrzi` ;
-
-CREATE TABLE IF NOT EXISTS `sinergija`.`sadrzi` (
-  `idObaveze` INT(11) NOT NULL,
-  `idProjekta` INT(11) NOT NULL,
-  PRIMARY KEY (`idObaveze`, `idProjekta`),
-  INDEX `fk_Obaveza_has_Projekat_Projekat1_idx` (`idProjekta` ASC),
-  INDEX `fk_Obaveza_has_Projekat_Obaveza_idx` (`idObaveze` ASC),
-  CONSTRAINT `fk_Obaveza_has_Projekat_Obaveza`
-    FOREIGN KEY (`idObaveze`)
-    REFERENCES `sinergija`.`obaveza` (`idObaveze`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_Obaveza_has_Projekat_Projekat1`
-    FOREIGN KEY (`idProjekta`)
-    REFERENCES `sinergija`.`projekat` (`idProjekta`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
 -- Table `sinergija`.`ucestvuje`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `sinergija`.`ucestvuje` ;
