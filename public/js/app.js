@@ -316,6 +316,20 @@ function procitaj_detalje(id){
     $("#" + id).slideToggle("slow");
 }
 
+function odustani_od_obaveze(id){
+    $.ajax({
+        url: "../sql/info.php",
+        data: {akcija: 'odustani_od_obaveze', id: id},
+        success: function() {
+            console.log("Odustajanje uspesno zabelezeno");
+        },
+        error: function () {
+            console.log("Odustajanje nije uspesno zabelezeno");
+        }
+    });
+    dohvati_obaveze(num_o);
+}
+
 function zavrsi_projekat(id){
     console.log(id);
     $.ajax({
