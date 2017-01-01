@@ -77,7 +77,9 @@ $(document).ready(function () {
      }
      });*/
 
-    dohvati_obaveze(num);
+    dohvati_projekte(num_p);
+    dohvati_obaveze(num_o);
+
 
     //citanje naziva timova iz baze
     $.ajax({
@@ -185,10 +187,32 @@ $("#kreirajProjekat").on("click", function () {
      })*/
 });
 
-function dohvati_obaveze(num) {
+function dohvati_projekte(num_p) {
+    $.ajax({
+        url: '../sql/project_info.php',
+        data: {num: num_p},
+        success: function(rezultat){
+            console.log("Dohvaćeni su projekti!");
+            $(".listaProjekata").html("");
+            $(".listaProjekata").append(rezultat);
+        },
+        error: function (rezultat) {
+            console.log("Javila se greška pri dohvatanju projekata!");
+            console.log(rezultat);
+        },
+        dataType: 'html'
+    });
+}
+
+$("#ucitajJosP").on("click", function () {
+    num_p += 2;
+    dohvati_projekte(num_p);
+});
+
+function dohvati_obaveze(num_o) {
     $.ajax({
         url: '../sql/task_info.php',
-        data: {num: num},
+        data: {num: num_o},
         success: function(rezultat){
             console.log("Dohvaćene su obaveze!");
             $(".listaObaveza").html("");
@@ -202,9 +226,9 @@ function dohvati_obaveze(num) {
     });
 }
 
-$("#ucitajJos").on("click", function () {
-    num += 2;
-    dohvati_obaveze(num);
+$("#ucitajJosO").on("click", function () {
+    num_o += 2;
+    dohvati_obaveze(num_o);
 });
 
 $("#prikazi-forma-promeniSliku").on("click", function () {
@@ -275,9 +299,24 @@ function zavrsi_obavezu(id){
             console.log("Obaveza neuspesno zavrsena");
         }
     });
-    dohvati_obaveze(num);
+    dohvati_obaveze(num_o);
 }
 
 function procitaj_detalje(id){
     $("#" + id).slideToggle("slow");
+}
+
+function zavrsi_projekat(id){
+    console.log(id);
+    $.ajax({
+        url: "../sql/info.php",
+        data: {akcija: 'zavrsi_projekat', id: id},
+        success: function(rezultat) {
+            console.log(rezultat);
+        },
+        error: function () {
+            console.log("Projekat neuspesno zavrsen");
+        }
+    });
+    dohvati_projekte( num_p);
 }
