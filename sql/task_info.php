@@ -49,6 +49,7 @@ if(isset($_SESSION['username'])){
                     <p>Deadline: <?php echo $deadline; ?></p>
                     <div class="button-group">
                         <button type="button" class="button" onclick="procitaj_detalje('<?php echo $idDiv; ?>')">Pročitaj detalje</button>
+                        <button type="button" class="button" onclick="odustani_od_obaveze('<?php echo $idObaveze; ?>')">Odustani</button>
                         <button type="button" class="button" onclick="zavrsi_obavezu(<?php echo $idObaveze; ?>)" >Završi obavezu</button>
                     </div>
                 </div>
