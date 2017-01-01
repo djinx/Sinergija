@@ -52,6 +52,24 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
+-- Table `sinergija`.`projekat`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `sinergija`.`projekat` ;
+
+CREATE TABLE IF NOT EXISTS `sinergija`.`projekat` (
+  `idProjekta` INT(11) NOT NULL AUTO_INCREMENT,
+  `naziv` VARCHAR(250) NOT NULL,
+  `opis` VARCHAR(1024) NOT NULL,
+  `Pocetak_rada` DATE NOT NULL,
+  `Kraj_rada` DATE NOT NULL,
+  `Pocetak_dogadjaja` DATE NOT NULL,
+  `Kraj_dogadjaja` DATE NOT NULL,
+  PRIMARY KEY (`idProjekta`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
 -- Table `sinergija`.`obaveza`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `sinergija`.`obaveza` ;
@@ -65,12 +83,19 @@ CREATE TABLE IF NOT EXISTS `sinergija`.`obaveza` (
   `Deadline` DATE NOT NULL,
   `Odradjena` TINYINT(1) NOT NULL,
   `idTima` INT(11) NOT NULL,
+  `idProjekta` INT NULL,
   PRIMARY KEY (`idObaveze`),
   INDEX `fk_Obaveza_Tim1_idx` (`idTima` ASC),
+  INDEX `fk_Obaveza_Projekat1_idx` (`idProjekta` ASC),
   CONSTRAINT `fk_Obaveza_Tim1`
     FOREIGN KEY (`idTima`)
     REFERENCES `sinergija`.`tim` (`idTima`)
-    ON DELETE CASCADE
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_Obaveza_Projekat1`
+    FOREIGN KEY (`idProjekta`)
+    REFERENCES `Sinergija`.`Projekat` (`idProjekta`)
+    ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
@@ -95,26 +120,8 @@ CREATE TABLE IF NOT EXISTS `sinergija`.`ima obavezu` (
   CONSTRAINT `fk_Korisnik_has_Obaveza_Obaveza1`
     FOREIGN KEY (`idObaveze`)
     REFERENCES `sinergija`.`obaveza` (`idObaveze`)
-    ON DELETE CASCADE
+    ON DELETE RESTRICT
     ON UPDATE CASCADE)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `sinergija`.`projekat`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `sinergija`.`projekat` ;
-
-CREATE TABLE IF NOT EXISTS `sinergija`.`projekat` (
-  `idProjekta` INT(11) NOT NULL AUTO_INCREMENT,
-  `naziv` VARCHAR(250) NOT NULL,
-  `opis` VARCHAR(1024) NOT NULL,
-  `Pocetak_rada` DATE NOT NULL,
-  `Kraj_rada` DATE NOT NULL,
-  `Pocetak_dogadjaja` DATE NOT NULL,
-  `Kraj_dogadjaja` DATE NOT NULL,
-  PRIMARY KEY (`idProjekta`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -272,7 +279,9 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 START TRANSACTION;
 USE `sinergija`;
 INSERT INTO `sinergija`.`korisnik` (`idKorisnika`, `Ime`, `Prezime`, `Telefon`, `E-mail`, `Slika`, `Nadimak`, `Sifra`, `Tip`) VALUES (1000, 'Nikola', 'Ajzenhamer', '060 734 3333', 'ajzenhamernikola@gmail.com', '../uploads/novi.png', 'Ajzen', '$2y$10$CbouRMdpUqUDP3Q0f7x1YeBXXfgeh2Zdz/r0nuhVunf4u41GPPo6m', 'u');
-INSERT INTO `sinergija`.`korisnik` (`idKorisnika`, `Ime`, `Prezime`, `Telefon`, `E-mail`, `Slika`, `Nadimak`, `Sifra`, `Tip`) VALUES (1001, 'ImePrimer', 'PrezimePrimer', '060 000 0000', 'primer@email.com', '../uploads/novi.png', 'Primer', '$2y$10$CbouRMdpUqUDP3Q0f7x1YeBXXfgeh2Zdz/r0nuhVunf4u41GPPo6m', 'c');
+INSERT INTO `sinergija`.`korisnik` (`idKorisnika`, `Ime`, `Prezime`, `Telefon`, `E-mail`, `Slika`, `Nadimak`, `Sifra`, `Tip`) VALUES (1001, 'Vojislav', 'Stankovic', '060 000 0000', 'voja94@gmail.com', '../uploads/novi.png', 'Voja', '$2y$10$CbouRMdpUqUDP3Q0f7x1YeBXXfgeh2Zdz/r0nuhVunf4u41GPPo6m', 'c');
+INSERT INTO `sinergija`.`korisnik` (`idKorisnika`, `Ime`, `Prezime`, `Telefon`, `E-mail`, `Slika`, `Nadimak`, `Sifra`, `Tip`) VALUES (1002, 'Anja', 'Bukurov', '064 111 1111', 'njica94@gmail.com', '../uploads/novi.png', 'Njica', '$2y$10$CbouRMdpUqUDP3Q0f7x1YeBXXfgeh2Zdz/r0nuhVunf4u41GPPo6m', 'c');
+INSERT INTO `sinergija`.`korisnik` (`idKorisnika`, `Ime`, `Prezime`, `Telefon`, `E-mail`, `Slika`, `Nadimak`, `Sifra`, `Tip`) VALUES (1003, 'Dusica', 'Krstic', '065 222 2222', 'dusmanin@gmail.com', '../uploads/novi.png', 'Du', '$2y$10$CbouRMdpUqUDP3Q0f7x1YeBXXfgeh2Zdz/r0nuhVunf4u41GPPo6m', 'u');
 
 COMMIT;
 
@@ -296,7 +305,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `sinergija`;
-INSERT INTO `sinergija`.`obaveza` (`idObaveze`, `Naziv`, `Opis`, `Datum_pocetka`, `Datum_zavrsetka`, `Deadline`, `Odradjena`, `idTima`) VALUES (3000, 'Pingovati kompanije za logo', 'Poslati mejl svakoj kompaniji da dostavi svoj logo u vektorskom i rasterskom formatu.', '2016-12-29', NULL, '2017-01-05', 0, 2001);
+INSERT INTO `sinergija`.`obaveza` (`idObaveze`, `Naziv`, `Opis`, `Datum_pocetka`, `Datum_zavrsetka`, `Deadline`, `Odradjena`, `idTima`, `idProjekta`) VALUES (3000, 'Pingovati kompanije za logo', 'Poslati mejl svakoj kompaniji da dostavi svoj logo u vektorskom i rasterskom formatu.', '2016-12-29', NULL, '2017-01-05', 0, 2001, NULL);
+INSERT INTO `sinergija`.`obaveza` (`idObaveze`, `Naziv`, `Opis`, `Datum_pocetka`, `Datum_zavrsetka`, `Deadline`, `Odradjena`, `idTima`, `idProjekta`) VALUES (NULL, 'PrimerObaveze', 'Opis obaveze. Uraditi nesto.', '2017-01-01', NULL, '2017-01-05', 0, 2002, NULL);
+INSERT INTO `sinergija`.`obaveza` (`idObaveze`, `Naziv`, `Opis`, `Datum_pocetka`, `Datum_zavrsetka`, `Deadline`, `Odradjena`, `idTima`, `idProjekta`) VALUES (NULL, 'Obaveza2', 'Napisati neki kreativan opis obaveze', '2017-01-01', NULL, '2017-01-25', 0, 2003, NULL);
 
 COMMIT;
 
@@ -307,6 +318,8 @@ COMMIT;
 START TRANSACTION;
 USE `sinergija`;
 INSERT INTO `sinergija`.`ima obavezu` (`idKorisnika`, `idObaveze`) VALUES (1000, 3000);
+INSERT INTO `sinergija`.`ima obavezu` (`idKorisnika`, `idObaveze`) VALUES (1000, 3001);
+INSERT INTO `sinergija`.`ima obavezu` (`idKorisnika`, `idObaveze`) VALUES (1000, 3002);
 
 COMMIT;
 
