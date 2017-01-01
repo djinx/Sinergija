@@ -41,7 +41,7 @@ switch ($akcija){
                 if($preparedQuery->execute()){
                     $preparedQuery->close();
                     $tipAkcije = "DELETE";
-                    $opisAkcije = 'Korisnik $idOsobeKojaBrise ($imeOsobeKojaBrise $prezimeOsobeKojaBrise) je obrisao korisnika $id ($ime $prezime).';
+                    $opisAkcije = 'Korisnik'.$idOsobeKojaBrise.' ('.$imeOsobeKojaBrise.' '.$prezimeOsobeKojaBrise.') je obrisao korisnika '.$id.' ('.$ime.' '.$prezime.').';
                     $query = "INSERT INTO Log VALUES (?, ?, ?, now())";
                     $preparedQuery = $db->prepare($query);
                     $preparedQuery->bind_param("iss", $idOsobeKojaBrise, $tipAkcije, $opisAkcije);
