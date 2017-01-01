@@ -30,17 +30,26 @@
     <div class="small-12 medium-9 columns">
 
         <ul class="tabs" data-tabs id="home-tabs">
-            <li class="tabs-title is-active"><a href="#tab-obaveze">Obaveze</a></li>
+            <li class="tabs-title is-active"><a href="#tab-projekti">Projekti</a></li>
+            <li class="tabs-title"><a href="#tab-obaveze">Obaveze</a></li>
             {% if session['Tip'] == 'u' %}
             <li class="tabs-title"><a href="#tab-administracija">Administracija</a></li>
             {% endif %}
         </ul>
         <div class="tabs-content" data-tabs-content="home-tabs">
+            <div class="tabs-panel is-active" id="tab-projekti">
+                <div class="listaProjekata">
+
+                </div>
+                <button id="ucitajJosP" class="expanded button">Učitaj još</button>
+            </div>
+        </div>
+        <div class="tabs-content" data-tabs-content="home-tabs">
             <div class="tabs-panel is-active" id="tab-obaveze">
                 <div class="listaObaveza">
 
                 </div>
-                <button id="ucitajJos" class="expanded button" href="#0">Učitaj još</button>
+                <button id="ucitajJosO" class="expanded button">Učitaj još</button>
             </div>
         </div>
         {% if session['Tip'] == 'u' %}

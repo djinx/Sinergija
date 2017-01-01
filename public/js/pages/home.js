@@ -4,4 +4,5 @@
 
 // broj obaveza koji se dohvata u startu
 // -1 ako treba dohvatiti sve obaveze
-var num = 3;
+var num_o = 3;
+var num_p = 3;

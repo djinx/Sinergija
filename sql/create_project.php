@@ -28,17 +28,15 @@ if(!empty($_POST['OpisProjekta'])){
 
 $datumPR = $_POST['DatumPocetkaRadaProjekta'];
 $pr = date('Y-m-d', strtotime($datumPR));
-$datumKR = $_POST['DatumKrajaRadaProjekta'];
-$kr = date('Y-m-d', strtotime($datumKR));
 $datumPD = $_POST['DatumPocetkaDogadjaja'];
 $pd = date('Y-m-d', strtotime($datumPD));
 $datumKD = $_POST['DatumKrajaDogadjaja'];
 $kd = date('Y-m-d', strtotime($datumKD));
 
 
-$query = 'INSERT INTO `projekat`(`idProjekta`, `naziv`, `opis`, `Pocetak_rada`, `Kraj_rada`, `Pocetak_dogadjaja`, `Kraj_dogadjaja`) VALUES (NULL, ?, ?, ?, ? , ?, ?)';
+$query = 'INSERT INTO `projekat`(`idProjekta`, `naziv`, `opis`, `Pocetak_rada`, `Kraj_rada`, `Pocetak_dogadjaja`, `Kraj_dogadjaja`) VALUES (NULL, ?, ?, ?, NULL , ?, ?)';
 $preparedQuery = $db->prepare($query);
-$preparedQuery->bind_param("ssssss", $naziv, $opis, $pr, $kr, $pd, $kd);
+$preparedQuery->bind_param("ssssss", $naziv, $opis, $pr, $pd, $kd);
 $preparedQuery->execute();
 
 $query = 'SELECT max(idProjekta) FROM projekat';
