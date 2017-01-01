@@ -15,7 +15,7 @@ if(isset($_SESSION['username'])){
 
     $idKorisnika = intval($_SESSION['username']['idKorisnika']);
     $num = $_GET['num'];
-    $query = "SELECT o.idObaveze, o.Naziv, o.Opis, o.Datum_pocetka, o.Deadline, t.Naziv FROM `ima obavezu` io JOIN obaveza o ON io.idObaveze = o.idObaveze JOIN tim t ON t.idTima = o.idTima WHERE o.Odradjena = 0 AND io.idKorisnika = ? ORDER BY o.Deadline";
+    $query = "SELECT o.idObaveze, o.Naziv, o.Opis, o.Datum_pocetka, o.Deadline, t.Naziv FROM `ima obavezu` io JOIN obaveza o ON io.idObaveze = o.idObaveze JOIN tim t ON t.idTima = o.idTima WHERE o.Datum_zavrsetka IS NULL AND io.idKorisnika = ? ORDER BY o.Deadline";
     if(intval($_GET['num']) != -1){
         $query = $query." LIMIT ?";
     }
