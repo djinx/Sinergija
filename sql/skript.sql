@@ -304,10 +304,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `sinergija`;
-INSERT INTO `sinergija`.`obaveza` (`idObaveze`, `Naziv`, `Opis`, `Datum_pocetka`, `Datum_zavrsetka`, `Deadline`, `Odradjena`, `idTima`, `idProjekta`) VALUES (6000, 'Pingovati kompanije za logo', 'oslati mejl svakoj kompaniji da dostavi svoj logo u vektorskom i rasterskom formatu.', '2016-12-29', NULL, '2017-01-05', 0, 2001, NULL);
+INSERT INTO `sinergija`.`obaveza` (`idObaveze`, `Naziv`, `Opis`, `Datum_pocetka`, `Datum_zavrsetka`, `Deadline`, `Odradjena`, `idTima`, `idProjekta`) VALUES (6000, 'Pingovati kompanije za logo', 'Poslati mejl svakoj kompaniji da dostavi svoj logo u vektorskom i rasterskom formatu.', '2016-12-29', NULL, '2017-01-05', 0, 2001, NULL);
 INSERT INTO `sinergija`.`obaveza` (`idObaveze`, `Naziv`, `Opis`, `Datum_pocetka`, `Datum_zavrsetka`, `Deadline`, `Odradjena`, `idTima`, `idProjekta`) VALUES (6001, 'Odabrati logo', 'Pregledaj sve logoe koji su ti poslati, pa odaberi neki koji ti se čini najzanimljivijim.', '2016-12-20', '2016-12-25', '2016-12-31', 1, 2001, 3001);
 INSERT INTO `sinergija`.`obaveza` (`idObaveze`, `Naziv`, `Opis`, `Datum_pocetka`, `Datum_zavrsetka`, `Deadline`, `Odradjena`, `idTima`, `idProjekta`) VALUES (6002, 'Napiši saopštenje za JobPrep Workshop', 'Napiši saopštenje za JobPrep Workshop', '2016-12-30', NULL, '2017-01-17', 0, 2001, NULL);
 INSERT INTO `sinergija`.`obaveza` (`idObaveze`, `Naziv`, `Opis`, `Datum_pocetka`, `Datum_zavrsetka`, `Deadline`, `Odradjena`, `idTima`, `idProjekta`) VALUES (6003, 'Pregledaj izveštaje PR člančića', 'Na gmail-u se nalaze.', '2016-12-30', NULL, '2017-01-10', 0, 2001, 3001);
+INSERT INTO `sinergija`.`obaveza` (`idObaveze`, `Naziv`, `Opis`, `Datum_pocetka`, `Datum_zavrsetka`, `Deadline`, `Odradjena`, `idTima`, `idProjekta`) VALUES (6004, 'Plan objava za februar 2017.', 'Napraviti plan objava za Facebook stranicu (obavezno) i Instagram profil (opciono) za februar 2017.', '2017-01-01', NULL, '2017-01-31', 0, 2001, NULL);
 
 COMMIT;
 
@@ -321,6 +322,17 @@ INSERT INTO `sinergija`.`ima obavezu` (`idKorisnika`, `idObaveze`) VALUES (1000,
 INSERT INTO `sinergija`.`ima obavezu` (`idKorisnika`, `idObaveze`) VALUES (1000, 6001);
 INSERT INTO `sinergija`.`ima obavezu` (`idKorisnika`, `idObaveze`) VALUES (1000, 6002);
 INSERT INTO `sinergija`.`ima obavezu` (`idKorisnika`, `idObaveze`) VALUES (1000, 6003);
+INSERT INTO `sinergija`.`ima obavezu` (`idKorisnika`, `idObaveze`) VALUES (1000, 6004);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `sinergija`.`koordinira`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `sinergija`;
+INSERT INTO `sinergija`.`koordinira` (`idProjekta`, `idKorisnika`, `idTima`) VALUES (3000, 1000, 2001);
 
 COMMIT;
 
@@ -334,6 +346,16 @@ INSERT INTO `sinergija`.`prijatelji` (`idPrijatelja`, `Naziv`, `Tip`, `Podtip`, 
 INSERT INTO `sinergija`.`prijatelji` (`idPrijatelja`, `Naziv`, `Tip`, `Podtip`, `Broj_telefona`, `Email`, `Veb_sajt`, `Ime_kontakta`, `Adresa`) VALUES (4001, 'PC Press', 'Mediji', 'Magazini', '011 2080220', 'pc@pcpress.rs, ana@pcpress.rs, marketing@pcpress.rs', 'www.pcpress.rs', 'Ana', NULL);
 INSERT INTO `sinergija`.`prijatelji` (`idPrijatelja`, `Naziv`, `Tip`, `Podtip`, `Broj_telefona`, `Email`, `Veb_sajt`, `Ime_kontakta`, `Adresa`) VALUES (4002, 'RTS', 'Mediji', 'Televizije', '011 3212000, 011 3249000, 011 3225678 (Marketing)', 'marketing.office@rts.rs', 'www.rts.rs/', NULL, NULL);
 INSERT INTO `sinergija`.`prijatelji` (`idPrijatelja`, `Naziv`, `Tip`, `Podtip`, `Broj_telefona`, `Email`, `Veb_sajt`, `Ime_kontakta`, `Adresa`) VALUES (4003, 'Puzzle Software d.o.o.', 'Kompanije', 'Sponzori', '011 3911245', 'zorana.katnic@puzzlesoftware.rs', 'http://puzzlesoftware.rs/Home', 'Zorana Katnić', 'Jove Ilića 55, 11000 Beograd, Srbija');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `sinergija`.`ucestvuje`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `sinergija`;
+INSERT INTO `sinergija`.`ucestvuje` (`idKorisnika`, `idProjekta`, `idTima`) VALUES (1000, 3000, 2001);
 
 COMMIT;
 
