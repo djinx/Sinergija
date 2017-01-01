@@ -41,13 +41,14 @@ switch ($akcija){
                 if($preparedQuery->execute()){
                     $preparedQuery->close();
                     $tipAkcije = "DELETE";
-                    $opisAkcije = 'Korisnik'.$idOsobeKojaBrise.' ('.$imeOsobeKojaBrise.' '.$prezimeOsobeKojaBrise.') je obrisao korisnika '.$id.' ('.$ime.' '.$prezime.').';
+                    $opisAkcije = 'Korisnik '.$idOsobeKojaBrise.' ('.$imeOsobeKojaBrise.' '.$prezimeOsobeKojaBrise.') je obrisao korisnika '.$id.' ('.$ime.' '.$prezime.').';
                     $query = "INSERT INTO Log VALUES (?, ?, ?, now())";
                     $preparedQuery = $db->prepare($query);
                     $preparedQuery->bind_param("iss", $idOsobeKojaBrise, $tipAkcije, $opisAkcije);
                     if($preparedQuery->execute()){
                         $db->commit();
                         echo "Korisnik je uspesno obrisan!";
+                        header("Location: ../public/");
                         return;
                     }else{
                         $db->rollback();
@@ -68,5 +69,3 @@ switch ($akcija){
     default:
         break;
 }
-
-header("Location: ../public/");
