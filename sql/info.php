@@ -16,6 +16,7 @@ if(!isset($_GET['akcija']))
     exit();
 
 $akcija = $_GET['akcija'];
+$message="";
 
 switch($akcija){
     case 'citaj_timove':
@@ -45,6 +46,14 @@ switch($akcija){
         $preparedQuery = $db->prepare($query);
         $preparedQuery->bind_param("i", $id);
         $preparedQuery->execute();
+        break;
+    case 'zavrsi_projekat':
+        $id = $_GET['id'];
+        $query = "UPDATE `projekat` SET `Kraj_rada`=CURRENT_DATE WHERE idProjekta=?";
+        $preparedQuery = $db->prepare($query);
+        $preparedQuery->bind_param("i", $id);
+        $preparedQuery->execute();
+        $message = "izvrsena izmena za projekat ".$id;
         break;
     default:
         break;
