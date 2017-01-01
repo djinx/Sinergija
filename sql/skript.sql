@@ -235,6 +235,20 @@ CREATE TABLE IF NOT EXISTS `sinergija`.`zaduzen` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
+
+-- -----------------------------------------------------
+-- Table `sinergija`.`Log`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `sinergija`.`Log` ;
+
+CREATE TABLE IF NOT EXISTS `sinergija`.`Log` (
+  `idKorisnika` INT(11) NOT NULL,
+  `TipAkcije` VARCHAR(45) NOT NULL,
+  `OpisAkcije` VARCHAR(256) NOT NULL,
+  `VremeDatum` DATETIME NOT NULL,
+  PRIMARY KEY (`idKorisnika`, `TipAkcije`, `OpisAkcije`, `VremeDatum`))
+ENGINE = InnoDB;
+
 SET SQL_MODE = '';
 GRANT USAGE ON *.* TO omikron;
  DROP USER omikron;
