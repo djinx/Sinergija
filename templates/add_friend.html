@@ -1,0 +1,45 @@
+<div id='formular-novPrijatelj' style="display: none;">
+    <div class='row column'>
+        <form id="forma-novPrijatelj" data-abide novalidate action="../sql/add_friend.php"  method="post">
+            <div data-abide-error class='alert callout' style='display: none;'>
+                <p><i class='fi-alert'></i> Postoje greške u formularu.</p>
+            </div>
+            <input type="hidden" id="ProjekatIdP" value="">
+            <div class='small-12 medium-6 columns'>
+                <label>
+                    Odaberi prijatelja:
+                    <select class='listaPrijatelja' name='Prijatelj' required>
+                        <option value=''></option>
+                    </select>
+                </label>
+                <label>
+                    Odaberi korisnika koji je zadužen za ovog prijatelja:
+                    <select class='listaUcesnika' name='Zaduzen' required>
+                        <option value=''></option>
+                    </select>
+                </label>
+                <label>
+                    Odaberi status saradnje:
+                    <select id='Status' name='Status' required>
+                        <option value=''></option>
+                        <option value='odobreno'> Uspešna saradnja </option>
+                        <option value='u pregovorima'> U pregovorima </option>
+                        <option value='odbijeno'> Odbijena saradnja </option>
+                    </select>
+                </label>
+            </div>
+
+            <div class='small-12 medium-6 columns'>
+                <label>Napomena
+                    <textarea rows="9" cols="50" id="Napomena" name="Napomena">
+
+                    </textarea>
+                </label>
+            </div>
+
+            <button type='submit' name='novPrijatelj' id='novPrijatelj' class='expanded button'>Dodaj novog prijatelja</button>
+            <a href='#0' id='odustaniOdPrijatelja' name='odustaniOdPrijatelja' class='expanded button'>Odustani</a>
+
+        </form>
+    </div>
+</div>
