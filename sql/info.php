@@ -57,6 +57,16 @@ switch($akcija){
             }
         }
         break;
+    case 'citaj_prijatelje':
+        $query = "SELECT idPrijatelja, naziv FROM prijatelji ";
+        $result=mysqli_query($db, $query) or die("Problem prilikom izvrsavanja upita");
+
+        // odgovor koji se salje
+        $message="";
+        while($row=mysqli_fetch_assoc($result)){
+            $message.=$row['idPrijatelja']."+".$row['naziv']."::";
+        }
+        break;
     case 'zavrsi_obavezu':
         $id = $_GET['id'];
         $query = "UPDATE Obaveza SET `Datum_zavrsetka`=CURRENT_DATE , `Odradjena`=1 WHERE idObaveze=?";

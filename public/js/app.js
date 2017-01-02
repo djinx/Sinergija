@@ -1,7 +1,7 @@
 $(document).foundation();
 
 var $formaNoviClan, $formaNovaObaveza;
-var $formaNovProjekat, $formaNovUcesik, $formaKoordinator;
+var $formaNovProjekat, $formaNovUcesik, $formaKoordinator, $formaNovPrijatelj;
 var $formaBrisanjeClana;
 
 function ucitaj(stranica) {
@@ -66,6 +66,56 @@ function ucitaj_timove(){
     });
 }
 
+function ucitaj_ucesnike(id){
+    $.ajax({
+        url: '../sql/info.php',
+        method: 'GET',
+        data: {akcija: 'citaj_ucesnike', id: id},
+        success: function(rezultat) {
+            var korisnici = rezultat.split("::");
+            console.log(rezultat);
+            // popunjanje select liste podacima
+            for(var i=0; i<korisnici.length-1; i++){
+                var korisnik = korisnici[i].split("+");
+                var id = korisnik[0];
+                var ime = korisnik[1];
+                var prezime = korisnik[2];
+                $(".listaUcesnika").append("<option value='"+id+"'>"+ ime +" " + prezime +"</option>");
+            }
+            console.log("Dohvacena su imena ucesnika");
+        },
+        error: function (rezultat) {
+            console.log("Javila se greška pri dohvatanju podataka o ucesnicima!");
+            console.log(rezultat);
+        }
+    });
+}
+
+function ucitaj_prijatelje(){
+    $.ajax({
+        url: '../sql/info.php',
+        method: 'GET',
+        data: {akcija: 'citaj_prijatelje'},
+        success: function(rezultat) {
+            var prijatelji = rezultat.split("::");
+            console.log(rezultat);
+            // popunjanje select liste podacima
+            for(var i=0; i<prijatelji.length-1; i++){
+                var prijatelj = prijatelji[i].split("+");
+                var id = prijatelj[0];
+                var naziv = prijatelj[1];
+                $(".listaPrijatelja").append("<option value='"+id+"'>"+ naziv +"</option>");
+            }
+            console.log("Dohvaceni su nazivi prijatelja");
+        },
+        error: function (rezultat) {
+            console.log("Javila se greška pri dohvatanju podataka o prijateljima!");
+            console.log(rezultat);
+        }
+    });
+
+}
+
 $(document).ready(function () {
 
     $formaNoviClan = $("#formular-noviClan");
@@ -74,6 +124,7 @@ $(document).ready(function () {
     $formaNovProjekat = $("#formular-novProjekat");
     $formaNovUcesik = $("#formular-dodajUcesnika");
     $formaKoordinator = $("#formular-dodajKoordinatora");
+    $formaNovPrijatelj = $("#formular-novPrijatelj");
 
     $formaBrisanjeClana = $("#formular-brisanjeClana");
 
@@ -93,6 +144,7 @@ $(document).ready(function () {
     $formaNovProjekat.css(stilSkrivenihFormulara);
     $formaNovUcesik.css(stilSkrivenihFormulara);
     $formaKoordinator.css(stilSkrivenihFormulara);
+    $formaNovPrijatelj.css(stilSkrivenihFormulara);
 
     $formaBrisanjeClana.css(stilSkrivenihFormulara);
 
@@ -369,28 +421,8 @@ function dodaj_ucesnika(id) {
 }
 
 function dodaj_koordinatora(id) {
-    $.ajax({
-        url: '../sql/info.php',
-        method: 'GET',
-        data: {akcija: 'citaj_ucesnike', id: id},
-        success: function(rezultat) {
-            var korisnici = rezultat.split("::");
-            console.log(rezultat);
-            // popunjanje select liste podacima
-            for(var i=0; i<korisnici.length-1; i++){
-                var korisnik = korisnici[i].split("+");
-                var id = korisnik[0];
-                var ime = korisnik[1];
-                var prezime = korisnik[2];
-                $(".listaUcesnika").append("<option value='"+id+"'>"+ ime +" " + prezime +"</option>");
-            }
-            console.log("Dohvacena su imena ucesnika");
-        },
-        error: function (rezultat) {
-            console.log("Javila se greška pri dohvatanju podataka o ucesnicima!");
-            console.log(rezultat);
-        }
-    });
+    //zahtev za popunjavanje selection liste sa ucenicima
+    ucitaj_ucesnike(id);
 
     $formaKoordinator.fadeIn("fast");
     $("#ProjekatIdK").val(id);
@@ -398,6 +430,23 @@ function dodaj_koordinatora(id) {
     // Dugme za odustajanje
     $("#odustaniOdKoordinatora").on("click", function () {
         $formaKoordinator.fadeOut("fast");
+    });
+}
+
+
+function dodaj_prijatelja(id){
+    //zahtev za popunjavanje selection liste sa ucenicima u projektu
+    ucitaj_ucesnike(id);
+
+    //zahtev za popunjavanje selection liste sa prijateljima
+    ucitaj_prijatelje();
+
+    $formaNovPrijatelj.fadeIn("fast");
+    $("#ProjekatIdP").val(id);
+
+    // Dugme za odustajanje
+    $("#odustaniOdPrijatelja").on("click", function () {
+        $formaNovPrijatelj.fadeOut("fast");
     });
 }
 
