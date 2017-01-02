@@ -1,6 +1,7 @@
 $(document).foundation();
 
-var $formaNoviClan, $formaNovaObaveza, $formaNovProjekat;
+var $formaNoviClan, $formaNovaObaveza;
+var $formaNovProjekat, $formaNovUcesik;
 var $formaBrisanjeClana;
 
 function ucitaj(stranica) {
@@ -39,11 +40,39 @@ function ucitajKorisnike() {
     });
 }
 
+//citanje naziva timova iz baze
+function ucitaj_timove(){
+    $.ajax({
+        url: '../sql/info.php',
+        method: 'GET',
+        data: {akcija: 'citaj_timove'},
+        success: function(rezultat) {
+            console.log("Dohvaceni su nazivi timova");
+            var timovi = rezultat.split("::");
+
+            // popunjanje select liste podacima
+            for(var i=0; i<timovi.length-1; i++){
+                var tim = timovi[i].split("+");
+                var id = tim[0];
+                var naziv = tim[1];
+                $("#Tim").append("<option value='"+id+"'>"+ naziv +" </option>");
+                $("#TimUcesnika").append("<option value='"+id+"'>"+ naziv +" </option>");
+            }
+        },
+        error: function (rezultat) {
+            console.log("Javila se greška pri dohvatanju naziva timova!");
+            console.log(rezultat);
+        }
+    });
+}
+
 $(document).ready(function () {
 
     $formaNoviClan = $("#formular-noviClan");
     $formaNovaObaveza = $("#formular-novaObaveza");
+
     $formaNovProjekat = $("#formular-novProjekat");
+    $formaNovUcesik = $("#formular-dodajUcesnika");
 
     $formaBrisanjeClana = $("#formular-brisanjeClana");
 
@@ -59,7 +88,9 @@ $(document).ready(function () {
 
     $formaNoviClan.css(stilSkrivenihFormulara);
     $formaNovaObaveza.css(stilSkrivenihFormulara);
+
     $formaNovProjekat.css(stilSkrivenihFormulara);
+    $formaNovUcesik.css(stilSkrivenihFormulara);
 
     $formaBrisanjeClana.css(stilSkrivenihFormulara);
 
@@ -97,30 +128,7 @@ $(document).ready(function () {
     dohvati_projekte(num_p);
     dohvati_obaveze(num_o);
 
-
-    //citanje naziva timova iz baze
-    $.ajax({
-        url: '../sql/info.php',
-        method: 'GET',
-        data: {akcija: 'citaj_timove'},
-        success: function(rezultat) {
-            console.log("Dohvaceni su nazivi timova");
-            var timovi = rezultat.split("::");
-
-            // popunjanje select liste podacima
-            for(var i=0; i<timovi.length-1; i++){
-                var tim = timovi[i].split("+");
-                var id = tim[0];
-                var naziv = tim[1];
-                $("#Tim").append("<option value='"+id+"'>"+ naziv +" </option>");
-            }
-        },
-        error: function (rezultat) {
-            console.log("Javila se greška pri dohvatanju naziva timova!");
-            console.log(rezultat);
-        }
-    });
-
+    ucitaj_timove();
     ucitajKorisnike();
 
     podesi_photo_ikonicu();
@@ -343,4 +351,17 @@ function zavrsi_projekat(id){
         }
     });
     dohvati_projekte( num_p);
+}
+
+function dodaj_ucesnika(id) {
+
+    $formaNovUcesik.fadeIn("fast");
+    $("#ProjekatId").val(id);
+
+    // Dugme za odustajanje
+    $("#odustaniOdNovogUcesnika").on("click", function () {
+        $formaNovUcesik.fadeOut("fast");
+    });
+
+    console.log("Ucesnik");
 }
