@@ -42,4 +42,4 @@ $preparedQuery->execute();
 //echo $korisnik." ".$row[0];
 
 header("Location: ../public/");
-?>
+
