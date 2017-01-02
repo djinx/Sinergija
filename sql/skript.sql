@@ -333,6 +333,7 @@ COMMIT;
 START TRANSACTION;
 USE `sinergija`;
 INSERT INTO `sinergija`.`koordinira` (`idProjekta`, `idKorisnika`, `idTima`) VALUES (3000, 1000, 2001);
+INSERT INTO `sinergija`.`koordinira` (`idProjekta`, `idKorisnika`, `idTima`) VALUES (3001, 1000, 2001);
 
 COMMIT;
 
@@ -356,6 +357,7 @@ COMMIT;
 START TRANSACTION;
 USE `sinergija`;
 INSERT INTO `sinergija`.`ucestvuje` (`idKorisnika`, `idProjekta`, `idTima`) VALUES (1000, 3000, 2001);
+INSERT INTO `sinergija`.`ucestvuje` (`idKorisnika`, `idProjekta`, `idTima`) VALUES (1000, 3001, 2001);
 
 COMMIT;
 
