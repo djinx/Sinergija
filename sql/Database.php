@@ -18,6 +18,7 @@ class Database
             if($db->connect_errno){
                 die("Problem sa povezivanjem!");
             }
+            $db->set_charset('utf8');
         }
 
         return $db;
