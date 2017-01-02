@@ -23,7 +23,7 @@ function ucitajKorisnike() {
         success: function(rezultat) {
             console.log("Dohvacena su imena korisnika");
             var korisnici = rezultat.split("::");
-
+            $(".listaKorisnika").empty();
             // popunjanje select liste podacima
             for(var i=0; i<korisnici.length-1; i++){
                 var korisnik = korisnici[i].split("+");
@@ -49,7 +49,7 @@ function ucitaj_timove(){
         success: function(rezultat) {
             console.log("Dohvaceni su nazivi timova");
             var timovi = rezultat.split("::");
-
+            $("#TimUcesnika").empty();
             // popunjanje select liste podacima
             for(var i=0; i<timovi.length-1; i++){
                 var tim = timovi[i].split("+");
@@ -74,6 +74,7 @@ function ucitaj_ucesnike(id){
         success: function(rezultat) {
             var korisnici = rezultat.split("::");
             console.log(rezultat);
+            $(".listaUcesnika").empty();
             // popunjanje select liste podacima
             for(var i=0; i<korisnici.length-1; i++){
                 var korisnik = korisnici[i].split("+");
@@ -99,6 +100,7 @@ function ucitaj_prijatelje(){
         success: function(rezultat) {
             var prijatelji = rezultat.split("::");
             console.log(rezultat);
+            $(".listaPrijatelja").empty();
             // popunjanje select liste podacima
             for(var i=0; i<prijatelji.length-1; i++){
                 var prijatelj = prijatelji[i].split("+");
