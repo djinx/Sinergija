@@ -62,8 +62,8 @@ if(isset($_SESSION['username'])){
                     </div>
                     <div class="button-group">
                         <button type="button" class="button" onclick="dodaj_ucesnika(<?php echo $idProjekta; ?>)" >Dodaj učesnika</button>
-
                         <button type="button" class="button" onclick="dodaj_koordinatora(<?php echo $idProjekta; ?>)" >Dodaj koordinatora</button>
+                        <button type="button" class="button" onclick="dodaj_prijatelja(<?php echo $idProjekta; ?>)" >Dodaj prijatelja</button>
                     </div>
                 </div>
                 <?php
