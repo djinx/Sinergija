@@ -60,6 +60,9 @@ if(isset($_SESSION['username'])){
                         <button type="button" class="button" onclick="procitaj_detalje('<?php echo $idDiv; ?>')">Pročitaj detalje</button>
                         <button type="button" class="button" onclick="zavrsi_projekat(<?php echo $idProjekta; ?>)" >Završi projekat</button>
                     </div>
+                    <div class="button-group">
+                        <button type="button" class="button" onclick="dodaj_ucesnika(<?php echo $idProjekta; ?>)" >Dodaj učesnika</button>
+                    </div>
                 </div>
                 <?php
                 $ordnum++;
