@@ -25,7 +25,7 @@
     </div>
 
     <div class="small-12 medium-8 large-8 columns" id="secondColumn">
-
+        <div id="informacije-Projekat"></div>
     </div>
 
 </div>

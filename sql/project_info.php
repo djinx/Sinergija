@@ -1,85 +1,52 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Buljavi Robot
- * Date: 1/1/2017
- * Time: 12:59 PM
+ * User: Admin
+ * Date: 2.1.2017
+ * Time: 17:19
  */
-
-session_start();
 
 require_once ('Database.php');
 
 $db = Database::getInstance();
 
-if(isset($_SESSION['username'])){
+if(isset($_POST['id'])){
 
-    $idKorisnika = intval($_SESSION['username']['idKorisnika']);
-    $num = $_GET['num'];
-    $query = "SELECT p.idProjekta, p.naziv, p.opis, p.pocetak_rada, p.pocetak_dogadjaja, p.kraj_dogadjaja, t.naziv, k.ime, k.prezime, k.nadimak  ";
-    $query = $query."FROM projekat p, ucestvuje u, tim t, koordinira ko, korisnik k  ";
-    $query = $query."WHERE u.idKorisnika = ? AND p.idProjekta = u.idProjekta  ";
-    $query = $query."AND t.idTima = u.idTima AND ko.idProjekta = p.idProjekta AND k.idKorisnika = ko.idKorisnika  ";
-    $query = $query."AND p.kraj_rada IS NULL  ";
+    $idProjekta = intval($_POST['id']);
 
-    if(intval($_GET['num']) != -1){
-        $query = $query." LIMIT ?";
-    }
-    if($preparedQuery = $db->prepare($query)){
-        if(intval($_GET['num']) != -1){
-            $preparedQuery->bind_param("ii", $idKorisnika, $num);
-        }else{
-            $preparedQuery->bind_param("i", $idKorisnika);
+    $query =
+        "SELECT p.naziv, p.opis, p.Pocetak_rada, p.Pocetak_dogadjaja, p.Kraj_dogadjaja, t.Naziv, k.Ime, k.Prezime, k.Nadimak
+         FROM projekat p 
+            JOIN ucestvuje u ON p.idProjekta = u.idProjekta
+            JOIN tim t ON u.idTima = t.idTima
+            JOIN koordinira ko ON p.idProjekta = ko.idProjekta
+            JOIN korisnik k ON ko.idKorisnika = k.idKorisnika 
+         WHERE p.idProjekta = ?";
+    $preparedQuery = $db->prepare($query);
+    $preparedQuery->bind_param("i", $idProjekta);
+
+    if($preparedQuery->execute()){
+        $preparedQuery->bind_result($nazivProjekta, $opis, $pocetakRada, $pocetakDogadjaja, $krajDogadjaja, $nazivTima, $ime, $prezime, $nadimak);
+        $koordinatori = "";
+        while($preparedQuery->fetch()){
+            $koordinatori .= $ime." ".$prezime." (".$nadimak."), ";
         }
+        ?>
+        <h4>Naziv projekta: <?php echo $nazivProjekta; ?></h4>
+        <h5>Tim: <?php echo $nazivTima; ?></h5>
 
-        if($preparedQuery->execute()){
-            $preparedQuery->bind_result($idProjekta, $nazivP, $opis, $pocetakR, $pocetakD, $krajD, $nazivT, $ime, $prezime, $nadimak);
-            $ordnum = 1;
-            while($preparedQuery->fetch()){
-                $type = "";
-                $date1 = new DateTime($pocetakD);
-                $date2 = new DateTime(date('Y-m-d'));
-                if(date_diff($date1, $date2, true)->format('%a') < 7){
-                    $type = "alert";
-                }else if(date_diff($date1, $date2, true)->format('%a') < 14){
-                    $type = "warning";
-                }
-                ?>
-                <div class="callout <?php echo $type; ?>">
-                    <h4><?php echo $nazivP; ?></h4>
-                    <h5>Tim: <?php echo $nazivT; ?></h5>
-                    <?php $idDiv = "p".$ordnum; ?>
-                    <div id="<?php echo $idDiv; ?>" style="display: none;">
-                        <p> <?php echo $opis; ?> </p>
-                        <p> Datum početka rada na projektu: <?php echo $pocetakR; ?> </p>
-                        <p> Datum početka događaja: <?php echo $pocetakD; ?> </p>
-                        <p> Datum kraja događaja: <?php echo $krajD; ?> </p>
-                    </div>
-                    <p>Koordinator: <?php echo $ime." ".$prezime." (".$nadimak.")"; ?></p>
-                    <div class="button-group">
-                        <button type="button" class="button" onclick="procitaj_detalje('<?php echo $idDiv; ?>')">Pročitaj detalje</button>
-                        <button type="button" class="button" onclick="zavrsi_projekat(<?php echo $idProjekta; ?>)" >Završi projekat</button>
-                    </div>
-                    <div class="button-group">
-                        <button type="button" class="button" onclick="dodaj_ucesnika(<?php echo $idProjekta; ?>)" >Dodaj učesnika</button>
-                        <button type="button" class="button" onclick="dodaj_koordinatora(<?php echo $idProjekta; ?>)" >Dodaj koordinatora</button>
-                        <button type="button" class="button" onclick="dodaj_prijatelja(<?php echo $idProjekta; ?>)" >Dodaj prijatelja</button>
-                    </div>
-                </div>
-                <?php
-                $ordnum++;
-            }
-            $preparedQuery->close();
-            return true;
-        }else{
-            var_dump($db->error);
-            die();
-        }
+        <p> <?php echo $opis; ?> </p>
+        <p> Datum početka rada na projektu: <?php echo $pocetakRada; ?> </p>
+        <p> Datum početka događaja: <?php echo $pocetakDogadjaja; ?> </p>
+        <p> Datum kraja događaja: <?php echo $krajDogadjaja; ?> </p>
+
+        <p>Koordinator: <?php echo substr($koordinatori, 0, strlen($koordinatori)-2); ?></p>
+<?php
+        $preparedQuery->close();
     }else{
-        var_dump($db->error);
-        die();
+        echo "Postoji problem sa dohvatanjem informacija. Pokušajte ponovo!";
     }
 
 }else{
-    die('Postoji problem sa dohvatanjem projekata!');
+    echo "Postoji greška u zahtevu. Pokušajte ponovo!";
 }
