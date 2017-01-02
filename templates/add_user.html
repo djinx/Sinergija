@@ -1,0 +1,30 @@
+<div id='formular-dodajUcesnika' style="display: none;">
+    <div class='row column'>
+        <form id="forma-dodajUcesnika" data-abide novalidate action="../sql/add_user.php" method="post">
+
+            <div data-abide-error class='alert callout' style='display: none;'>
+                <p><i class='fi-alert'></i> Postoje greške u formularu.</p>
+            </div>
+
+            <div class='small-12 medium-6 columns'>
+                <input type="hidden" id="ProjekatId" name="Projekat" value="">
+                <label>Odaberi člana
+                    <select class="listaKorisnika" name='Ucesnik' required>
+                        <option value=''></option>
+                    </select>
+                </label>
+            </div>
+            <div class='small-12 medium-6 columns'>
+                <label>Odaberi tim:
+                    <select id='TimUcesnika' name='TimUcesnika' required>
+                        <option value=''></option>
+                    </select>
+                </label>
+            </div>
+
+            <button type='submit' name='dodajNovogUcesnika' id='dodajNovogUcesnika' class='expanded button'>Dodaj novog učesnika</button>
+            <a href='#0' id='odustaniOdNovogUcesnika' class='expanded button'>Odustani</a>
+
+        </form>
+    </div>
+</div>
