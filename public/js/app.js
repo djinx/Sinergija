@@ -360,6 +360,10 @@ function procitaj_detalje(id){
     });
 }
 
+function procitaj_detalje_obaveze(id){
+    $("#" + id).slideToggle("slow");
+}
+
 function odustani_od_obaveze(id){
     $.ajax({
         url: "../sql/info.php",
