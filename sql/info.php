@@ -40,6 +40,23 @@ switch($akcija){
             $message.=$row['idKorisnika']."+".$row['Ime']."+".$row['Prezime']."::";
         }
         break;
+    case 'citaj_ucesnike':
+        $query = "SELECT k.idKorisnika, k.ime, k.prezime ";
+        $query = $query." FROM korisnik k, ucestvuje u ";
+        $query = $query." WHERE idProjekta = ? ";
+        $query = $query." AND k.idKorisnika = u.idKorisnika ";
+        $preparedQuery = $db->prepare($query);
+        $preparedQuery->bind_param("i", $_GET['id']);
+        $preparedQuery->execute();
+        $result = $preparedQuery->get_result();
+        if($result->num_rows > 0) {
+            // odgovor koji se salje
+            $message = "";
+            while ($row = $result->fetch_assoc()) {
+                $message .= $row['idKorisnika'] . "+" . $row['ime'] . "+" . $row['prezime'] . "::";
+            }
+        }
+        break;
     case 'zavrsi_obavezu':
         $id = $_GET['id'];
         $query = "UPDATE Obaveza SET `Datum_zavrsetka`=CURRENT_DATE , `Odradjena`=1 WHERE idObaveze=?";

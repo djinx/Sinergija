@@ -1,0 +1,23 @@
+<div id='formular-dodajKoordinatora' style="display: none;">
+    <div class='row column'>
+        <form id="forma-dodajKoordinatora" data-abide novalidate action="../sql/add_coordinator.php" method="post">
+
+            <div data-abide-error class='alert callout' style='display: none;'>
+                <p><i class='fi-alert'></i> Postoje greške u formularu.</p>
+            </div>
+
+            <div class='small-12 medium-6 columns'>
+                <input type="hidden" id="ProjekatIdK" name="ProjekatK" value="">
+                <label>Odaberi člana
+                    <select class="listaUcesnika" name='Ucesnici' required>
+                        <option value=''></option>
+                    </select>
+                </label>
+            </div>
+
+            <button type='submit' name='dodajNovogKoordinatora' id='dodajNovogKoordinatora' class='expanded button'>Dodaj koordinatora</button>
+            <a href='#0' id='odustaniOdKoordinatora' class='expanded button'>Odustani</a>
+
+        </form>
+    </div>
+</div>

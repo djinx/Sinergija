@@ -86,6 +86,8 @@
 
 {{ include('add_user.html') }}
 
+{{ include('add_coordinator.html') }}
+
 {{ include('obrisi_korisnika.html') }}
 
 <script src="../public/js/pages/home.js"></script>
