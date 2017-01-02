@@ -304,10 +304,10 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `sinergija`;
-INSERT INTO `sinergija`.`obaveza` (`idObaveze`, `Naziv`, `Opis`, `Datum_pocetka`, `Datum_zavrsetka`, `Deadline`, `Odradjena`, `idTima`, `idProjekta`) VALUES (6000, 'Pingovati kompanije za logo', 'Poslati mejl svakoj kompaniji da dostavi svoj logo u vektorskom i rasterskom formatu.', '2016-12-29', NULL, '2017-01-05', 0, 2001, NULL);
+INSERT INTO `sinergija`.`obaveza` (`idObaveze`, `Naziv`, `Opis`, `Datum_pocetka`, `Datum_zavrsetka`, `Deadline`, `Odradjena`, `idTima`, `idProjekta`) VALUES (6000, 'Pingovati kompanije za logo', 'Poslati mejl svakoj kompaniji da dostavi svoj logo u vektorskom i rasterskom formatu.', '2016-12-29', NULL, '2017-01-05', 1, 2001, NULL);
 INSERT INTO `sinergija`.`obaveza` (`idObaveze`, `Naziv`, `Opis`, `Datum_pocetka`, `Datum_zavrsetka`, `Deadline`, `Odradjena`, `idTima`, `idProjekta`) VALUES (6001, 'Odabrati logo', 'Pregledaj sve logoe koji su ti poslati, pa odaberi neki koji ti se čini najzanimljivijim.', '2016-12-20', '2016-12-25', '2016-12-31', 1, 2001, 3001);
-INSERT INTO `sinergija`.`obaveza` (`idObaveze`, `Naziv`, `Opis`, `Datum_pocetka`, `Datum_zavrsetka`, `Deadline`, `Odradjena`, `idTima`, `idProjekta`) VALUES (6002, 'Napiši saopštenje za JobPrep Workshop', 'Napiši saopštenje za JobPrep Workshop', '2016-12-30', NULL, '2017-01-17', 0, 2001, NULL);
-INSERT INTO `sinergija`.`obaveza` (`idObaveze`, `Naziv`, `Opis`, `Datum_pocetka`, `Datum_zavrsetka`, `Deadline`, `Odradjena`, `idTima`, `idProjekta`) VALUES (6003, 'Pregledaj izveštaje PR člančića', 'Na gmail-u se nalaze.', '2016-12-30', NULL, '2017-01-10', 0, 2001, 3001);
+INSERT INTO `sinergija`.`obaveza` (`idObaveze`, `Naziv`, `Opis`, `Datum_pocetka`, `Datum_zavrsetka`, `Deadline`, `Odradjena`, `idTima`, `idProjekta`) VALUES (6002, 'Napiši saopštenje za JobPrep Workshop', 'Napiši saopštenje za JobPrep Workshop', '2016-12-30', NULL, '2017-01-17', 0, 2001, 3001);
+INSERT INTO `sinergija`.`obaveza` (`idObaveze`, `Naziv`, `Opis`, `Datum_pocetka`, `Datum_zavrsetka`, `Deadline`, `Odradjena`, `idTima`, `idProjekta`) VALUES (6003, 'Pregledaj izveštaje PR člančića', 'Na gmail-u se nalaze.', '2016-12-30', NULL, '2017-01-10', 0, 2001, NULL);
 INSERT INTO `sinergija`.`obaveza` (`idObaveze`, `Naziv`, `Opis`, `Datum_pocetka`, `Datum_zavrsetka`, `Deadline`, `Odradjena`, `idTima`, `idProjekta`) VALUES (6004, 'Plan objava za februar 2017.', 'Napraviti plan objava za Facebook stranicu (obavezno) i Instagram profil (opciono) za februar 2017.', '2017-01-01', NULL, '2017-01-31', 0, 2001, NULL);
 
 COMMIT;
