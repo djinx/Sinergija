@@ -6,6 +6,3 @@
 // -1 ako treba dohvatiti sve obaveze
 var num_o = 0;
 var num_p = -1;
-
-//
-var detailsInSeparateColumn = true;

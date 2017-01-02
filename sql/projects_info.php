@@ -34,7 +34,6 @@ if(isset($_SESSION['username'])){
 
         if($preparedQuery->execute()){
             $preparedQuery->bind_result($idProjekta, $nazivP, $opis, $pocetakR, $pocetakD, $krajD, $nazivT, $ime, $prezime, $nadimak);
-            $ordnum = 1;
             while($preparedQuery->fetch()){
                 $type = "";
                 $date1 = new DateTime($pocetakD);
@@ -48,26 +47,19 @@ if(isset($_SESSION['username'])){
                 <div class="callout <?php echo $type; ?>">
                     <h4><?php echo $nazivP; ?></h4>
                     <h5>Tim: <?php echo $nazivT; ?></h5>
-                    <?php $idDiv = "p".$ordnum; ?>
-                    <div id="<?php echo $idDiv; ?>" style="display: none;">
-                        <p> <?php echo $opis; ?> </p>
-                        <p> Datum početka rada na projektu: <?php echo $pocetakR; ?> </p>
-                        <p> Datum početka događaja: <?php echo $pocetakD; ?> </p>
-                        <p> Datum kraja događaja: <?php echo $krajD; ?> </p>
-                    </div>
-                    <p>Koordinator: <?php echo $ime." ".$prezime." (".$nadimak.")"; ?></p>
-                    <div class="button-group">
-                        <button type="button" class="button" onclick="procitaj_detalje('<?php echo $idDiv; ?>')">Pročitaj detalje</button>
-                        <button type="button" class="button" onclick="zavrsi_projekat(<?php echo $idProjekta; ?>)" >Završi projekat</button>
-                    </div>
-                    <div class="button-group">
-                        <button type="button" class="button" onclick="dodaj_ucesnika(<?php echo $idProjekta; ?>)" >Dodaj učesnika</button>
-                        <button type="button" class="button" onclick="dodaj_koordinatora(<?php echo $idProjekta; ?>)" >Dodaj koordinatora</button>
-                        <button type="button" class="button" onclick="dodaj_prijatelja(<?php echo $idProjekta; ?>)" >Dodaj prijatelja</button>
-                    </div>
+                    <?php
+                        if(isset($_SESSION['pages']['projects']) && $_SESSION['pages']['projects']) {
+                            ?>
+                            <div class="button-group">
+                                <button type="button" class="button"
+                                        onclick="procitaj_detalje(<?php echo $idProjekta; ?>)">Pročitaj detalje
+                                </button>
+                            </div>
+                            <?php
+                        }
+                    ?>
                 </div>
                 <?php
-                $ordnum++;
             }
             $preparedQuery->close();
             return true;

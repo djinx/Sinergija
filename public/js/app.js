@@ -375,27 +375,18 @@ function zavrsi_obavezu(id){
 }
 
 function procitaj_detalje(id){
-    try{
-        if(detailsInSeparateColumn) {
-            var idProjekta = $($("#" + id).next().next().children()[1]).attr("onclick").substr(16, 4);
-            console.log(idProjekta);
-            $.ajax({
-                url: "../sql/project_info.php",
-                method: "post",
-                data: {id: idProjekta},
-                success: function(rezultat){
-                    var $informacije = $("#informacije-Projekat");
-					$informacije.empty();
-					$informacije.css("display", "none");
-                    $informacije.append(rezultat).append("<button class='expanded button' onclick='$(\"#informacije-Projekat\").slideUp(\"slow\").empty()'>Sakrij</button>");
-                    $informacije.slideDown("slow");
-                }
-            });
+    $.ajax({
+        url: "../sql/project_info.php",
+        method: "post",
+        data: {id: id},
+        success: function(rezultat){
+            var $informacije = $("#informacije-Projekat");
+            $informacije.empty();
+            $informacije.css("display", "none");
+            $informacije.append(rezultat);
+            $informacije.slideDown("slow");
         }
-    }catch(e){
-        console.log(e);
-        $("#" + id).slideToggle("slow");
-    }
+    });
 }
 
 function odustani_od_obaveze(id){

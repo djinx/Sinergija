@@ -40,7 +40,14 @@ if(isset($_POST['id'])){
         <p> Datum početka događaja: <?php echo $pocetakDogadjaja; ?> </p>
         <p> Datum kraja događaja: <?php echo $krajDogadjaja; ?> </p>
 
-        <p>Koordinator: <?php echo substr($koordinatori, 0, strlen($koordinatori)-2); ?></p>
+        <p>Koordinatori: <?php echo substr($koordinatori, 0, strlen($koordinatori)-2); ?></p>
+        <div class="button-group">
+            <button type="button" class="button" onclick="dodaj_ucesnika(<?php echo $idProjekta; ?>)" >Dodaj učesnika</button>
+            <button type="button" class="button" onclick="dodaj_koordinatora(<?php echo $idProjekta; ?>)" >Dodaj koordinatora</button>
+            <button type="button" class="button" onclick="dodaj_prijatelja(<?php echo $idProjekta; ?>)" >Dodaj prijatelja</button>
+        </div>
+        <button type="button" class="button" onclick="zavrsi_projekat(<?php echo $idProjekta; ?>)" >Završi projekat</button>
+        <button class="expanded button" onclick="$('#informacije-Projekat').empty()">Sakrij</button>
 <?php
         $preparedQuery->close();
     }else{

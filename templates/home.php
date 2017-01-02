@@ -30,22 +30,13 @@
     <div class="small-12 medium-9 columns">
 
         <ul class="tabs" data-tabs id="home-tabs">
-            <li class="tabs-title is-active"><a href="#tab-projekti">Projekti</a></li>
-            <li class="tabs-title"><a href="#tab-obaveze">Obaveze</a></li>
+            <li class="tabs-title is-active"><a href="#tab-obavestenja">Obaveštenja</a></li>
             {% if session['Tip'] == 'u' %}
             <li class="tabs-title"><a href="#tab-administracija">Administracija</a></li>
             {% endif %}
         </ul>
         <div class="tabs-content" data-tabs-content="home-tabs">
-            <div class="tabs-panel is-active" id="tab-projekti">
-                <div class="listaProjekata">
-
-                </div>
-                <button id="ucitajJosP" class="expanded button">Učitaj još</button>
-            </div>
-        </div>
-        <div class="tabs-content" data-tabs-content="home-tabs">
-            <div class="tabs-panel is-active" id="tab-obaveze">
+            <div class="tabs-panel is-active" id="tab-obavestenja">
                 <div class="listaObaveza">
 
                 </div>
@@ -83,12 +74,6 @@
 {{ include('create_task.html') }}
 
 {{ include('create_project.html') }}
-
-{{ include('add_user.html') }}
-
-{{ include('add_coordinator.html') }}
-
-{{ include('add_friend.html') }}
 
 {{ include('obrisi_korisnika.html') }}
 
