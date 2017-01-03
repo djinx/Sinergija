@@ -52,7 +52,7 @@ if(isset($_SESSION['username'])){
                             ?>
                             <div class="button-group">
                                 <button type="button" class="button"
-                                        onclick="procitaj_detalje(<?php echo $idProjekta; ?>)">Pročitaj detalje
+                                        onclick="procitaj_detalje(<?php echo $idProjekta; ?>, <?php echo $idKorisnika; ?>)">Pročitaj detalje
                                 </button>
                             </div>
                             <?php
