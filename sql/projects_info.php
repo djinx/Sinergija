@@ -16,11 +16,11 @@ if(isset($_SESSION['username'])){
 
     $idKorisnika = intval($_SESSION['username']['idKorisnika']);
     $num = $_GET['num'];
-    $query = "SELECT p.idProjekta, p.naziv, p.opis, p.pocetak_rada, p.pocetak_dogadjaja, p.kraj_dogadjaja, t.naziv, k.ime, k.prezime, k.nadimak  ";
-    $query = $query."FROM projekat p, ucestvuje u, tim t, koordinira ko, korisnik k  ";
-    $query = $query."WHERE u.idKorisnika = ? AND p.idProjekta = u.idProjekta  ";
-    $query = $query."AND t.idTima = u.idTima AND ko.idProjekta = p.idProjekta AND k.idKorisnika = ko.idKorisnika  ";
-    $query = $query."AND p.kraj_rada IS NULL  ";
+    $query =
+        " SELECT p.idProjekta, p.naziv, p.pocetak_dogadjaja, t.naziv 
+          FROM projekat p, ucestvuje u, tim t 
+          WHERE u.idKorisnika = ? AND p.idProjekta = u.idProjekta 
+          AND t.idTima = u.idTima AND p.kraj_rada IS NULL  ";
 
     if(intval($_GET['num']) != -1){
         $query = $query." LIMIT ?";
@@ -33,7 +33,7 @@ if(isset($_SESSION['username'])){
         }
 
         if($preparedQuery->execute()){
-            $preparedQuery->bind_result($idProjekta, $nazivP, $opis, $pocetakR, $pocetakD, $krajD, $nazivT, $ime, $prezime, $nadimak);
+            $preparedQuery->bind_result($idProjekta, $nazivP, $pocetakD, $nazivT);
             while($preparedQuery->fetch()){
                 $type = "";
                 $date1 = new DateTime($pocetakD);

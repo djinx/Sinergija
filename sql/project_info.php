@@ -112,7 +112,6 @@ if(isset($_POST['idP']) && isset($_POST['idK'])){
     <button class="expanded button" onclick="$('#informacije-Projekat').empty()">Sakrij</button>
 
 <?php
-    $preparedQuery->close();
 
 }else{
     echo "Postoji greška u zahtevu. Pokušajte ponovo!";
