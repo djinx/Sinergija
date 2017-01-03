@@ -345,11 +345,11 @@ function zavrsi_obavezu(id){
     dohvati_obaveze(num_o);
 }
 
-function procitaj_detalje(id){
+function procitaj_detalje(idP, idK){
     $.ajax({
         url: "../sql/project_info.php",
         method: "post",
-        data: {id: id},
+        data: {idP: idP, idK: idK},
         success: function(rezultat){
             var $informacije = $("#informacije-Projekat");
             $informacije.empty();
