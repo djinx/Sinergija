@@ -33,6 +33,7 @@ switch($akcija){
         else{
             echo "Postoji problem sa dohvatanjem informacija. Pokušajte ponovo!";
         }
+        $preparedQuery->close();
 
         break;
     case 'citaj_korisnike':
@@ -49,6 +50,7 @@ switch($akcija){
         else{
             echo "Postoji problem sa dohvatanjem informacija. Pokušajte ponovo!";
         }
+        $preparedQuery->close();
         break;
     case 'citaj_ucesnike':
         $query =
@@ -71,16 +73,26 @@ switch($akcija){
         else{
             echo "Postoji problem sa dohvatanjem informacija. Pokušajte ponovo!";
         }
+        $preparedQuery->close();
         break;
     case 'citaj_prijatelje':
         $query = "SELECT idPrijatelja, naziv FROM prijatelji ";
-        $result=mysqli_query($db, $query) or die("Problem prilikom izvrsavanja upita");
-
-        // odgovor koji se salje
-        $message="";
-        while($row=mysqli_fetch_assoc($result)){
-            $message.=$row['idPrijatelja']."+".$row['naziv']."::";
+        $preparedQuery = $db->prepare($query);
+        if($preparedQuery->execute()) {
+            $result = $preparedQuery->get_result();
+            if ($result->num_rows > 0) {
+                // odgovor koji se salje
+                $message = "";
+                while ($row = $result->fetch_assoc()) {
+                    $message .= $row['idPrijatelja'] . "+" . $row['naziv'] . "::";
+                }
+            }
         }
+        else{
+            echo "Postoji problem sa dohvatanjem informacija. Pokušajte ponovo!";
+        }
+
+        $preparedQuery->close();
         break;
     case 'zavrsi_obavezu':
         $id = $_GET['id'];
@@ -88,6 +100,7 @@ switch($akcija){
         $preparedQuery = $db->prepare($query);
         $preparedQuery->bind_param("i", $id);
         $preparedQuery->execute();
+        $preparedQuery->close();
         break;
     case 'odustani_od_obaveze':
         $id = $_GET['id'];
@@ -95,6 +108,7 @@ switch($akcija){
         $preparedQuery = $db->prepare($query);
         $preparedQuery->bind_param("i", $id);
         $preparedQuery->execute();
+        $preparedQuery->close();
         break;
     case 'zavrsi_projekat':
         $id = $_GET['id'];
@@ -102,6 +116,7 @@ switch($akcija){
         $preparedQuery = $db->prepare($query);
         $preparedQuery->bind_param("i", $id);
         $preparedQuery->execute();
+        $preparedQuery->close();
         break;
     default:
         break;
