@@ -159,6 +159,7 @@ $(document).ready(function () {
 
     dohvati_projekte(num_p);
     dohvati_obaveze(num_o);
+    dohvati_sve_obaveze();
 
     ucitaj_timove();
     ucitajKorisnike();
@@ -267,6 +268,22 @@ function dohvati_obaveze(num_o) {
             console.log("Dohvaćene su obaveze!");
             $(".listaObaveza").html("");
             $(".listaObaveza").append(rezultat);
+        },
+        error: function (rezultat) {
+            console.log("Javila se greška pri dohvatanju obaveza!");
+            console.log(rezultat);
+        },
+        dataType: 'html'
+    });
+}
+
+function dohvati_sve_obaveze() {
+    $.ajax({
+        url: '../sql/all_tasks_info.php',
+        success: function(rezultat){
+            console.log("Dohvaćene su obaveze!");
+            $(".listaSvihObaveza").html("");
+            $(".listaSvihObaveza").append(rezultat);
         },
         error: function (rezultat) {
             console.log("Javila se greška pri dohvatanju obaveza!");
