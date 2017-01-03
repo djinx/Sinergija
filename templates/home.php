@@ -37,10 +37,10 @@
         </ul>
         <div class="tabs-content" data-tabs-content="home-tabs">
             <div class="tabs-panel is-active" id="tab-obavestenja">
-                <div class="listaObaveza">
+                <div class="listaObavestenja">
 
                 </div>
-                <button id="ucitajJosO" class="expanded button">Učitaj još</button>
+                <button id="ucitajJosObavestenja" class="expanded button">Učitaj još obaveštenja</button>
             </div>
         </div>
         {% if session['Tip'] == 'u' %}

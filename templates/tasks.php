@@ -19,6 +19,7 @@
                 <a href="#firstColumnData" role="tab" class="accordion-title" id="firstColumn-heading" aria-controls="firstColumnData">Neobavljene obaveze</a>
                 <div id="firstColumnData" class="accordion-content" role="tabpanel" data-tab-content aria-labelledby="firstColumn-heading">
                     <div class="listaObaveza"></div>
+                    <button class="expanded button" id="ucitajJosObaveza">Učitaj još obaveza</button>
                 </div>
             </li>
         </ul>

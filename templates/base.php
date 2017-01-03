@@ -17,6 +17,9 @@
 
 <body>
 
+    <script src="../public/js/vendor/jquery.js"></script>
+    <script src="../public/js/vendor/what-input.js"></script>
+
     <!-- Ovde ubaci titlebar i ostalo -->
     <div class="off-canvas-wrapper">
         <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
@@ -26,10 +29,10 @@
                 </button>
                 <!-- Your menu or Off-canvas content goes here -->
                 <ul class="mobile-ofc vertical menu">
-                    <li><button class="expanded button" id="pocetnaLink" onclick="ucitaj('home')">Početna</button></li>
-                    <li><button class="expanded button" id="obavezeLink" onclick="ucitaj('tasks')">Obaveze</button></li>
-                    <li><button class="expanded button" id="projektiLink" onclick="ucitaj('projects')">Projekti</button></li>
-                    <li><button class="expanded button" id="partneriLink" onclick="ucitaj('partners')">Partneri</button></li>
+                    <li><button class="expanded button" id="pocetnaLink" onclick="ucitaj_stranicu('home')">Početna</button></li>
+                    <li><button class="expanded button" id="obavezeLink" onclick="ucitaj_stranicu('tasks')">Obaveze</button></li>
+                    <li><button class="expanded button" id="projektiLink" onclick="ucitaj_stranicu('projects')">Projekti</button></li>
+                    <li><button class="expanded button" id="partneriLink" onclick="ucitaj_stranicu('partners')">Partneri</button></li>
                     <li>
                         <form action="../sql/odjavljivanje.php" method="post">
                             <button type="submit" class="expanded button">Odjavi se</button>
@@ -63,8 +66,6 @@
 
     {% block body %}{% endblock %}
 
-    <script src="../public/js/vendor/jquery.js"></script>
-    <script src="../public/js/vendor/what-input.js"></script>
     <script src="../public/js/vendor/foundation.js"></script>
     <script src="../public/js/app.js"></script>
 
