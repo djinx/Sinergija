@@ -14,7 +14,7 @@ class Database
         static $db = null;
 
         if(!$db){
-            $db = new mysqli('localhost', 'root', '', 'Sinergija');
+            $db = new mysqli('localhost', 'omikron', '123456', 'Sinergija');
             if($db->connect_errno){
                 die("Problem sa povezivanjem!");
             }
