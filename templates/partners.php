@@ -1,6 +1,6 @@
 {% extends 'base.php' %}
 
-{% block title %}Partners{% endblock %}
+{% block title %}Partneri{% endblock %}
 
 {% block body %}
 

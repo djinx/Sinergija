@@ -29,6 +29,7 @@
                     <li><button class="expanded button" id="pocetnaLink" onclick="ucitaj('home')">Početna</button></li>
                     <li><button class="expanded button" id="obavezeLink" onclick="ucitaj('tasks')">Obaveze</button></li>
                     <li><button class="expanded button" id="projektiLink" onclick="ucitaj('projects')">Projekti</button></li>
+                    <li><button class="expanded button" id="partneriLink" onclick="ucitaj('partners')">Partneri</button></li>
                     <li>
                         <form action="../sql/odjavljivanje.php" method="post">
                             <button type="submit" class="expanded button">Odjavi se</button>
