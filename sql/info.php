@@ -21,40 +21,55 @@ $message="";
 switch($akcija){
     case 'citaj_timove':
         $query = "SELECT `idTima`, `Naziv` FROM `tim`";
-        $result=mysqli_query($db, $query) or die("Problem prilikom izvrsavanja upita");
-
-        // odgovor koji se salje
-        $message="";
-        while($row=mysqli_fetch_assoc($result)){
-            $message.=$row['idTima']."+".$row['Naziv']."::";
+        $preparedQuery = $db->prepare($query);
+        if($preparedQuery->execute()) {
+            $preparedQuery->bind_result($idTima, $naziv);
+            // odgovor koji se salje
+            $message = "";
+            while ($preparedQuery->fetch()) {
+                $message .= $idTima . "+" . $naziv . "::";
+            }
+        }
+        else{
+            echo "Postoji problem sa dohvatanjem informacija. Pokušajte ponovo!";
         }
 
         break;
     case 'citaj_korisnike':
         $query = "SELECT `idKorisnika`, `Ime`, `Prezime` FROM `korisnik`";
-        $result=mysqli_query($db, $query) or die("Problem prilikom izvrsavanja upita");
-
-        // odgovor koji se salje
-        $message="";
-        while($row=mysqli_fetch_assoc($result)){
-            $message.=$row['idKorisnika']."+".$row['Ime']."+".$row['Prezime']."::";
+        $preparedQuery = $db->prepare($query);
+        if($preparedQuery->execute()) {
+            $preparedQuery->bind_result($idKorisnika, $ime, $prezime);
+            // odgovor koji se salje
+            $message = "";
+            while ($preparedQuery->fetch()) {
+                $message .= $idKorisnika . "+" . $ime. "+" . $prezime . "::";
+            }
+        }
+        else{
+            echo "Postoji problem sa dohvatanjem informacija. Pokušajte ponovo!";
         }
         break;
     case 'citaj_ucesnike':
-        $query = "SELECT k.idKorisnika, k.ime, k.prezime ";
-        $query = $query." FROM korisnik k, ucestvuje u ";
-        $query = $query." WHERE idProjekta = ? ";
-        $query = $query." AND k.idKorisnika = u.idKorisnika ";
+        $query =
+            " SELECT k.idKorisnika, k.ime, k.prezime 
+              FROM korisnik k, ucestvuje u 
+              WHERE idProjekta = ? 
+              AND k.idKorisnika = u.idKorisnika ";
         $preparedQuery = $db->prepare($query);
         $preparedQuery->bind_param("i", $_GET['id']);
-        $preparedQuery->execute();
-        $result = $preparedQuery->get_result();
-        if($result->num_rows > 0) {
-            // odgovor koji se salje
-            $message = "";
-            while ($row = $result->fetch_assoc()) {
-                $message .= $row['idKorisnika'] . "+" . $row['ime'] . "+" . $row['prezime'] . "::";
+        if($preparedQuery->execute()) {
+            $result = $preparedQuery->get_result();
+            if ($result->num_rows > 0) {
+                // odgovor koji se salje
+                $message = "";
+                while ($row = $result->fetch_assoc()) {
+                    $message .= $row['idKorisnika'] . "+" . $row['ime'] . "+" . $row['prezime'] . "::";
+                }
             }
+        }
+        else{
+            echo "Postoji problem sa dohvatanjem informacija. Pokušajte ponovo!";
         }
         break;
     case 'citaj_prijatelje':
@@ -87,7 +102,6 @@ switch($akcija){
         $preparedQuery = $db->prepare($query);
         $preparedQuery->bind_param("i", $id);
         $preparedQuery->execute();
-        $message = "izvrsena izmena za projekat ".$id;
         break;
     default:
         break;
@@ -95,4 +109,3 @@ switch($akcija){
 }
 
 echo $message;
-?>
