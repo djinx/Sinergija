@@ -34,15 +34,11 @@ $datumKD = $_POST['DatumKrajaDogadjaja'];
 $kd = date('Y-m-d', strtotime($datumKD));
 
 
-$query = 'INSERT INTO `projekat`(`idProjekta`, `naziv`, `opis`, `Pocetak_rada`, `Kraj_rada`, `Pocetak_dogadjaja`, `Kraj_dogadjaja`) VALUES (NULL, ?, ?, ?, NULL , ?, ?)';
+$query =
+    " INSERT INTO `projekat`(`idProjekta`, `naziv`, `opis`, `Pocetak_rada`, `Kraj_rada`, `Pocetak_dogadjaja`, `Kraj_dogadjaja`)
+      VALUES (NULL, ?, ?, ?, NULL , ?, ?)";
 $preparedQuery = $db->prepare($query);
-$preparedQuery->bind_param("ssssss", $naziv, $opis, $pr, $pd, $kd);
+$preparedQuery->bind_param("sssss", $naziv, $opis, $pr, $pd, $kd);
 $preparedQuery->execute();
-
-$query = 'SELECT max(idProjekta) FROM projekat';
-$result=mysqli_query($db, $query) or die("Problem prilikom izvrsavanja upita");
-$row=mysqli_fetch_array($result);
-
-echo $naziv." ".$row[0]." ".$opis;
 
 header("Location: ../public/");
