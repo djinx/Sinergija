@@ -2,12 +2,13 @@
 /**
  * Created by PhpStorm.
  * User: Admin
- * Date: 30.12.2016
- * Time: 18:37
+ * Date: 3.1.2017
+ * Time: 16:37
  */
+
 session_start();
 
 $_SESSION['pages']['home'] = false;
-$_SESSION['pages']['partners'] = false;
+$_SESSION['pages']['partners'] = true;
 $_SESSION['pages']['projects'] = false;
-$_SESSION['pages']['tasks'] = true;
+$_SESSION['pages']['tasks'] = false;

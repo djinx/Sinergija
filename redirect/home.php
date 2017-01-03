@@ -8,5 +8,6 @@
 session_start();
 
 $_SESSION['pages']['home'] = true;
+$_SESSION['pages']['partners'] = false;
 $_SESSION['pages']['projects'] = false;
 $_SESSION['pages']['tasks'] = false;
