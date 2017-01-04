@@ -73,18 +73,19 @@ function ucitaj_ucesnike(id){
             console.log(rezultat);
             /*
              * TODO: Dve stvari
-             * 1) Promeniti tip selektora tako da dohvati samo elemente <select> koji imaju klasu "listaUcesnika"
-             * 2) Refaktorisati selektor u promenljivu
+             * + 1) Promeniti tip selektora tako da dohvati samo elemente <select> koji imaju klasu "listaUcesnika"
+             * + 2) Refaktorisati selektor u promenljivu
              */
-            $(".listaUcesnika").empty();
-            $(".listaUcesnika").append("<option value=''></option>");
+            var $listaUcesnika = $("select.listaUcesnika");
+            $listaUcesnika.empty();
+            $listaUcesnika.append("<option value=''></option>");
             // popunjanje select liste podacima
             for(var i=0; i<korisnici.length-1; i++){
                 var korisnik = korisnici[i].split("+");
                 var id = korisnik[0];
                 var ime = korisnik[1];
                 var prezime = korisnik[2];
-                $(".listaUcesnika").append("<option value='"+id+"'>"+ ime +" " + prezime +"</option>");
+                $listaUcesnika.append("<option value='"+id+"'>"+ ime +" " + prezime +"</option>");
             }
             console.log("Dohvacena su imena ucesnika");
         },
@@ -142,17 +143,18 @@ function ucitaj_prijatelje(){
             console.log(rezultat);
             /*
              * TODO: Dve stvari
-             * 1) Promeniti tip selektora tako da dohvati samo elemente <select> koji imaju klasu "listaPrijatelja"
-             * 2) Refaktorisati selektor u promenljivu
+             * + 1) Promeniti tip selektora tako da dohvati samo elemente <select> koji imaju klasu "listaPrijatelja"
+             * + 2) Refaktorisati selektor u promenljivu
              */
-            $(".listaPrijatelja").empty();
-            $(".listaPrijatelja").append("<option value=''></option>");
+            var $listaPrijatelja =  $("select.listaPrijatelja");
+            $listaPrijatelja.empty();
+            $listaPrijatelja.append("<option value=''></option>");
             // popunjanje select liste podacima
             for(var i=0; i<prijatelji.length-1; i++){
                 var prijatelj = prijatelji[i].split("+");
                 var id = prijatelj[0];
                 var naziv = prijatelj[1];
-                $(".listaPrijatelja").append("<option value='"+id+"'>"+ naziv +"</option>");
+                $listaPrijatelja.append("<option value='"+id+"'>"+ naziv +"</option>");
             }
             console.log("Dohvaceni su nazivi prijatelja");
         },
