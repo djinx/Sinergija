@@ -33,7 +33,7 @@ function ucitaj_stranicu(naziv) {
  * <Ime> <Prezime> (<Nadimak>).
  * Dohvaceni spisak se smesta u sve <select> elemente koji imaju klasu "listaKorisnika"
  */
-function ucitajKorisnike() {
+function ucitaj_korisnike() {
     $.ajax({
         url: '../sql/info.php',
         method: 'GET',
@@ -43,11 +43,12 @@ function ucitajKorisnike() {
             var korisnici = rezultat.split("::");
             /*
              * TODO: Dve stvari
-             * 1) Promeniti tip selektora tako da dohvati samo elemente <select> koji imaju klasu "listaKorisnika"
-             * 2) Refaktorisati selektor u promenljivu
+             * + 1) Promeniti tip selektora tako da dohvati samo elemente <select> koji imaju klasu "listaKorisnika"
+             * + 2) Refaktorisati selektor u promenljivu
              */
-            $(".listaKorisnika").empty();
-            $(".listaKorisnika").append("<option value=''></option>");
+            var $listaKorisnika = $("select.listaKorisnika");
+            $listaKorisnika.empty();
+            $listaKorisnika.append("<option value=''></option>");
 
             // popunjanje select liste podacima
             for(var i=0; i<korisnici.length-1; i++){
@@ -55,7 +56,7 @@ function ucitajKorisnike() {
                 var id = korisnik[0];
                 var ime = korisnik[1];
                 var prezime = korisnik[2];
-                $(".listaKorisnika").append("<option value='"+id+"'>"+ ime +" " + prezime +"</option>");
+                $listaKorisnika.append("<option value='"+id+"'>"+ ime +" " + prezime +"</option>");
             }
         },
         error: function (rezultat) {
@@ -80,20 +81,22 @@ function ucitaj_timove(){
             var timovi = rezultat.split("::");
             /*
              * TODO: Dve stvari
-             * 1) Promeniti tip selektora tako da dohvati samo elemente <select> koji imaju klasu "listaTimova", i izmeniti sve elemente koji imaju id "TimUcesnika" i "Tim" tako da imaju klasu "listaTimova"
-             * 2) Refaktorisati selektor u promenljivu
+             * + 1) Promeniti tip selektora tako da dohvati samo elemente <select> koji imaju klasu "listaTimova", i izmeniti sve elemente koji imaju id "TimUcesnika" i "Tim" tako da imaju klasu "listaTimova"
+             * + 2) Refaktorisati selektor u promenljivu
              */
-            $("#TimUcesnika").empty();
-            $("#TimUcesnika").append("<option value=''></option>");
-            $("#Tim").empty();
-            $("#Tim").append("<option value=''></option>");
+            var $tim = $("select.Tim");
+            var $timUcesnika = $("select.TimUcesnika");
+            $timUcesnika.empty();
+            $timUcesnika.append("<option value=''></option>");
+            $tim.empty();
+            $tim.append("<option value=''></option>");
             // popunjanje select liste podacima
             for(var i=0; i<timovi.length-1; i++){
                 var tim = timovi[i].split("+");
                 var id = tim[0];
                 var naziv = tim[1];
-                $("#Tim").append("<option value='"+id+"'>"+ naziv +" </option>");
-                $("#TimUcesnika").append("<option value='"+id+"'>"+ naziv +" </option>");
+                $tim.append("<option value='"+id+"'>"+ naziv +" </option>");
+                $timUcesnika.append("<option value='"+id+"'>"+ naziv +" </option>");
             }
         },
         error: function (rezultat) {
@@ -118,9 +121,9 @@ $(document).ready(function () {
 
     ucitaj_timove();
     /*
-     * TODO: promeniti naziv funkcije tako da se slaze sa ostalim nazivima funkcija
+     * + TODO: promeniti naziv funkcije tako da se slaze sa ostalim nazivima funkcija
      */
-    ucitajKorisnike();
+    ucitaj_korisnike();
 
 });
 
