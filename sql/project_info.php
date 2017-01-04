@@ -6,14 +6,16 @@
  * Time: 17:19
  */
 
+session_start();
+
 require_once ('Database.php');
 
 $db = Database::getInstance();
 
-if(isset($_POST['idP']) && isset($_POST['idK'])){
+if(isset($_POST['idP']) && isset($_SESSION['username']['idKorisnika'])){
 
     $idProjekta = intval($_POST['idP']);
-    $idKorisnika = intval($_POST['idK']);
+    $idKorisnika = intval($_SESSION['username']['idKorisnika']);
 
     //upit za izdvajanje podataka o projektu
     $query =
