@@ -20,7 +20,7 @@ function dohvati_projekte(num_p) {
         success: function(rezultat){
             console.log("Dohvaćeni su projekti!");
             /*
-             * TODO: refaktorisati selektor u promenljivu
+             * + TODO: refaktorisati selektor u promenljivu
              */
             var $listaProjekata = $("div.listaProjekata");
             $listaProjekata.html("");
