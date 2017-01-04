@@ -22,8 +22,9 @@ function dohvati_projekte(num_p) {
             /*
              * TODO: refaktorisati selektor u promenljivu
              */
-            $("div.listaProjekata").html("");
-            $("div.listaProjekata").append(rezultat);
+            var $listaProjekata = $("div.listaProjekata");
+            $listaProjekata.html("");
+            $listaProjekata.append(rezultat);
         },
         error: function (rezultat) {
             console.log("Javila se greška pri dohvatanju projekata!");
@@ -34,20 +35,19 @@ function dohvati_projekte(num_p) {
 }
 
 /*
- * TODO: refaktorisati u procitaj_detalje_projekta i izbaciti drugi argument (iz kodova i iz komentara ispod)
+ * + TODO: refaktorisati u procitaj_detalje_projekta i izbaciti drugi argument (iz kodova i iz komentara ispod)
  */
 /**
  * Prikazuje/sakriva informacije o projektu sa zadatim identifikatorom.
  * Server generiše ove pozive automatski pri dohvatanju projekata.
  * Za prikazivanje rezultata je neophodno pridružiti identifikator "informacije-Projekat" odgovarajućem <div> elementu.
  * @param idP: identifikator projekta čiji se detalji prikazuju.
- * @param idK: identifikator korisnika čiji se projekti prikazuju.
  */
-function procitaj_detalje(idP, idK){
+function procitaj_detalje_projekta(idP){
     $.ajax({
         url: "../sql/project_info.php",
         method: "post",
-        data: {idP: idP, idK: idK},
+        data: {idP: idP},
         success: function(rezultat){
             var $informacije = $("div#informacije-Projekat");
             $informacije.empty();
