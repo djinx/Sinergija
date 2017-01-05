@@ -9,15 +9,15 @@
 var num_o = 3;
 
 /**
- * Dohvata sve završene i nezavršene obaveze iz baze podataka za prijavljenog korisnika.
- * Za prikazivanje rezultata je neophodno pridružiti klasu "listaSvihObaveza" odgovarajućem <div> elementu.
+ * Dohvata sve završene obaveze iz baze podataka za prijavljenog korisnika.
+ * Za prikazivanje rezultata je neophodno pridružiti klasu "listaZavrsenihObaveza" odgovarajućem <div> elementu.
  */
-function dohvati_sve_obaveze() {
+function dohvati_obavljene_obaveze() {
     $.ajax({
         url: '../sql/all_tasks_info.php',
         success: function(rezultat){
             console.log("Dohvaćene su sve obaveze!");
-            var $listaSvihObaveza = $("div.listaSvihObaveza");
+            var $listaSvihObaveza = $("div.listaZavrsenihObaveza");
             $listaSvihObaveza.html("");
             $listaSvihObaveza.append(rezultat);
         },
@@ -34,7 +34,7 @@ function dohvati_sve_obaveze() {
  * Za prikazivanje rezultata je neophodno pridružiti klasu "listaObaveza" odgovarajućem <div> elementu.
  * @param num_o: broj obaveza koji se dohvata iz baze podataka; -1 ako treba dohvatiti sve obaveze.
  */
-function dohvati_obaveze(num_o) {
+function dohvati_neobavljene_obaveze(num_o) {
     if(num_o){
         $.ajax({
             url: '../sql/task_info.php',
@@ -79,7 +79,7 @@ function odustani_od_obaveze(id){
             console.log("Odustajanje nije uspesno zabelezeno");
         }
     });
-    dohvati_obaveze(num_o);
+    dohvati_neobavljene_obaveze(num_o);
 }
 
 /**
@@ -98,7 +98,7 @@ function zavrsi_obavezu(id){
             console.log("Obaveza neuspesno zavrsena");
         }
     });
-    dohvati_obaveze(num_o);
+    dohvati_neobavljene_obaveze(num_o);
 }
 
 /*
@@ -106,13 +106,13 @@ function zavrsi_obavezu(id){
  */
 $("#ucitajJosObaveza").on("click", function () {
     num_o += 2;
-    dohvati_obaveze(num_o);
+    dohvati_neobavljene_obaveze(num_o);
 });
 
 /*
  * Pozivanje funkcija koje su neophodne za ovu stranicu.
  */
 $(document).ready(function () {
-    dohvati_obaveze(num_o);
-    dohvati_sve_obaveze();
+    dohvati_neobavljene_obaveze(num_o);
+    dohvati_obavljene_obaveze();
 });
