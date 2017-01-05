@@ -58,8 +58,44 @@ function procitaj_detalje_projekta(idP){
     });
 }
 
+
+
 /**
- * Dohvata sve korisnike koji učestvuju projektu sa zadatim identifikatorom.
+ * Cita sve korisnike koji postoje u bazi podataka, a nisu ucesnici na datom projektu, u obliku:
+ * <Ime> <Prezime> (<Nadimak>).
+ * Dohvaceni spisak se smesta u <select> element koji ima klasu "listaClanova"
+ */
+function ucitaj_neucesnike(id) {
+    $.ajax({
+        url: '../sql/info.php',
+        method: 'GET',
+        data: {akcija: 'citaj_neucesnike', id: id},
+        success: function(rezultat) {
+            console.log("Dohvacena su imena clanova");
+            var korisnici = rezultat.split("::");
+
+            var $listaClanova = $("select.listaClanova");
+            $listaClanova.empty();
+            $listaClanova.append("<option value=''></option>");
+
+            // popunjanje select liste podacima
+            for(var i=0; i<korisnici.length-1; i++){
+                var korisnik = korisnici[i].split("+");
+                var id = korisnik[0];
+                var ime = korisnik[1];
+                var prezime = korisnik[2];
+                $listaClanova.append("<option value='"+id+"'>"+ ime +" " + prezime +"</option>");
+            }
+        },
+        error: function (rezultat) {
+            console.log("Javila se greška pri dohvatanju podataka o clanovima!");
+            console.log(rezultat);
+        }
+    });
+}
+
+/**
+ * Dohvata sve korisnike koji učestvuju projektu sa zadatim identifikatorom, a nisu koordinatori.
  * Za prikazivanje rezultata je neophodno pridružiti klasu "listaUcesnika" odgovarajućem <select> elementu.
  * @param id: identifikator projekta čiju listu učesnika treba dohvatiti.
  */
@@ -71,11 +107,8 @@ function ucitaj_ucesnike(id){
         success: function(rezultat) {
             var korisnici = rezultat.split("::");
             console.log(rezultat);
-            /*
-             * TODO: Dve stvari
-             * + 1) Promeniti tip selektora tako da dohvati samo elemente <select> koji imaju klasu "listaUcesnika"
-             * + 2) Refaktorisati selektor u promenljivu
-             */
+
+
             var $listaUcesnika = $("select.listaUcesnika");
             $listaUcesnika.empty();
             $listaUcesnika.append("<option value=''></option>");
@@ -102,6 +135,9 @@ function ucitaj_ucesnike(id){
  * @param id: identifikator projekta na kojem se dodaje novi učesnik.
  */
 function dodaj_ucesnika(id) {
+    //zahtev za popunjavanje selection liste sa clanovima koji nisu ucesnici
+    ucitaj_neucesnike(id);
+
     $formaNovUcesnik.fadeIn("fast");
     $("#ProjekatId").val(id);
 
@@ -117,7 +153,7 @@ function dodaj_ucesnika(id) {
  * @param id: identifikator projekta na kojem se dodaje novi koordinator.
  */
 function dodaj_koordinatora(id) {
-    //zahtev za popunjavanje selection liste sa ucenicima
+    //zahtev za popunjavanje selection liste sa ucesnicima
     ucitaj_ucesnike(id);
 
     $formaKoordinator.fadeIn("fast");
