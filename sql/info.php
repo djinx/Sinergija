@@ -52,6 +52,29 @@ switch($akcija){
         }
         $preparedQuery->close();
         break;
+    case 'citaj_neucesnike':
+        $idProjekta = $_GET['id'];
+        $query =
+            " SELECT `idKorisnika`, `Ime`, `Prezime` 
+              FROM `korisnik` 
+              WHERE `idKorisnika` not in (SELECT `idKorisnika` 
+                                          FROM `ucestvuje` 
+                                          WHERE idProjekta = ?)";
+        $preparedQuery = $db->prepare($query);
+        $preparedQuery->bind_param("i", $idProjekta);
+        if($preparedQuery->execute()) {
+            $preparedQuery->bind_result($idKorisnika, $ime, $prezime);
+            // odgovor koji se salje
+            $message = "";
+            while ($preparedQuery->fetch()) {
+                $message .= $idKorisnika . "+" . $ime. "+" . $prezime . "::";
+            }
+        }
+        else{
+            echo "Postoji problem sa dohvatanjem informacija. Pokušajte ponovo!";
+        }
+        $preparedQuery->close();
+        break;
     case 'citaj_ucesnike':
         $idProjekta = $_GET['id'];
         $query =
