@@ -53,13 +53,18 @@ switch($akcija){
         $preparedQuery->close();
         break;
     case 'citaj_ucesnike':
+        $idProjekta = $_GET['id'];
         $query =
             " SELECT k.idKorisnika, k.ime, k.prezime 
               FROM korisnik k, ucestvuje u 
-              WHERE idProjekta = ? 
-              AND k.idKorisnika = u.idKorisnika ";
+              WHERE idProjekta = ?
+              AND k.idKorisnika = u.idKorisnika
+              AND k.idKorisnika not in (SELECT ko.idKorisnika 
+                                        FROM koordinira ko
+                                       	WHERE ko.idKorisnika = k.idKorisnika
+                                       	  AND ko.idProjekta = ?) ";
         $preparedQuery = $db->prepare($query);
-        $preparedQuery->bind_param("i", $_GET['id']);
+        $preparedQuery->bind_param("ii", $idProjekta, $idProjekta);
         if($preparedQuery->execute()) {
             $result = $preparedQuery->get_result();
             if ($result->num_rows > 0) {
