@@ -22,8 +22,11 @@ if(isset($_SESSION['username'])){
         FROM `ima obavezu` io 
             JOIN obaveza o ON io.idObaveze = o.idObaveze 
             JOIN tim t ON t.idTima = o.idTima 
-        WHERE io.idKorisnika = ? 
-        ORDER BY o.Deadline";
+        WHERE o.Datum_zavrsetka IS NOT NULL 
+          AND io.idKorisnika = ? 
+          AND o.Odradjena = 1
+        ORDER BY o.Datum_Zavrsetka DESC";
+
     if($preparedQuery = $db->prepare($query)){
         $preparedQuery->bind_param("i", $idKorisnika);
         if($preparedQuery->execute()){
