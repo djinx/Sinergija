@@ -129,6 +129,42 @@ function ucitaj_ucesnike(id){
     });
 }
 
+
+/**
+ * Dohvata sve korisnike koji učestvuju projektu sa zadatim identifikatorom.
+ * Za prikazivanje rezultata je neophodno pridružiti klasu "listaSvihUcesnika" odgovarajućem <select> elementu.
+ * @param id: identifikator projekta čiju listu učesnika treba dohvatiti.
+ */
+function ucitaj_sve_ucesnike(id){
+    $.ajax({
+        url: '../sql/info.php',
+        method: 'GET',
+        data: {akcija: 'citaj_sve_ucesnike', id: id},
+        success: function(rezultat) {
+            var korisnici = rezultat.split("::");
+            console.log(rezultat);
+
+
+            var $listaSvihUcesnika = $("select.listaSvihUcesnika");
+            $listaSvihUcesnika.empty();
+            $listaSvihUcesnika.append("<option value=''></option>");
+            // popunjanje select liste podacima
+            for(var i=0; i<korisnici.length-1; i++){
+                var korisnik = korisnici[i].split("+");
+                var id = korisnik[0];
+                var ime = korisnik[1];
+                var prezime = korisnik[2];
+                $listaSvihUcesnika.append("<option value='"+id+"'>"+ ime +" " + prezime +"</option>");
+            }
+            console.log("Dohvacena su imena ucesnika");
+        },
+        error: function (rezultat) {
+            console.log("Javila se greška pri dohvatanju podataka o ucesnicima!");
+            console.log(rezultat);
+        }
+    });
+}
+
 /**
  * Dodaje novog učesnika u određeni tim na projektu sa zadatim identifikatorom.
  * Server generiše ove pozive automatski pri dohvatanju projekata.
@@ -208,7 +244,7 @@ function ucitaj_prijatelje(){
  */
 function dodaj_prijatelja(id){
     //zahtev za popunjavanje selection liste sa ucenicima u projektu
-    ucitaj_ucesnike(id);
+    ucitaj_sve_ucesnike(id);
 
     //zahtev za popunjavanje selection liste sa prijateljima
     ucitaj_prijatelje();
