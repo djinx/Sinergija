@@ -30,7 +30,7 @@
             <li class="accordion-navigation" data-accordion-item="" role="presentation">
                 <a href="#secondColumnData" role="tab" class="accordion-title" id="secondColumn-heading" aria-controls="firstColumnData">Obavljene obaveze</a>
                 <div id="secondColumnData" class="accordion-content" role="tabpanel" data-tab-content aria-labelledby="secondColumn-heading">
-                    <div class="listaSvihObaveza"></div>
+                    <div class="listaZavrsenihObaveza"></div>
                 </div>
             </li>
         </ul>
