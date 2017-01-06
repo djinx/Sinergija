@@ -125,17 +125,48 @@ switch($akcija){
         }
         $preparedQuery->close();
         break;
-    case 'citaj_prijatelje':
-        $query = "SELECT idPrijatelja, naziv FROM prijatelji ";
+    case 'citaj_tipove':
+        $query = "SELECT DISTINCT tip FROM `prijatelji` ";
         $preparedQuery = $db->prepare($query);
+        if($preparedQuery->execute()){
+            $preparedQuery->bind_result($tip);
+            $message = "";
+            while($preparedQuery->fetch())
+                $message .= $tip."::";
+        }
+        else{
+            echo "Postoji problem sa dohvatanjem informacija. Pokušajte ponovo!";
+        }
+        $preparedQuery->close();
+        break;
+    case 'citaj_podtipove':
+        $tip = $_GET['tip'];
+        $query = "SELECT DISTINCT podtip FROM `prijatelji` WHERE tip = ? ";
+        $preparedQuery = $db->prepare($query);
+        $preparedQuery->bind_param("s", $tip);
+        if($preparedQuery->execute()){
+            $preparedQuery->bind_result($podtip);
+            $message = "";
+            while($preparedQuery->fetch())
+                $message .= $podtip."::";
+        }
+        else{
+            echo "Postoji problem sa dohvatanjem informacija. Pokušajte ponovo!";
+        }
+        $preparedQuery->close();
+        break;
+    case 'citaj_prijatelje':
+        $tip = $_GET['tip'];
+        $podtip = $_GET['podtip'];
+        $query = "SELECT idPrijatelja, naziv FROM prijatelji WHERE tip = ? AND podtip = ?";
+        $preparedQuery = $db->prepare($query);
+        $preparedQuery->bind_param("ss", $tip, $podtip);
         if($preparedQuery->execute()) {
-            $result = $preparedQuery->get_result();
-            if ($result->num_rows > 0) {
+            $preparedQuery->bind_result($idPrijatelja, $naziv);
+            $message = "";
+            while($preparedQuery->fetch()) {
                 // odgovor koji se salje
-                $message = "";
-                while ($row = $result->fetch_assoc()) {
-                    $message .= $row['idPrijatelja'] . "+" . $row['naziv'] . "::";
-                }
+                $message .= $idPrijatelja . "+" . $naziv . "::";
             }
         }
         else{

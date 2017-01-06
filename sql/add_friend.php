@@ -16,29 +16,14 @@ $errors = array();
 $projekat = $_POST['ProjekatIdP'];
 $prijatelj = $_POST['Prijatelj'];
 $zaduzen = $_POST['Zaduzen'];
-$status = $_POST['Status'];
 
-//provera napomene
-if(!empty($_POST['Napomena'])){
-    $napomena = $db->real_escape_string(trim($_POST['Napomena']));
-}else{
-    $napomena = NULL;
-}
 
 //upis podataka iz forme u bazu
-if($napomena){
-    $query =
-        " INSERT INTO `zaduzen`(`idKorisnika`, `idProjekta`, `idSponzora`, `Status`, `Napomena`) 
-          VALUES (?, ?, ?, ?, ?)";
-    $preparedQuery = $db->prepare($query);
-    $preparedQuery->bind_param("sssss", $zaduzen, $projekat, $prijatelj, $status, $napomena);
-} else{
-    $query =
-        " INSERT INTO `zaduzen`(`idKorisnika`, `idProjekta`, `idSponzora`, `Status`, `Napomena`) 
-          VALUES (?, ?, ?, ?, NULL)";
-    $preparedQuery = $db->prepare($query);
-    $preparedQuery->bind_param("ssss", $zaduzen, $projekat, $prijatelj, $status);
-}
+$query =
+        " INSERT INTO `zaduzen`(`idKorisnika`, `idProjekta`, `idSponzora`, `Status`) 
+          VALUES (?, ?, ?, 'U pregovorima')";
+$preparedQuery = $db->prepare($query);
+$preparedQuery->bind_param("sss", $zaduzen, $projekat, $prijatelj);
 $preparedQuery->execute();
 
 header("Location: ../public/");

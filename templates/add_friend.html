@@ -7,6 +7,21 @@
             <input type="hidden" id="ProjekatIdP" name="ProjekatIdP" value="">
             <div class='small-12 medium-6 columns'>
                 <label>
+                    Odaberi tip prijatelja:
+                    <select class='Tip' name='Tip' onchange="ucitaj_podtipove()" required>
+                        <option value=''></option>
+                    </select>
+                </label>
+                <label>
+                    Odaberi podtip prijatelja:
+                    <select class='Podtip' name='Podtip' onchange="ucitaj_prijatelje()" required>
+                        <option value=''></option>
+                    </select>
+                </label>
+            </div>
+
+            <div class='small-12 medium-6 columns'>
+                <label>
                     Odaberi prijatelja:
                     <select class='listaPrijatelja' name='Prijatelj' required>
                         <option value=''></option>
@@ -17,21 +32,6 @@
                     <select class='listaSvihUcesnika' name='Zaduzen' required>
                         <option value=''></option>
                     </select>
-                </label>
-                <label>
-                    Odaberi status saradnje:
-                    <select id='Status' name='Status' required>
-                        <option value=''></option>
-                        <option value='odobreno'> Uspešna saradnja </option>
-                        <option value='u pregovorima'> U pregovorima </option>
-                        <option value='odbijeno'> Odbijena saradnja </option>
-                    </select>
-                </label>
-            </div>
-
-            <div class='small-12 medium-6 columns'>
-                <label>Napomena
-                    <textarea rows="9" cols="50" id="Napomena" name="Napomena"></textarea>
                 </label>
             </div>
 
