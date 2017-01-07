@@ -39,13 +39,53 @@
     <div class="small-12 medium-6 large-4 columns" id="thirdColumn">
         <ul class="accordion" id="thirdColumnAcc" data-accordion="thirdColumnAcc" role="tablist" data-allow-all-closed="true" data-multi-expand="true">
             <li class="accordion-item" data-accordion-item="" role="presentation">
+                {% if session['Tip'] == 'u' %}
                 <a href="#thirdColumnData" class="accordion-title" role="tab"  id="thirdColumn-heading" aria-controls="thirdColumnData">Napravi novu obavezu</a>
                 <div id="thirdColumnData" data-tab-content=""  class="accordion-content" role="tabpanel" aria-labelledby="thirdColumn-heading">
+                    <form id="forma-novaObaveza" data-abide novalidate action="../sql/nova_obaveza.php"  method="post">
+                        <div data-abide-error class='alert callout' style='display: none;'>
+                            <p><i class='fi-alert'></i> Postoje greške u formularu.</p>
+                        </div>
+
+                        <div class='columns'>
+                            <label>
+                                Naziv
+                                <input type='text' id='NazivObaveze' name='NazivObaveze' required>
+                            </label>
+                            <label>
+                                Opis
+                                <textarea rows="9" cols="50" id='OpisObaveze' name='OpisObaveze' required></textarea>
+                            </label>
+                            <label>
+                                Datum početka
+                                <input type='date' id='DatumPocetkaObaveze' name='DatumPocetkaObaveze' required>
+                            </label>
+                            <label>Rok za završavanje obaveze
+                                <input type='date' id='Deadline' name='Deadline' required>
+                            </label>
+                            <label>Odaberi tim
+                                <select class='Tim' name='Tim' required>
+                                    <option value=''></option>
+                                </select>
+                            </label>
+                            <label>Odaberi korisnika
+                                <select class="listaKorisnika" name='Korisnik' required>
+                                    <option value=''></option>
+                                </select>
+                            </label>
+                        </div>
+
+                        <button type='submit' name='novaObaveza' id='novaObaveza' class='expanded button'>Kreiraj novu obavezu</button>
+                        <a href='#0' id='odustaniOdNoveObaveze' name='odustaniOdNoveObaveze' class='expanded button'>Odustani</a>
+
+                    </form>
+
                 </div>
+
+                {% endif %}
             </li>
         </ul>
     </div>
-
 </div>
 
 <script src="../public/js/pages/tasks.js"></script>
