@@ -76,7 +76,6 @@
                         </div>
 
                         <button type='submit' name='novaObaveza' id='novaObaveza' class='expanded button'>Kreiraj novu obavezu</button>
-                        <a href='#0' id='odustaniOdNoveObaveze' name='odustaniOdNoveObaveze' class='expanded button'>Odustani</a>
 
                     </form>
 
