@@ -36,16 +36,12 @@ function ucitaj_stranicu(naziv) {
 function ucitaj_korisnike() {
     $.ajax({
         url: '../sql/info.php',
-        method: 'GET',
+        method: 'post',
         data: {akcija: 'citaj_korisnike'},
         success: function(rezultat) {
             console.log("Dohvacena su imena korisnika");
             var korisnici = rezultat.split("::");
-            /*
-             * TODO: Dve stvari
-             * + 1) Promeniti tip selektora tako da dohvati samo elemente <select> koji imaju klasu "listaKorisnika"
-             * + 2) Refaktorisati selektor u promenljivu
-             */
+
             var $listaKorisnika = $("select.listaKorisnika");
             $listaKorisnika.empty();
             $listaKorisnika.append("<option value=''></option>");
@@ -74,7 +70,7 @@ function ucitaj_korisnike() {
 function ucitaj_timove(){
     $.ajax({
         url: '../sql/info.php',
-        method: 'GET',
+        method: 'post',
         data: {akcija: 'citaj_timove'},
         success: function(rezultat) {
             console.log("Dohvaceni su nazivi timova");

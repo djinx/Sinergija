@@ -71,6 +71,7 @@ function procitaj_detalje_obaveze(id){
 function odustani_od_obaveze(id){
     $.ajax({
         url: "../sql/info.php",
+        method: 'post',
         data: {akcija: 'odustani_od_obaveze', id: id},
         success: function() {
             console.log("Odustajanje uspesno zabelezeno");
@@ -90,6 +91,7 @@ function odustani_od_obaveze(id){
 function zavrsi_obavezu(id){
     $.ajax({
         url: "../sql/info.php",
+        method: 'post',
         data: {akcija: 'zavrsi_obavezu', id: id},
         success: function() {
             console.log("Obaveza uspesno zavrsena");

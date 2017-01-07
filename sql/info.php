@@ -12,10 +12,10 @@ require_once ('Database.php');
 
 $db = Database::getInstance();
 
-if(!isset($_GET['akcija']))
+if(!isset($_POST['akcija']))
     exit();
 
-$akcija = $_GET['akcija'];
+$akcija = $_POST['akcija'];
 $message="";
 
 switch($akcija){
@@ -53,7 +53,7 @@ switch($akcija){
         $preparedQuery->close();
         break;
     case 'citaj_neucesnike':
-        $idProjekta = $_GET['id'];
+        $idProjekta = $_POST['id'];
         $query =
             " SELECT `idKorisnika`, `Ime`, `Prezime` 
               FROM `korisnik` 
@@ -76,7 +76,7 @@ switch($akcija){
         $preparedQuery->close();
         break;
     case 'citaj_ucesnike':
-        $idProjekta = $_GET['id'];
+        $idProjekta = $_POST['id'];
         $query =
             " SELECT k.idKorisnika, k.ime, k.prezime 
               FROM korisnik k, ucestvuje u 
@@ -104,7 +104,7 @@ switch($akcija){
         $preparedQuery->close();
         break;
     case 'citaj_sve_ucesnike':
-        $idProjekta = $_GET['id'];
+        $idProjekta = $_POST['id'];
         $query =
             " SELECT k.idKorisnika, k.ime, k.prezime 
               FROM korisnik k, ucestvuje u 
@@ -140,7 +140,7 @@ switch($akcija){
         $preparedQuery->close();
         break;
     case 'citaj_podtipove':
-        $tip = $_GET['tip'];
+        $tip = $_POST['tip'];
         $query = "SELECT DISTINCT podtip FROM `prijatelji` WHERE tip = ? ";
         $preparedQuery = $db->prepare($query);
         $preparedQuery->bind_param("s", $tip);
@@ -156,8 +156,8 @@ switch($akcija){
         $preparedQuery->close();
         break;
     case 'citaj_prijatelje':
-        $tip = $_GET['tip'];
-        $podtip = $_GET['podtip'];
+        $tip = $_POST['tip'];
+        $podtip = $_POST['podtip'];
         $query = "SELECT idPrijatelja, naziv FROM prijatelji WHERE tip = ? AND podtip = ?";
         $preparedQuery = $db->prepare($query);
         $preparedQuery->bind_param("ss", $tip, $podtip);
@@ -176,7 +176,7 @@ switch($akcija){
         $preparedQuery->close();
         break;
     case 'zavrsi_obavezu':
-        $id = $_GET['id'];
+        $id = $_POST['id'];
         $query = "UPDATE Obaveza SET `Datum_zavrsetka`=CURRENT_DATE , `Odradjena`=1 WHERE idObaveze=?";
         $preparedQuery = $db->prepare($query);
         $preparedQuery->bind_param("i", $id);
@@ -184,7 +184,7 @@ switch($akcija){
         $preparedQuery->close();
         break;
     case 'odustani_od_obaveze':
-        $id = $_GET['id'];
+        $id = $_POST['id'];
         $query = "UPDATE Obaveza SET `Datum_zavrsetka`=CURRENT_DATE WHERE idObaveze=?";
         $preparedQuery = $db->prepare($query);
         $preparedQuery->bind_param("i", $id);
@@ -192,7 +192,7 @@ switch($akcija){
         $preparedQuery->close();
         break;
     case 'zavrsi_projekat':
-        $id = $_GET['id'];
+        $id = $_POST['id'];
         $query = "UPDATE `projekat` SET `Kraj_rada`=CURRENT_DATE WHERE idProjekta=?";
         $preparedQuery = $db->prepare($query);
         $preparedQuery->bind_param("i", $id);

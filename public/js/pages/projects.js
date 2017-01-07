@@ -34,9 +34,7 @@ function dohvati_projekte(num_p) {
     });
 }
 
-/*
- * + TODO: refaktorisati u procitaj_detalje_projekta i izbaciti drugi argument (iz kodova i iz komentara ispod)
- */
+
 /**
  * Prikazuje/sakriva informacije o projektu sa zadatim identifikatorom.
  * Server generiše ove pozive automatski pri dohvatanju projekata.
@@ -68,7 +66,7 @@ function procitaj_detalje_projekta(idP){
 function ucitaj_neucesnike(id) {
     $.ajax({
         url: '../sql/info.php',
-        method: 'GET',
+        method: 'post',
         data: {akcija: 'citaj_neucesnike', id: id},
         success: function(rezultat) {
             console.log("Dohvacena su imena clanova");
@@ -102,7 +100,7 @@ function ucitaj_neucesnike(id) {
 function ucitaj_ucesnike(id){
     $.ajax({
         url: '../sql/info.php',
-        method: 'GET',
+        method: 'post',
         data: {akcija: 'citaj_ucesnike', id: id},
         success: function(rezultat) {
             var korisnici = rezultat.split("::");
@@ -136,7 +134,7 @@ function ucitaj_ucesnike(id){
 function ucitaj_sve_ucesnike(id){
     $.ajax({
         url: '../sql/info.php',
-        method: 'GET',
+        method: 'post',
         data: {akcija: 'citaj_sve_ucesnike', id: id},
         success: function(rezultat) {
             var korisnici = rezultat.split("::");
@@ -205,7 +203,7 @@ function dodaj_koordinatora(id) {
 function ucitaj_tipove(){
     $.ajax({
         url: '../sql/info.php',
-        method: 'GET',
+        method: 'post',
         data: {akcija: 'citaj_tipove'},
         success: function(rezultat) {
             var tipovi = rezultat.split("::");
@@ -236,7 +234,7 @@ function ucitaj_podtipove(){
     var tip = $(".Tip").val();
     $.ajax({
         url: '../sql/info.php',
-        method: 'GET',
+        method: 'post',
         data: {akcija: 'citaj_podtipove', tip: tip},
         success: function(rezultat) {
             var podtipovi = rezultat.split("::");
@@ -273,7 +271,7 @@ function ucitaj_prijatelje(){
 
     $.ajax({
         url: '../sql/info.php',
-        method: 'GET',
+        method: 'post',
         data: {akcija: 'citaj_prijatelje', tip: tip, podtip: podtip},
         success: function(rezultat) {
             var prijatelji = rezultat.split("::");
@@ -327,6 +325,7 @@ function zavrsi_projekat(id){
     console.log(id);
     $.ajax({
         url: "../sql/info.php",
+        method: 'post',
         data: {akcija: 'zavrsi_projekat', id: id},
         success: function(rezultat) {
             console.log(rezultat);
