@@ -16,6 +16,7 @@ var num_p = -1;
 function dohvati_projekte(num_p) {
     $.ajax({
         url: '../sql/projects_info.php',
+        method: 'post',
         data: {num: num_p},
         success: function(rezultat){
             console.log("Dohvaćeni su projekti!");

@@ -22,6 +22,7 @@ var stilSkrivenihFormulara = {
 function ucitaj_stranicu(naziv) {
     $.ajax({
         url : '../redirect/' + naziv + '.php',
+        method: 'post',
         success: function () {
             window.location.assign("../public/");
         }
@@ -75,11 +76,8 @@ function ucitaj_timove(){
         success: function(rezultat) {
             console.log("Dohvaceni su nazivi timova");
             var timovi = rezultat.split("::");
-            /*
-             * TODO: Dve stvari
-             * + 1) Promeniti tip selektora tako da dohvati samo elemente <select> koji imaju klasu "listaTimova", i izmeniti sve elemente koji imaju id "TimUcesnika" i "Tim" tako da imaju klasu "listaTimova"
-             * + 2) Refaktorisati selektor u promenljivu
-             */
+
+
             var $tim = $("select.Tim");
             var $timUcesnika = $("select.TimUcesnika");
             $timUcesnika.empty();
@@ -116,9 +114,6 @@ $(document).ready(function () {
     $formaNovPrijatelj.css(stilSkrivenihFormulara);
 
     ucitaj_timove();
-    /*
-     * + TODO: promeniti naziv funkcije tako da se slaze sa ostalim nazivima funkcija
-     */
     ucitaj_korisnike();
 
 });

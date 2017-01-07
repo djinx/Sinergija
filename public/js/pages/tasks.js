@@ -15,6 +15,7 @@ var num_o = 3;
 function dohvati_obavljene_obaveze() {
     $.ajax({
         url: '../sql/all_tasks_info.php',
+        method: 'post',
         success: function(rezultat){
             console.log("Dohvaćene su sve obaveze!");
             var $listaSvihObaveza = $("div.listaZavrsenihObaveza");
@@ -38,6 +39,7 @@ function dohvati_neobavljene_obaveze(num_o) {
     if(num_o){
         $.ajax({
             url: '../sql/task_info.php',
+            method: 'post',
             data: {num: num_o},
             success: function(rezultat){
                 console.log("Dohvaćene su obaveze!");
