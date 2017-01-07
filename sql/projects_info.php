@@ -15,18 +15,18 @@ $db = Database::getInstance();
 if(isset($_SESSION['username'])){
 
     $idKorisnika = intval($_SESSION['username']['idKorisnika']);
-    $num = $_GET['num'];
+    $num = $_POST['num'];
     $query =
         " SELECT p.idProjekta, p.naziv, p.pocetak_dogadjaja, t.naziv 
           FROM projekat p, ucestvuje u, tim t 
           WHERE u.idKorisnika = ? AND p.idProjekta = u.idProjekta 
           AND t.idTima = u.idTima AND p.kraj_rada IS NULL  ";
 
-    if(intval($_GET['num']) != -1){
+    if(intval($_POST['num']) != -1){
         $query = $query." LIMIT ?";
     }
     if($preparedQuery = $db->prepare($query)){
-        if(intval($_GET['num']) != -1){
+        if(intval($_POST['num']) != -1){
             $preparedQuery->bind_param("ii", $idKorisnika, $num);
         }else{
             $preparedQuery->bind_param("i", $idKorisnika);
