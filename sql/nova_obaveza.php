@@ -10,14 +10,27 @@ require_once('Database.php');
 
 $db = Database::getInstance();
 
-$naziv = $_POST['NazivObaveze'];
-$opis = $_POST['OpisObaveze'];
+//provera naziva
+if(!empty($_POST['NazivObaveze'])){
+    $naziv = $db->real_escape_string(trim($_POST['NazivObaveze']));
+}else{
+    $errors[] = "Molimo unesite naziv obaveze!";
+}
+
+//provera opisa
+if(!empty($_POST['OpisObaveze'])){
+    $opis = $db->real_escape_string(trim($_POST['OpisObaveze']));
+}else{
+    $errors[] = "Molimo unesite opis obaveze!";
+}
+
 $datum = $_POST['DatumPocetkaObaveze'];
 $deadline = $_POST['Deadline'];
 $tim = $_POST['Tim'];
 $korisnik = $_POST['Korisnik'];
 $datum1 =  date('Y-m-d', strtotime($datum));
 $deadline1 =  date('Y-m-d', strtotime($deadline));
+
 
 //pravljenje nove obaveze
 $sql = 'INSERT INTO obaveza(`idObaveze`, `Naziv`, `Opis`, `Datum_pocetka`, `Deadline`, `Odradjena`, `idTima`) VALUES(NULL, ?, ?, ?, ?, 0, ?)';
