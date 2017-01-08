@@ -63,7 +63,10 @@
                 </label>
                 <label>Prijatelji
                     <br>
-                    <button type="button" class="button" name="kreirajPrijatelja" id="kreirajPrijatelja">Kreiraj novog prijatelja</button>
+                    <div class="button-group">
+                        <button type="button" class="button" name="kreirajPrijatelja" id="kreirajPrijatelja">Kreiraj novog prijatelja</button>
+                        <button type="button" class="button" name="izmeniPrijatelja" id="izmeniPrijatelja">Izmeni</button>
+                    </div>
                 </label>
 
             </div>
@@ -82,6 +85,8 @@
 {{ include('obrisi_korisnika.html') }}
 
 {{ include('create_friend.html') }}
+
+{{ include('update_friend.html') }}
 
 <script src="../public/js/pages/home.js"></script>
 
