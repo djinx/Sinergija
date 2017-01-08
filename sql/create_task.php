@@ -10,6 +10,13 @@ require_once('Database.php');
 
 $db = Database::getInstance();
 
+/*
+ * id projekta iz hidden polja
+ * ukoliko je prazno to znaci da se obaveza ne dodaje projektu
+ * vec je nezavisna
+*/
+$projekat = $_POST['IdProjektaObaveza'];
+
 //provera naziva
 if(!empty($_POST['NazivObaveze'])){
     $naziv = $db->real_escape_string(trim($_POST['NazivObaveze']));
@@ -31,14 +38,24 @@ $korisnik = $_POST['Korisnik'];
 $datum1 =  date('Y-m-d', strtotime($datum));
 $deadline1 =  date('Y-m-d', strtotime($deadline));
 
-
 //pravljenje nove obaveze
-$sql = 'INSERT INTO obaveza(`idObaveze`, `Naziv`, `Opis`, `Datum_pocetka`, `Deadline`, `Odradjena`, `idTima`) VALUES(NULL, ?, ?, ?, ?, 0, ?)';
-$preparedQuery = $db->prepare($sql);
-$preparedQuery->bind_param("ssssi", $naziv, $opis, $datum1, $deadline1, $tim);
+$query =
+    ' INSERT INTO obaveza(`idObaveze`, `Naziv`, `Opis`, `Datum_pocetka`, `Deadline`, `Odradjena`, `idTima`, `idProjekta`) 
+      VALUES(NULL, ?, ?, ?, ?, 0, ?, ';
+if($projekat == ""){
+    // obaveza je nezavisna i za idProjekta unosimo NULL
+    $query .= 'NULL)';
+    $preparedQuery = $db->prepare($query);
+    $preparedQuery->bind_param("ssssi", $naziv, $opis, $datum1, $deadline1, $tim);
+}
+else{
+    // obaveza se unosi u okviru projekta i unosi se idProjekta
+    $query .= '?)';
+    $preparedQuery = $db->prepare($query);
+    $preparedQuery->bind_param("ssssii", $naziv, $opis, $datum1, $deadline1, $tim, $projekat);
+}
 $preparedQuery->execute();
 $preparedQuery->close();
-//echo $naziv." ".$opis." ".$datum1." ".$deadline1." ".$tim;
 
 //izdvajanje obaveze sa najvecim idObaveze - to je obaveza koja je poslednja uneta
 $query = 'SELECT max(idObaveze) FROM obaveza';
@@ -51,12 +68,11 @@ if($preparedQuery->execute()) {
 $preparedQuery->close();
 
 //dodavanje obaveze odabranom korisniku
-$sql = 'INSERT INTO `ima obavezu`(`idKorisnika`, `idObaveze`) VALUES (?, ?)';
-$preparedQuery = $db->prepare($sql);
+$query = 'INSERT INTO `ima obavezu`(`idKorisnika`, `idObaveze`) VALUES (?, ?)';
+$preparedQuery = $db->prepare($query);
 $preparedQuery->bind_param("ii", $korisnik, $idObaveze);
 $preparedQuery->execute();
 $preparedQuery->close();
-//echo $korisnik." ".$row[0];
 
 header("Location: ../public/");
 
