@@ -20,9 +20,8 @@ function dohvati_projekte(num_p) {
         data: {num: num_p},
         success: function(rezultat){
             console.log("Dohvaćeni su projekti!");
-            /*
-             * + TODO: refaktorisati selektor u promenljivu
-             */
+
+
             var $listaProjekata = $("div.listaProjekata");
             $listaProjekata.html("");
             $listaProjekata.append(rezultat);
@@ -308,12 +307,12 @@ function dodaj_prijatelja(id){
     //zahtev za popunjavanje selection liste sa prijateljima
     ucitaj_tipove();
 
-    $formaNovPrijatelj.fadeIn("fast");
+    $formaDodajPrijatelja.fadeIn("fast");
     $("#ProjekatIdP").val(id);
 
     // Dugme za odustajanje
     $("#odustaniOdPrijatelja").on("click", function () {
-        $formaNovPrijatelj.fadeOut("fast");
+        $formaDodajPrijatelja.fadeOut("fast");
     });
 }
 

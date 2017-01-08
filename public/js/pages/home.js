@@ -9,6 +9,7 @@ var $formaNoviClan = $("#formular-noviClan");
 var $formaBrisanjeClana = $("#formular-brisanjeClana");
 //formaNovaObaveza je premestena u app.js
 var $formaNovProjekat = $("#formular-novProjekat");
+var $formaNoviPrijatelj = $("#formular-noviPrijatelj");
 
 /*
  * Broj obaveza koji se dohvata u startu na ovoj stranici.
@@ -157,6 +158,17 @@ $("#kreirajProjekat").on("click", function () {
      })*/
 });
 
+
+$("#kreirajPrijatelja").on("click", function () {
+    $formaNoviPrijatelj.fadeIn("fast");
+
+    // Dugme za odustajanje
+    $("#odustaniOdNovogPrijatelja").on("click", function () {
+        $formaNoviPrijatelj.fadeOut("fast");
+    })
+});
+
+
 /*
  * Pozivanje funkcija koje su neophodne za ovu stranicu.
  */
@@ -166,6 +178,7 @@ $(document).ready(function () {
     $formaBrisanjeClana.css(stilSkrivenihFormulara);
 
     $formaNovProjekat.css(stilSkrivenihFormulara);
+    $formaNoviPrijatelj.css(stilSkrivenihFormulara);
 
     podesi_photo_ikonicu();
 });
