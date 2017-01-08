@@ -1,0 +1,58 @@
+<div id='formular-izmenaPrijatelja' style="display: none;">
+    <div class='row column'>
+        <form id="forma-izmenaPrijatelja" data-abide novalidate action="../sql/update_friend.php" method="post">
+
+            <div data-abide-error class='alert callout' style='display: none;'>
+                <p><i class='fi-alert'></i> Postoje greške u formularu.</p>
+            </div>
+
+            <div class='small-12 medium-6 columns'>
+                <label>
+                    Odaberi tip prijatelja:
+                    <select class='Tip' name='Tip' onchange="ucitaj_podtipove()" required>
+                        <option value=''></option>
+                    </select>
+                </label>
+                <label>
+                    Odaberi podtip prijatelja:
+                    <select class='Podtip' name='Podtip' onchange="ucitaj_prijatelje()" required>
+                        <option value=''></option>
+                    </select>
+                </label>
+                <label>
+                    Odaberi prijatelja:
+                    <select class='listaPrijatelja' name='Prijatelj' onchange="prikazi_podatke_prijatelji()" required>
+                        <option value=''></option>
+                    </select>
+                </label>
+            </div>
+
+            <div class='small-12 medium-6 columns' id='podaciOPrijatelju'  style="display: none;">
+                <label>
+                    Broj telefona
+                    <input type='text' id='BrojTelefonaPrijatelja' name='BrojTelefonaPrijatelja' >
+                </label>
+                <label>
+                    E-mail
+                    <input type='email' id='EmailPrijatelja' name='EmailPrijatelja' >
+                </label>
+                <label>
+                    Veb sajt
+                    <input type='text' id='VebSajtPrijatelja' name='VebSajtPrijatelja' >
+                </label>
+                <label>
+                    Ime kontakta
+                    <input type='text' id="ImeKontaktaPrijatelja" name="ImeKontaktaPrijatelja" >
+                </label>
+                <label>
+                    Adresa
+                    <input type='text' id="AdresaPrijatelja" name="AdresaPrijatelja" >
+                </label>
+            </div>
+
+            <button type='submit' name='izmenaPrijatelja' id='izmenaPrijatelja' class='expanded button'>Sacuvaj izmene</button>
+            <a href='#0' id='odustaniOdIzmenaPrijatelja' class='expanded button'>Odustani</a>
+
+        </form>
+    </div>
+</div>
