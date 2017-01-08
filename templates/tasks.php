@@ -42,7 +42,7 @@
                 {% if session['Tip'] == 'u' %}
                 <a href="#thirdColumnData" class="accordion-title" role="tab"  id="thirdColumn-heading" aria-controls="thirdColumnData">Napravi novu obavezu</a>
                 <div id="thirdColumnData" data-tab-content=""  class="accordion-content" role="tabpanel" aria-labelledby="thirdColumn-heading">
-                    <form id="forma-novaObaveza" data-abide novalidate action="../sql/nova_obaveza.php"  method="post">
+                    <form id="forma-novaObaveza" data-abide novalidate action="../sql/create_task.php" method="post">
                         <div data-abide-error class='alert callout' style='display: none;'>
                             <p><i class='fi-alert'></i> Postoje greške u formularu.</p>
                         </div>

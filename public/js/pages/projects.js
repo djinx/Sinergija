@@ -318,6 +318,26 @@ function dodaj_prijatelja(id){
 }
 
 /**
+ * Dodaje novu obavezu na projektu sa zadatim identifikatorom, kao i osobu zaduženu za nju.
+ * Server generiše ove pozive automatski pri dohvatanju projekata.
+ * @param id: identifikator projekta na kojem se dodaje novi prijatelj.
+ */
+function dodaj_obavezu(id){
+    //ucitavanje podataka u select liste se obavlja u app.js
+
+    $("#IdProjektaObaveza").val(id);
+    $formaNovaObaveza.fadeIn("fast");
+
+    // Dugme za odustajanje
+    $("#odustaniOdNoveObaveze").on("click", function () {
+        $formaNovaObaveza.fadeOut("fast");
+    });
+
+
+}
+
+
+/**
  * Postavlja da se završava sa radom na projektu sa zadatim identifikatorom.
  * Server generiše ove pozive automatski pri dohvatanju projekata.
  * @param id: identifikator projekta čiji je rad završen.

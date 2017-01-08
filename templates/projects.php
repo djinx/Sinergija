@@ -36,6 +36,8 @@
 
 {{ include('add_friend.html') }}
 
+{{ include('create_task.html') }}
+
 <script src="../public/js/pages/projects.js"></script>
 
 {% endblock %}
