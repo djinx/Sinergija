@@ -61,6 +61,10 @@
                     <br>
                     <button type="button" class="button" name="kreirajProjekat" id="kreirajProjekat">Kreiraj nov projekat</button>
                 </label>
+                <label>Prijatelji
+                    <br>
+                    <button type="button" class="button" name="kreirajPrijatelja" id="kreirajPrijatelja">Kreiraj novog prijatelja</button>
+                </label>
 
             </div>
         </div>
@@ -76,6 +80,8 @@
 {{ include('create_project.html') }}
 
 {{ include('obrisi_korisnika.html') }}
+
+{{ include('create_friend.html') }}
 
 <script src="../public/js/pages/home.js"></script>
 
