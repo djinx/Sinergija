@@ -1,6 +1,6 @@
 $(document).foundation();
 
-var $formaNovUcesnik, $formaKoordinator, $formaNovPrijatelj;
+var $formaNovUcesnik, $formaKoordinator, $formaNovPrijatelj, $formaNovaObaveza;
 
 /*
  * CSS stil u JSON formatu koji se koristi za predstavljanje izgleda formulara nakon njihovog prikaza.
@@ -108,10 +108,12 @@ $(document).ready(function () {
     $formaNovUcesnik = $("#formular-dodajUcesnika");
     $formaKoordinator = $("#formular-dodajKoordinatora");
     $formaNovPrijatelj = $("#formular-novPrijatelj");
+    $formaNovaObaveza = $("#formular-novaObaveza");
 
     $formaNovUcesnik.css(stilSkrivenihFormulara);
     $formaKoordinator.css(stilSkrivenihFormulara);
     $formaNovPrijatelj.css(stilSkrivenihFormulara);
+    $formaNovaObaveza.css(stilSkrivenihFormulara);
 
     ucitaj_timove();
     ucitaj_korisnike();

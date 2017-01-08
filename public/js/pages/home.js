@@ -7,8 +7,7 @@
  */
 var $formaNoviClan = $("#formular-noviClan");
 var $formaBrisanjeClana = $("#formular-brisanjeClana");
-
-var $formaNovaObaveza = $("#formular-novaObaveza");
+//formaNovaObaveza je premestena u app.js
 var $formaNovProjekat = $("#formular-novProjekat");
 
 /*
@@ -166,7 +165,6 @@ $(document).ready(function () {
     $formaNoviClan.css(stilSkrivenihFormulara);
     $formaBrisanjeClana.css(stilSkrivenihFormulara);
 
-    $formaNovaObaveza.css(stilSkrivenihFormulara);
     $formaNovProjekat.css(stilSkrivenihFormulara);
 
     podesi_photo_ikonicu();
