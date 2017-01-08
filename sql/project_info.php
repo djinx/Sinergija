@@ -109,6 +109,7 @@ if(isset($_POST['idP']) && isset($_SESSION['username']['idKorisnika'])){
         <button type="button" class="button" onclick="dodaj_ucesnika(<?php echo $idProjekta; ?>)" >Dodaj učesnika</button>
         <button type="button" class="button" onclick="dodaj_koordinatora(<?php echo $idProjekta; ?>)" >Dodaj koordinatora</button>
         <button type="button" class="button" onclick="dodaj_prijatelja(<?php echo $idProjekta; ?>)" >Dodaj prijatelja</button>
+        <button type="button" class="button" onclick="dodaj_obavezu(<?php echo $idProjekta; ?>)" >Dodaj obavezu</button>
     </div>
     <button type="button" class="button" onclick="zavrsi_projekat(<?php echo $idProjekta; ?>)" >Završi projekat</button>
     <button class="expanded button" onclick="$('#informacije-Projekat').empty()">Sakrij</button>
