@@ -1,0 +1,52 @@
+<div id='formular-noviPrijatelj' style="display: none;">
+    <div class='row column'>
+        <form id="forma-noviPrijatelj" data-abide novalidate action="../sql/create_friend.php" method="post">
+
+            <div data-abide-error class='alert callout' style='display: none;'>
+                <p><i class='fi-alert'></i> Postoje greške u formularu.</p>
+            </div>
+
+            <div class='small-12 medium-6 columns'>
+                <label>
+                    Naziv
+                    <input type='text' id='NazivPrijatelja' name='NazivPrijatelja' required>
+                </label>
+                <label>
+                    Tip
+                    <input type='text' id='TipPrijatelja' name='TipPrijatelja' required>
+                </label>
+                <label>
+                    Podtip
+                    <input type='text' id='PodtipPrijatelja' name='PodtipPrijatelja' required>
+                </label>
+                <label>
+                    Broj telefona
+                    <input type='text' id='BrojTelefonaPrijatelja' name='BrojTelefonaPrijatelja' >
+                </label>
+            </div>
+
+            <div class='small-12 medium-6 columns'>
+                <label>
+                    E-mail
+                    <input type='email' id='EmailPrijatelja' name='NadimakClana' >
+                </label>
+                <label>
+                    Veb sajt
+                    <input type='text' id='VebSajtPrijatelja' name='VebSajtPrijatelja' >
+                </label>
+                <label>
+                    Ime kontakta
+                    <input type='text' id="ImeKontaktaPrijatelja" name="ImeKontaktaPrijatelja" >
+                </label>
+                <label>
+                    Adresa
+                    <input type='text' id="AdresaPrijatelja" name="AdresaPrijatelja" >
+                </label>
+            </div>
+
+            <button type='submit' name='noviPrijatelj' id='noviClan' class='expanded button'>Kreiraj novog prijatelja</button>
+            <a href='#0' id='odustaniOdNovogPrijatelja' class='expanded button'>Odustani</a>
+
+        </form>
+    </div>
+</div>
