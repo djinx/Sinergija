@@ -10,7 +10,7 @@ var $formaBrisanjeClana = $("#formular-brisanjeClana");
 //formaNovaObaveza je premestena u app.js
 var $formaNovProjekat = $("#formular-novProjekat");
 var $formaNoviPrijatelj = $("#formular-noviPrijatelj");
-
+var $formaIzmenaPrijatelja = $("#formular-izmenaPrijatelja");
 /*
  * Broj obaveza koji se dohvata u startu na ovoj stranici.
  * Vrednost je -1 ako treba dohvatiti sve obaveze.
@@ -169,6 +169,26 @@ $("#kreirajPrijatelja").on("click", function () {
 });
 
 
+$("#izmeniPrijatelja").on("click", function () {
+
+    ucitaj_tipove();
+    $formaIzmenaPrijatelja.fadeIn("fast");
+
+    // Dugme za odustajanje
+    $("#odustaniOdIzmenaPrijatelja").on("click", function () {
+        $formaIzmenaPrijatelja.fadeOut("fast");
+        $('#forma-izmenaPrijatelja')[0].reset();
+    })
+});
+
+
+/*
+ * Prikazuje formu za izmenu podataka o prijatelju.
+*/
+function prikazi_podatke_prijatelji(){
+    $podaciOPrijatelju.fadeIn("fast");
+}
+
 /*
  * Pozivanje funkcija koje su neophodne za ovu stranicu.
  */
@@ -179,6 +199,7 @@ $(document).ready(function () {
 
     $formaNovProjekat.css(stilSkrivenihFormulara);
     $formaNoviPrijatelj.css(stilSkrivenihFormulara);
+    $formaIzmenaPrijatelja.css(stilSkrivenihFormulara);
 
     podesi_photo_ikonicu();
 });
