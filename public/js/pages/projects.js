@@ -174,6 +174,7 @@ function dodaj_ucesnika(id) {
     // Dugme za odustajanje
     $("#odustaniOdNovogUcesnika").on("click", function () {
         $formaNovUcesnik.fadeOut("fast");
+        $('#forma-dodajUcesnika')[0].reset();
     });
 }
 
@@ -192,6 +193,7 @@ function dodaj_koordinatora(id) {
     // Dugme za odustajanje
     $("#odustaniOdKoordinatora").on("click", function () {
         $formaKoordinator.fadeOut("fast");
+        $('#forma-dodajKoordinatora')[0].reset();
     });
 }
 
@@ -214,6 +216,7 @@ function dodaj_prijatelja(id){
     // Dugme za odustajanje
     $("#odustaniOdPrijatelja").on("click", function () {
         $formaDodajPrijatelja.fadeOut("fast");
+        $('#forma-dodajPrijatelja')[0].reset();
     });
 }
 
@@ -231,6 +234,7 @@ function dodaj_obavezu(id){
     // Dugme za odustajanje
     $("#odustaniOdNoveObaveze").on("click", function () {
         $formaNovaObaveza.fadeOut("fast");
+        $('#forma-novaObaveza')[0].reset();
     });
 
 

@@ -98,6 +98,7 @@ $("#kreirajClana").on("click", function () {
     // Dugme za odustajanje
     $("#odustaniOdNovogClana").on("click", function () {
         $formaNoviClan.fadeOut("fast");
+        $('#forma-noviClan')[0].reset();
     });
 
     // Dugme za pohranjivanje podataka za novog clana
@@ -113,6 +114,7 @@ $("#obrisiClana").on("click", function () {
     // Dugme za odustajanje
     $("#odustaniOdBrisanjaClana").on("click", function () {
         $formaBrisanjeClana.fadeOut("fast");
+        $('#forma-brisanjeClana')[0].reset();
     });
 
     // Dugme za pohranjivanje podataka za novog clana
@@ -128,6 +130,7 @@ $("#kreirajObavezu").on("click", function () {
     // Dugme za odustajanje
     $("#odustaniOdNoveObaveze").on("click", function () {
         $formaNovaObaveza.fadeOut("fast");
+        $('#forma-novaObaveza')[0].reset();
     });
 
     // Dugme za pohranjivanje podataka za novu obavezu
@@ -148,6 +151,7 @@ $("#kreirajProjekat").on("click", function () {
     // Dugme za odustajanje
     $("#odustaniOdNovogProjekta").on("click", function () {
         $formaNovProjekat.fadeOut("fast");
+        $('#forma-novProjekat')[0].reset();
     });
 
     // Dugme za pohranjivanje podataka za novu obavezu
@@ -165,6 +169,7 @@ $("#kreirajPrijatelja").on("click", function () {
     // Dugme za odustajanje
     $("#odustaniOdNovogPrijatelja").on("click", function () {
         $formaNoviPrijatelj.fadeOut("fast");
+        $('#forma-noviPrijatelj')[0].reset();
     })
 });
 
