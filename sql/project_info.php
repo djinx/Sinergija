@@ -28,6 +28,8 @@ if(isset($_POST['idP']) && isset($_SESSION['username']['idKorisnika'])){
     if($preparedQuery->execute()){
         $preparedQuery->bind_result($nazivProjekta, $opis, $pocetakRada, $pocetakDogadjaja, $krajDogadjaja);
         $preparedQuery->fetch();
+        // uklanjanje znakova za novi red
+        $opis = str_replace(array("\\r\\n", "\\r", "\\n"), "<br/>", $opis);
     }else{
         echo "Postoji problem sa dohvatanjem informacija. Pokušajte ponovo!";
         $nazivProjekta = "";

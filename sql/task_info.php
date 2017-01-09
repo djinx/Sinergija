@@ -37,6 +37,8 @@ if(isset($_SESSION['username'])){
             $preparedQuery->bind_result($idObaveze, $naziv, $opis, $datumPocetka, $deadline, $tim);
             $ordnum = 1;
             while($preparedQuery->fetch()){
+                // uklanjanje znakova za novi red
+                $opis = str_replace(array("\\r\\n", "\\r", "\\n"), "<br/>", $opis);
                 $type = "";
                 $date1 = new DateTime($deadline);
                 $date2 = new DateTime(date('Y-m-d'));
