@@ -187,6 +187,30 @@ $("#izmeniPrijatelja").on("click", function () {
 */
 function prikazi_podatke_prijatelji(){
     $podaciOPrijatelju.fadeIn("fast");
+    var id = $(".listaPrijatelja").val();
+    // zahtev za popunjavanje podataka o odabranom prijatelju
+    $.ajax({
+        url: '../sql/info.php',
+        method: 'post',
+        data: {akcija: 'citaj_podatke_prijatelji', id: id},
+        success: function(rezultat) {
+            // naziv, broj_telefona, email, veb_sajt, ime_kontakta, adresa
+            var podaci = rezultat.split("::");
+
+            $("#BrojTelefonaPrijatelja1").val(podaci[1]);
+            $("#EmailPrijatelja1").val(podaci[2]);
+            $("#VebSajtPrijatelja1").val(podaci[3]);
+            $("#ImeKontaktaPrijatelja1").val(podaci[4]);
+            $("#AdresaPrijatelja1").val(podaci[5]);
+
+            console.log("Dohvaceni su podaci o  prijateljima");
+        },
+        error: function (rezultat) {
+            console.log("Javila se greška pri dohvatanju podataka o prijateljima!");
+            console.log(rezultat);
+        }
+    });
+
 }
 
 /*

@@ -175,6 +175,28 @@ switch($akcija){
 
         $preparedQuery->close();
         break;
+    case 'citaj_podatke_prijatelji':
+        $id = $_POST['id'];
+        $query =
+            " SELECT naziv, broj_telefona, email, veb_sajt, ime_kontakta, adresa
+              FROM prijatelji 
+              WHERE idPrijatelja = ?";
+        $preparedQuery = $db->prepare($query);
+        $preparedQuery->bind_param("i", $id);
+        if($preparedQuery->execute()) {
+            $preparedQuery->bind_result($naziv, $broj, $email, $veb, $ime, $adresa);
+            $message = "";
+            while($preparedQuery->fetch()) {
+                // odgovor koji se salje
+                $message .= $naziv . "::" . $broj . "::" . $email . "::" . $veb . "::" . $ime . "::" . $adresa;
+            }
+        }
+        else{
+            echo "Postoji problem sa dohvatanjem informacija. Pokušajte ponovo!";
+        }
+
+        $preparedQuery->close();
+        break;
     case 'zavrsi_obavezu':
         $id = $_POST['id'];
         $query = "UPDATE Obaveza SET `Datum_zavrsetka`=CURRENT_DATE , `Odradjena`=1 WHERE idObaveze=?";
