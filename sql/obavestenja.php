@@ -34,7 +34,7 @@ if(isset($_SESSION['username']) && isset($_POST['num'])){
         JOIN obaveza o ON io.idObaveze = o.idObaveze
       WHERE io.idKorisnika = ?";
     $upiti[] = "
-      SELECT z.VremeDatum, CONCAT_WS(' ', 'Zaduženi ste za prijatelja', p.Naziv, 'na projektu', p.naziv) AS opis
+      SELECT z.VremeDatum, CONCAT_WS(' ', 'Zaduženi ste za prijatelja', pr.Naziv, 'na projektu', p.naziv) AS opis
       FROM zaduzen z
         JOIN projekat p ON z.idProjekta = p.idProjekta
         JOIN prijatelji pr ON z.idSponzora = pr.idPrijatelja
