@@ -227,7 +227,7 @@ function ucitaj_obavestenja() {
         data: {num: num_obav},
         success: function (rezultat) {
             console.log("Dohvacena su obavestenja");
-            $obavestenja = $(".listaObavestenja");
+            $obavestenja = $("div.listaObavestenja");
             $obavestenja.empty();
             $obavestenja.append(rezultat);
         },
