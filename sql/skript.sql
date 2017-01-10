@@ -373,6 +373,8 @@ START TRANSACTION;
 USE `sinergija`;
 INSERT INTO `sinergija`.`zaduzen` (`idKorisnika`, `idProjekta`, `idSponzora`, `Status`, `Napomena`, `VremeDatum`) VALUES (1000, 3001, 4000, 'U pregovorima', NULL, '2016-12-15 10:02');
 INSERT INTO `sinergija`.`zaduzen` (`idKorisnika`, `idProjekta`, `idSponzora`, `Status`, `Napomena`, `VremeDatum`) VALUES (1000, 3001, 4001, 'U pregovorima', NULL, '2016-12-15 10:10');
+INSERT INTO `sinergija`.`zaduzen` (`idKorisnika`, `idProjekta`, `idSponzora`, `Status`, `Napomena`, `VremeDatum`) VALUES (1000, 3001, 4002, 'U pregovorima', 'Intervju je prošao dobro. Objavili su nas u emisiji \"Kulturni dnevnik\", koja će biti emitovana u ponedeljak u 14h na RTS 2.', '2016-12-16 11:00');
+INSERT INTO `sinergija`.`zaduzen` (`idKorisnika`, `idProjekta`, `idSponzora`, `Status`, `Napomena`, `VremeDatum`) VALUES (1000, 3001, 4003, 'U pregovorima', NULL, '2016-12-16 13:00');
 
 COMMIT;
 
