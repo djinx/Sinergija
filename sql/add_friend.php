@@ -20,8 +20,8 @@ $zaduzen = $_POST['Zaduzen'];
 
 //upis podataka iz forme u bazu
 $query =
-        " INSERT INTO `zaduzen`(`idKorisnika`, `idProjekta`, `idSponzora`, `Status`) 
-          VALUES (?, ?, ?, 'U pregovorima')";
+        " INSERT INTO `zaduzen`(`idKorisnika`, `idProjekta`, `idSponzora`, `Status`, `VremeDatum`) 
+          VALUES (?, ?, ?, 'U pregovorima', NOW())";
 $preparedQuery = $db->prepare($query);
 $preparedQuery->bind_param("sss", $zaduzen, $projekat, $prijatelj);
 $preparedQuery->execute();

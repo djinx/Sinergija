@@ -14,7 +14,7 @@ $projekat = $_POST['Projekat'];
 $korisnik = $_POST['Ucesnik'];
 $tim = $_POST['TimUcesnika'];
 
-$query = "INSERT INTO `ucestvuje` VALUES (?, ?, ?)";
+$query = "INSERT INTO `ucestvuje` VALUES (?, ?, ?, NOW())";
 $preparedQuery = $db->prepare($query);
 $preparedQuery->bind_param("iii", $korisnik, $projekat, $tim);
 $preparedQuery->execute();

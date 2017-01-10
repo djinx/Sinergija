@@ -68,7 +68,7 @@ if($preparedQuery->execute()) {
 $preparedQuery->close();
 
 //dodavanje obaveze odabranom korisniku
-$query = 'INSERT INTO `ima obavezu`(`idKorisnika`, `idObaveze`) VALUES (?, ?)';
+$query = 'INSERT INTO `ima obavezu`(`idKorisnika`, `idObaveze`, `VremeDatum`) VALUES (?, ?, NOW())';
 $preparedQuery = $db->prepare($query);
 $preparedQuery->bind_param("ii", $korisnik, $idObaveze);
 $preparedQuery->execute();

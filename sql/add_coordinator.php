@@ -26,7 +26,7 @@ if($result->num_rows == 1) {
 else
     $tim = 2000;
 
-$query = "INSERT INTO `koordinira`(`idProjekta`, `idKorisnika`, `idTima`) VALUES (?, ?, ?)";
+$query = "INSERT INTO `koordinira`(`idProjekta`, `idKorisnika`, `idTima`, `VremeDatum`) VALUES (?, ?, ?, NOW())";
 $preparedQuery = $db->prepare($query);
 $preparedQuery->bind_param("iii", $projekat, $korisnik , $tim);
 $preparedQuery->execute();
