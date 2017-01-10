@@ -13,7 +13,12 @@
 
 <div class="row">
 
+    {% if session['Tip'] == 'u' %}
     <div class="small-12 medium-6 large-4 columns" id="firstColumn">
+    {% endif %}
+    {% if session['Tip'] == 'c' %}
+    <div class="small-12 medium-6 large-6 columns" id="firstColumn">
+    {% endif %}
         <ul class="accordion" id="firstColumnAcc" data-accordion="firstColumnAcc" data-allow-all-closed="true" data-multi-expand="true">
             <li class="accordion-navigation is-active" data-accordion-item="" role="presentation">
                 <a href="#firstColumnData" role="tab" class="accordion-title" id="firstColumn-heading" aria-controls="firstColumnData">Neobavljene obaveze</a>
@@ -25,7 +30,12 @@
         </ul>
     </div>
 
-    <div class="small-12 medium-6 large-4 columns" id="secondColumn">
+        {% if session['Tip'] == 'u' %}
+        <div class="small-12 medium-6 large-4 columns" id="secondColumn">
+        {% endif %}
+        {% if session['Tip'] == 'c' %}
+        <div class="small-12 medium-6 large-6 columns" id="secondColumn">
+        {% endif %}
         <ul class="accordion" id="secondColumnAcc" data-accordion="secondColumnAcc" role="tablist" data-allow-all-closed="true" data-multi-expand="true">
             <li class="accordion-navigation" data-accordion-item="" role="presentation">
                 <a href="#secondColumnData" role="tab" class="accordion-title" id="secondColumn-heading" aria-controls="firstColumnData">Obavljene obaveze</a>
@@ -36,10 +46,10 @@
         </ul>
     </div>
 
+    {% if session['Tip'] == 'u' %}
     <div class="small-12 medium-6 large-4 columns" id="thirdColumn">
         <ul class="accordion" id="thirdColumnAcc" data-accordion="thirdColumnAcc" role="tablist" data-allow-all-closed="true" data-multi-expand="true">
             <li class="accordion-item" data-accordion-item="" role="presentation">
-                {% if session['Tip'] == 'u' %}
                 <a href="#thirdColumnData" class="accordion-title" role="tab"  id="thirdColumn-heading" aria-controls="thirdColumnData">Napravi novu obavezu</a>
                 <div id="thirdColumnData" data-tab-content=""  class="accordion-content" role="tabpanel" aria-labelledby="thirdColumn-heading">
                     <form id="forma-novaObaveza" data-abide novalidate action="../sql/create_task.php" method="post">
@@ -76,15 +86,12 @@
                         </div>
 
                         <button type='submit' name='novaObaveza' id='novaObaveza' class='expanded button'>Kreiraj novu obavezu</button>
-
                     </form>
-
                 </div>
-
-                {% endif %}
             </li>
         </ul>
     </div>
+    {% endif %}
 </div>
 
 <script src="../public/js/pages/tasks.js"></script>
