@@ -7,7 +7,7 @@
  */
 var $formaNoviClan = $("#formular-noviClan");
 var $formaBrisanjeClana = $("#formular-brisanjeClana");
-//formaNovaObaveza je premestena u app.js
+
 var $formaNovProjekat = $("#formular-novProjekat");
 var $formaNoviPrijatelj = $("#formular-noviPrijatelj");
 var $formaIzmenaPrijatelja = $("#formular-izmenaPrijatelja");
@@ -186,9 +186,9 @@ $("#izmeniPrijatelja").on("click", function () {
 });
 
 
-/*
+/**
  * Prikazuje formu za izmenu podataka o prijatelju.
-*/
+ */
 function prikazi_podatke_prijatelji(){
     $podaciOPrijatelju.fadeIn("fast");
     var id = $(".listaPrijatelja").val();
@@ -217,6 +217,9 @@ function prikazi_podatke_prijatelji(){
 
 }
 
+/**
+ * Učitava dodatna obaveštenja iz baze podataka.
+ */
 function ucitaj_obavestenja() {
     $.ajax({
         url: '../sql/obavestenja.php',
@@ -235,6 +238,9 @@ function ucitaj_obavestenja() {
     });
 }
 
+/*
+ * Povećava broj obaveštenja koja se dohvataju i dohvata ih.
+ */
 $("#ucitajJosObavestenja").on('click', function () {
     num_obav += 3;
     ucitaj_obavestenja();
