@@ -50,6 +50,7 @@
                     <li><a href="#">Dusica Krstic</a></li>
                     <li><a href="#">Nikola Pujaz</a></li>
                 </ul>
+				<a href="../templates/chat.php" target="_blank">Grupno ćaskanje</a>
             </div>
         </div>
     </div>
