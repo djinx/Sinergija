@@ -12,10 +12,9 @@ var $formaNovProjekat = $("#formular-novProjekat");
 var $formaNoviPrijatelj = $("#formular-noviPrijatelj");
 var $formaIzmenaPrijatelja = $("#formular-izmenaPrijatelja");
 /*
- * Broj obaveza koji se dohvata u startu na ovoj stranici.
- * Vrednost je -1 ako treba dohvatiti sve obaveze.
+ * Broj obaveštenja koji se dohvata u startu na ovoj stranici.
  */
-var num_o = 3;
+var num_obav = 3;
 
 /**
  * Podesavanje velicine i pozicije photo ikonice koja se nalazi preko profilne slike.
@@ -218,6 +217,29 @@ function prikazi_podatke_prijatelji(){
 
 }
 
+function ucitaj_obavestenja() {
+    $.ajax({
+        url: '../sql/obavestenja.php',
+        method: 'post',
+        data: {num: num_obav},
+        success: function (rezultat) {
+            console.log("Dohvacena su obavestenja");
+            $obavestenja = $(".listaObavestenja");
+            $obavestenja.empty();
+            $obavestenja.append(rezultat);
+        },
+        error: function (rezultat) {
+            console.log("Javila se greška pri dohvatanju obaveštenja!");
+            console.log(rezultat);
+        }
+    });
+}
+
+$("#ucitajJosObavestenja").on('click', function () {
+    num_obav += 3;
+    ucitaj_obavestenja();
+});
+
 /*
  * Pozivanje funkcija koje su neophodne za ovu stranicu.
  */
@@ -231,4 +253,5 @@ $(document).ready(function () {
     $formaIzmenaPrijatelja.css(stilSkrivenihFormulara);
 
     podesi_photo_ikonicu();
+    ucitaj_obavestenja();
 });
