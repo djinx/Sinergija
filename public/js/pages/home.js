@@ -298,7 +298,7 @@ function ucitaj_sve_prijatelje(){
  */
 function prikazi_podatke_prijatelji(){
     $podaciOPrijatelju.fadeIn("fast");
-    var id = $(".listaPrijatelja").val();
+    var id = $(".listaSvihPrijatelja").val();
     // zahtev za popunjavanje podataka o odabranom prijatelju
     $.ajax({
         url: '../sql/info.php',
@@ -307,7 +307,7 @@ function prikazi_podatke_prijatelji(){
         success: function(rezultat) {
             // naziv, broj_telefona, email, veb_sajt, ime_kontakta, adresa
             var podaci = rezultat.split("::");
-
+            console.log(rezultat);
             $("#BrojTelefonaPrijatelja1").val(podaci[1]);
             $("#EmailPrijatelja1").val(podaci[2]);
             $("#VebSajtPrijatelja1").val(podaci[3]);

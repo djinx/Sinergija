@@ -202,6 +202,7 @@ switch($akcija){
         $preparedQuery->close();
         break;
     case 'citaj_podatke_prijatelji':
+        $id = $_POST['id'];
         $query =
             " SELECT naziv, broj_telefona, email, veb_sajt, ime_kontakta, adresa
               FROM prijatelji 
