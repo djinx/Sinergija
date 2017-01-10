@@ -198,6 +198,117 @@ function dodaj_koordinatora(id) {
 }
 
 
+
+/**
+ * Dohvata sve tipove koji postoje u bazi podatka.
+ * Za prikazivanje rezultata je neophodno pridružiti klasu "Tip" odgovarajucem <select> elementu.
+ * @param id: identifikator projekta kom se dodaje prijatelj
+ */
+
+function ucitaj_tipove(id){
+    $("#ProjekatIdP").val(id);
+    $.ajax({
+        url: '../sql/info.php',
+        method: 'post',
+        data: {akcija: 'citaj_tipove'},
+        success: function(rezultat) {
+            var tipovi = rezultat.split("::");
+
+            var $tip =  $("select.Tip");
+            $tip.empty();
+            $tip.append("<option value=''></option>");
+            // popunjanje select liste podacima
+            for(var i=0; i<tipovi.length-1; i++){
+                $tip.append("<option value='"+tipovi[i]+"'>"+ tipovi[i] +"</option>");
+            }
+            console.log("Dohvaceni su tipovi prijatelja");
+        },
+        error: function (rezultat) {
+            console.log("Javila se greška pri dohvatanju podataka o tipovima prijatelja!");
+            console.log(rezultat);
+        }
+
+    });
+
+    $podaciOPrijatelju.fadeOut("fast");
+}
+
+/**
+ * Dohvata sve podtipove, za odabrani tip, koji postoje u bazi podatka.
+ * Za prikazivanje rezultata je neophodno pridružiti klasu "Tip" odgovarajucem <select> elementu.
+ */
+
+function ucitaj_podtipove(){
+    var tip = $(".Tip").val();
+    $.ajax({
+        url: '../sql/info.php',
+        method: 'post',
+        data: {akcija: 'citaj_podtipove', tip: tip},
+        success: function(rezultat) {
+            var podtipovi = rezultat.split("::");
+
+            var $podtip =  $("select.Podtip");
+            $podtip.empty();
+            $podtip.append("<option value=''></option>");
+            // popunjanje select liste podacima
+            for(var i=0; i<podtipovi.length-1; i++){
+                $podtip.append("<option value='"+podtipovi[i]+"'>"+ podtipovi[i] +"</option>");
+            }
+            console.log("Dohvaceni su podtipovi prijatelja");
+        },
+        error: function (rezultat) {
+            console.log("Javila se greška pri dohvatanju podataka o tipovima prijatelja!");
+            console.log(rezultat);
+        }
+
+    });
+
+    // brisemo sadrzaj liste prijatelja jer je potrebno odabrati nov podtip
+    var $listaPrijatelja =  $("select.listaPrijatelja");
+    $listaPrijatelja.empty();
+    $listaPrijatelja.append("<option value=''></option>");
+
+    $podaciOPrijatelju.fadeOut("fast");
+}
+
+
+
+/**
+ * Dohvata prijatelje sa zadatim tipom i podtipom koji postoje u bazi podataka.
+ * Za prikazivanje rezultata je neophodno pridružiti klasu "listaPrijatelja" odgovarajućem <select> elementu.
+ */
+function ucitaj_prijatelje(){
+
+    var tip = $(".Tip").val();
+    var podtip = $(".Podtip").val();
+    var id = $("#ProjekatIdP").val();
+    $.ajax({
+        url: '../sql/info.php',
+        method: 'post',
+        data: {akcija: 'citaj_prijatelje', id: id, tip: tip, podtip: podtip},
+        success: function(rezultat) {
+            var prijatelji = rezultat.split("::");
+
+            var $listaPrijatelja =  $("select.listaPrijatelja");
+            $listaPrijatelja.empty();
+            $listaPrijatelja.append("<option value=''></option>");
+            // popunjanje select liste podacima
+            for(var i=0; i<prijatelji.length-1; i++){
+                var prijatelj = prijatelji[i].split("+");
+                var id = prijatelj[0];
+                var naziv = prijatelj[1];
+                $listaPrijatelja.append("<option value='"+id+"'>"+ naziv +"</option>");
+            }
+            console.log("Dohvaceni su nazivi prijatelja");
+        },
+        error: function (rezultat) {
+            console.log("Javila se greška pri dohvatanju podataka o prijateljima!");
+            console.log(rezultat);
+        }
+    });
+
+}
+
 /**
  * Dodaje novog prijatelja na projektu sa zadatim identifikatorom, kao i osobu zaduženu za njega.
  * Server generiše ove pozive automatski pri dohvatanju projekata.
@@ -208,7 +319,7 @@ function dodaj_prijatelja(id){
     ucitaj_sve_ucesnike(id);
 
     //zahtev za popunjavanje selection liste sa prijateljima
-    ucitaj_tipove();
+    ucitaj_tipove(id);
 
     $formaDodajPrijatelja.fadeIn("fast");
     $("#ProjekatIdP").val(id);
