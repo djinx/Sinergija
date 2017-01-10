@@ -1,4 +1,4 @@
-﻿-- MySQL Workbench Forward Engineering
+-- MySQL Workbench Forward Engineering
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
@@ -109,6 +109,7 @@ DROP TABLE IF EXISTS `sinergija`.`ima obavezu` ;
 CREATE TABLE IF NOT EXISTS `sinergija`.`ima obavezu` (
   `idKorisnika` INT(11) NOT NULL,
   `idObaveze` INT(11) NOT NULL,
+  `VremeDatum` DATETIME NOT NULL,
   PRIMARY KEY (`idKorisnika`, `idObaveze`),
   INDEX `fk_Korisnik_has_Obaveza_Obaveza1_idx` (`idObaveze` ASC),
   INDEX `fk_Korisnik_has_Obaveza_Korisnik1_idx` (`idKorisnika` ASC),
@@ -134,6 +135,7 @@ CREATE TABLE IF NOT EXISTS `sinergija`.`koordinira` (
   `idProjekta` INT(11) NOT NULL,
   `idKorisnika` INT(11) NOT NULL,
   `idTima` INT(11) NOT NULL,
+  `VremeDatum` DATETIME NOT NULL,
   PRIMARY KEY (`idProjekta`, `idKorisnika`),
   INDEX `fk_Projekat_has_Korisnik_Korisnik1_idx` (`idKorisnika` ASC),
   INDEX `fk_Projekat_has_Korisnik_Projekat1_idx` (`idProjekta` ASC),
@@ -186,6 +188,7 @@ CREATE TABLE IF NOT EXISTS `sinergija`.`ucestvuje` (
   `idKorisnika` INT(11) NOT NULL,
   `idProjekta` INT(11) NOT NULL,
   `idTima` INT(11) NOT NULL,
+  `VremeDatum` DATETIME NOT NULL,
   PRIMARY KEY (`idKorisnika`, `idProjekta`),
   INDEX `fk_Korisnik_has_Projekat_Projekat1_idx` (`idProjekta` ASC),
   INDEX `fk_Korisnik_has_Projekat_Korisnik1_idx` (`idKorisnika` ASC),
@@ -220,6 +223,7 @@ CREATE TABLE IF NOT EXISTS `sinergija`.`zaduzen` (
   `idSponzora` INT(11) NOT NULL,
   `Status` VARCHAR(15) NULL DEFAULT NULL,
   `Napomena` VARCHAR(4096) NULL DEFAULT NULL,
+  `VremeDatum` DATETIME NOT NULL,
   PRIMARY KEY (`idKorisnika`, `idProjekta`, `idSponzora`),
   INDEX `fk_Zaduzen_Sponzori1_idx` (`idSponzora` ASC),
   CONSTRAINT `fk_Zaduzen_Sponzori1`
@@ -318,11 +322,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `sinergija`;
-INSERT INTO `sinergija`.`ima obavezu` (`idKorisnika`, `idObaveze`) VALUES (1000, 6000);
-INSERT INTO `sinergija`.`ima obavezu` (`idKorisnika`, `idObaveze`) VALUES (1000, 6001);
-INSERT INTO `sinergija`.`ima obavezu` (`idKorisnika`, `idObaveze`) VALUES (1000, 6002);
-INSERT INTO `sinergija`.`ima obavezu` (`idKorisnika`, `idObaveze`) VALUES (1000, 6003);
-INSERT INTO `sinergija`.`ima obavezu` (`idKorisnika`, `idObaveze`) VALUES (1000, 6004);
+INSERT INTO `sinergija`.`ima obavezu` (`idKorisnika`, `idObaveze`, `VremeDatum`) VALUES (1000, 6000, '2016-12-15 10:00:02');
+INSERT INTO `sinergija`.`ima obavezu` (`idKorisnika`, `idObaveze`, `VremeDatum`) VALUES (1000, 6001, '2016-12-15 10:00:03');
+INSERT INTO `sinergija`.`ima obavezu` (`idKorisnika`, `idObaveze`, `VremeDatum`) VALUES (1000, 6002, '2016-12-15 10:00:04');
+INSERT INTO `sinergija`.`ima obavezu` (`idKorisnika`, `idObaveze`, `VremeDatum`) VALUES (1000, 6003, '2016-12-15 10:00:05');
+INSERT INTO `sinergija`.`ima obavezu` (`idKorisnika`, `idObaveze`, `VremeDatum`) VALUES (1000, 6004, '2016-12-15 10:00:06');
 
 COMMIT;
 
@@ -332,8 +336,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `sinergija`;
-INSERT INTO `sinergija`.`koordinira` (`idProjekta`, `idKorisnika`, `idTima`) VALUES (3000, 1000, 2001);
-INSERT INTO `sinergija`.`koordinira` (`idProjekta`, `idKorisnika`, `idTima`) VALUES (3001, 1000, 2001);
+INSERT INTO `sinergija`.`koordinira` (`idProjekta`, `idKorisnika`, `idTima`, `VremeDatum`) VALUES (3000, 1000, 2001, '2016-12-15 10:00:10');
+INSERT INTO `sinergija`.`koordinira` (`idProjekta`, `idKorisnika`, `idTima`, `VremeDatum`) VALUES (3001, 1000, 2001, '2016-12-15 10:00:11');
 
 COMMIT;
 
@@ -356,8 +360,19 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `sinergija`;
-INSERT INTO `sinergija`.`ucestvuje` (`idKorisnika`, `idProjekta`, `idTima`) VALUES (1000, 3000, 2001);
-INSERT INTO `sinergija`.`ucestvuje` (`idKorisnika`, `idProjekta`, `idTima`) VALUES (1000, 3001, 2001);
+INSERT INTO `sinergija`.`ucestvuje` (`idKorisnika`, `idProjekta`, `idTima`, `VremeDatum`) VALUES (1000, 3000, 2001, '2016-12-15 10:00:00');
+INSERT INTO `sinergija`.`ucestvuje` (`idKorisnika`, `idProjekta`, `idTima`, `VremeDatum`) VALUES (1000, 3001, 2001, '2016-12-15 10:00:01');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `sinergija`.`zaduzen`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `sinergija`;
+INSERT INTO `sinergija`.`zaduzen` (`idKorisnika`, `idProjekta`, `idSponzora`, `Status`, `Napomena`, `VremeDatum`) VALUES (1000, 3001, 4000, 'U pregovorima', NULL, '2016-12-15 10:02');
+INSERT INTO `sinergija`.`zaduzen` (`idKorisnika`, `idProjekta`, `idSponzora`, `Status`, `Napomena`, `VremeDatum`) VALUES (1000, 3001, 4001, 'U pregovorima', NULL, '2016-12-15 10:10');
 
 COMMIT;
 
