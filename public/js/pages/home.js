@@ -11,6 +11,8 @@ var $formaBrisanjeClana = $("#formular-brisanjeClana");
 var $formaNovProjekat = $("#formular-novProjekat");
 var $formaNoviPrijatelj = $("#formular-noviPrijatelj");
 var $formaIzmenaPrijatelja = $("#formular-izmenaPrijatelja");
+var $podaciOPrijatelju = $("#podaciOPrijatelju");
+
 /*
  * Broj obaveštenja koji se dohvata u startu na ovoj stranici.
  */
@@ -224,6 +226,17 @@ function ucitaj_tipove_svih(){
  */
 
 function ucitaj_podtipove_svih(){
+
+    // brisemo sadrzaj svih trenutnih vrednosti
+    var $listaPrijatelja =  $("select.listaSvihPrijatelja");
+    $listaPrijatelja.empty();
+    $listaPrijatelja.append("<option value=''></option>");
+    $podaciOPrijatelju.fadeOut("fast");
+    $podaciOPrijatelju.find('input').val('');
+    $listaPrijatelja.val('');
+    $(".Podtip").val('');
+
+
     var tip = $(".Tip").val();
     $.ajax({
         url: '../sql/info.php',
@@ -247,13 +260,6 @@ function ucitaj_podtipove_svih(){
         }
 
     });
-
-    // brisemo sadrzaj liste prijatelja jer je potrebno odabrati nov podtip
-    var $listaPrijatelja =  $("select.listaPrijatelja");
-    $listaPrijatelja.empty();
-    $listaPrijatelja.append("<option value=''></option>");
-
-    $podaciOPrijatelju.fadeOut("fast");
 }
 
 
@@ -262,6 +268,13 @@ function ucitaj_podtipove_svih(){
  * Za prikazivanje rezultata je neophodno pridružiti klasu "listaPrijatelja" odgovarajućem <select> elementu.
  */
 function ucitaj_sve_prijatelje(){
+
+    // brisemo sadrzaj svih trenutnih vrednosti
+    $(".listaSvihPrijatelja").val('');
+    // sklanjamo polja sa podacima ukoliko su prikazana
+    $podaciOPrijatelju.fadeOut("fast");
+    $podaciOPrijatelju.find('input').val('');
+
     var tip = $(".Tip").val();
     var podtip = $(".Podtip").val();
 
@@ -297,7 +310,10 @@ function ucitaj_sve_prijatelje(){
  * Prikazuje formu za izmenu podataka o prijatelju.
  */
 function prikazi_podatke_prijatelji(){
+    // brisemo podatke koji su vec upisani i ispisujemo podatke iz baze
+    $podaciOPrijatelju.find('input').val('');
     $podaciOPrijatelju.fadeIn("fast");
+
     var id = $(".listaSvihPrijatelja").val();
     // zahtev za popunjavanje podataka o odabranom prijatelju
     $.ajax({

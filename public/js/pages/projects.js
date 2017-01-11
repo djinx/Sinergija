@@ -229,8 +229,6 @@ function ucitaj_tipove(id){
         }
 
     });
-
-    $podaciOPrijatelju.fadeOut("fast");
 }
 
 /**
@@ -239,6 +237,15 @@ function ucitaj_tipove(id){
  */
 
 function ucitaj_podtipove(){
+
+    // brisemo sadrzaj svih trenutnih vrednosti
+    var $listaPrijatelja =  $("select.listaPrijatelja");
+    $listaPrijatelja.empty();
+    $listaPrijatelja.append("<option value=''></option>");
+    $listaPrijatelja.val('');
+    $(".Podtip").val('');
+
+
     var tip = $(".Tip").val();
     $.ajax({
         url: '../sql/info.php',
@@ -262,13 +269,6 @@ function ucitaj_podtipove(){
         }
 
     });
-
-    // brisemo sadrzaj liste prijatelja jer je potrebno odabrati nov podtip
-    var $listaPrijatelja =  $("select.listaPrijatelja");
-    $listaPrijatelja.empty();
-    $listaPrijatelja.append("<option value=''></option>");
-
-    $podaciOPrijatelju.fadeOut("fast");
 }
 
 
@@ -279,6 +279,8 @@ function ucitaj_podtipove(){
  */
 function ucitaj_prijatelje(){
 
+    // brisemo sadrzaj svih trenutnih vrednosti
+    $(".listaPrijatelja").val('');
     var tip = $(".Tip").val();
     var podtip = $(".Podtip").val();
     var id = $("#ProjekatIdP").val();
