@@ -13,6 +13,9 @@ var $formaNoviPrijatelj = $("#formular-noviPrijatelj");
 var $formaIzmenaPrijatelja = $("#formular-izmenaPrijatelja");
 var $podaciOPrijatelju = $("#podaciOPrijatelju");
 
+var $formaNovaPoruka = $("#formular-novaPoruka");
+var $prikazPoruke = $("#prikazPoruke");
+
 /*
  * Broj obaveštenja koji se dohvata u startu na ovoj stranici.
  */
@@ -368,6 +371,31 @@ $("#ucitajJosObavestenja").on('click', function () {
     num_obav += 3;
     ucitaj_obavestenja();
 });
+
+$("#osveziSadrzaj").on('click', function () {
+    $formaNovaPoruka.fadeOut("fast");
+    $prikazPoruke.fadeOut("fast");
+    // TODO: ajax zahtev ucitavanje svih poruke iz baze
+});
+
+$("#posaljiNovu").on('click', function(){
+    $formaNovaPoruka.fadeIn("fast");
+    $prikazPoruke.fadeOut("fast");
+
+    $("#odustaniOdNovePoruke").on('click', function () {
+        $formaNovaPoruka.fadeOut("fast");
+        $('#forma-novaPoruka')[0].reset();
+    });
+});
+
+
+function prikazi_poruku(){
+    $formaNovaPoruka.fadeOut("fast");
+    $prikazPoruke.fadeIn("fast");
+
+    // TODO: ajax zahtev za podacima o poruci
+    // TODO: dodati parametar id kako bi se lakse odredilo koja je porua u pitanju
+}
 
 /*
  * Pozivanje funkcija koje su neophodne za ovu stranicu.
