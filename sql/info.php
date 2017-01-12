@@ -226,8 +226,8 @@ switch($akcija){
     case 'citaj_zaduzene_prijatelje':
         $idKorisnika = intval($_SESSION['username']['idKorisnika']);
         $prijatelji = array();
-        $query = "
-          SELECT pr.Naziv AS Naziv_prijatelja, pr.Tip, pr.Podtip, COALESCE(pr.Broj_telefona, ' ') AS Broj_telefona, COALESCE(pr.Email, ' ') AS Email, COALESCE(pr.Veb_sajt, ' ') AS Veb_sajt, COALESCE(pr.Ime_Kontakta, ' ') AS Ime_kontakta, COALESCE(pr.Adresa, ' ') AS Adresa, p.naziv AS Naziv_projekta, COALESCE(z.Status, ' ') AS Status, COALESCE(z.Napomena, ' ') AS Napomena
+        $query =
+          "SELECT pr.Naziv AS Naziv_prijatelja, pr.Tip, pr.Podtip, COALESCE(pr.Broj_telefona, ' ') AS Broj_telefona, COALESCE(pr.Email, ' ') AS Email, COALESCE(pr.Veb_sajt, ' ') AS Veb_sajt, COALESCE(pr.Ime_Kontakta, ' ') AS Ime_kontakta, COALESCE(pr.Adresa, ' ') AS Adresa, p.naziv AS Naziv_projekta, COALESCE(z.Status, ' ') AS Status, COALESCE(z.Napomena, ' ') AS Napomena
           FROM zaduzen z
             JOIN prijatelji pr ON z.idSponzora = pr.idPrijatelja
             JOIN projekat p ON z.idProjekta = p.idProjekta
@@ -265,15 +265,15 @@ switch($akcija){
                                             <table class="unstriped">
                                                 <thead>
                                                     <tr>
-                                                        <th>Naziv</th>
-                                                        <th>Broj&nbsp;telefona</th>
-                                                        <th>Email</th>
-                                                        <th>Veb&nbsp;sajt</th>
-                                                        <th>Ime&nbsp;kontakta</th>
-                                                        <th>Adresa</th>
-                                                        <th>Naziv&nbsp;projekta</th>
-                                                        <th>Status</th>
-                                                        <th>Napomena</th>
+                                                        <th style="min-width: 150px;">Naziv</th>
+                                                        <th style="min-width: 150px;">Broj telefona</th>
+                                                        <th style="min-width: 250px;">Email</th>
+                                                        <th style="min-width: 150px;">Veb sajt</th>
+                                                        <th style="min-width: 250px;">Ime kontakta</th>
+                                                        <th style="min-width: 250px;">Adresa</th>
+                                                        <th style="min-width: 200px;">Naziv projekta</th>
+                                                        <th style="min-width: 150px;">Status</th>
+                                                        <th style="min-width: 300px;">Napomena</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -285,7 +285,7 @@ switch($akcija){
                                                             <td><?php echo $niz->Naziv_prijatelja; ?></td>
                                                             <td><?php echo $niz->Broj_telefona; ?></td>
                                                             <td><?php echo $niz->Email; ?></td>
-                                                            <td><?php echo $niz->Veb_sajt; ?></td>
+                                                            <td><a href="http://<?php echo $niz->Veb_sajt; ?>" target="_blank"><?php echo $niz->Veb_sajt; ?></a></td>
                                                             <td><?php echo $niz->Ime_kontakta; ?></td>
                                                             <td><?php echo $niz->Adresa; ?></td>
                                                             <td><?php echo $niz->Naziv_projekta; ?></td>
