@@ -156,6 +156,32 @@ switch($akcija){
         $preparedQuery->close();
         break;
     case 'citaj_prijatelje':
+        $id = $_POST['id'];
+        $tip = $_POST['tip'];
+        $podtip = $_POST['podtip'];
+        $query =
+            " SELECT idPrijatelja, naziv 
+              FROM prijatelji 
+              WHERE tip = ? 
+              AND podtip = ? 
+              AND NOT EXISTS (SELECT * FROM zaduzen WHERE idPrijatelja = idSponzora AND idProjekta = ?)";
+        $preparedQuery = $db->prepare($query);
+        $preparedQuery->bind_param("ssi", $tip, $podtip, $id);
+        if($preparedQuery->execute()) {
+            $preparedQuery->bind_result($idPrijatelja, $naziv);
+            $message = "";
+            while($preparedQuery->fetch()) {
+                // odgovor koji se salje
+                $message .= $idPrijatelja . "+" . $naziv . "::";
+            }
+        }
+        else{
+            echo "Postoji problem sa dohvatanjem informacija. Pokušajte ponovo!";
+        }
+
+        $preparedQuery->close();
+        break;
+    case 'citaj_sve_prijatelje':
         $tip = $_POST['tip'];
         $podtip = $_POST['podtip'];
         $query = "SELECT idPrijatelja, naziv FROM prijatelji WHERE tip = ? AND podtip = ?";
@@ -176,6 +202,7 @@ switch($akcija){
         $preparedQuery->close();
         break;
     case 'citaj_podatke_prijatelji':
+        $id = $_POST['id'];
         $query =
             " SELECT naziv, broj_telefona, email, veb_sajt, ime_kontakta, adresa
               FROM prijatelji 

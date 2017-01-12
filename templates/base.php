@@ -45,11 +45,7 @@
                 <button class="close-button" aria-label="Close menu" type="button" data-close>
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <!-- Your menu or Off-canvas content goes here -->
-                <ul  class="mobile-ofc vertical menu">
-                    <li><a href="#">Dusica Krstic</a></li>
-                    <li><a href="#">Nikola Pujaz</a></li>
-                </ul>
+                <!-- Off-canvas content goes here -->
 				<a href="../templates/chat.php" target="_blank">Grupno ćaskanje</a>
             </div>
         </div>

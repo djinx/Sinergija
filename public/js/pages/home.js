@@ -11,6 +11,8 @@ var $formaBrisanjeClana = $("#formular-brisanjeClana");
 var $formaNovProjekat = $("#formular-novProjekat");
 var $formaNoviPrijatelj = $("#formular-noviPrijatelj");
 var $formaIzmenaPrijatelja = $("#formular-izmenaPrijatelja");
+var $podaciOPrijatelju = $("#podaciOPrijatelju");
+
 /*
  * Broj obaveštenja koji se dohvata u startu na ovoj stranici.
  */
@@ -175,7 +177,7 @@ $("#kreirajPrijatelja").on("click", function () {
 
 $("#izmeniPrijatelja").on("click", function () {
 
-    ucitaj_tipove();
+    ucitaj_tipove_svih();
     $formaIzmenaPrijatelja.fadeIn("fast");
 
     // Dugme za odustajanje
@@ -187,11 +189,132 @@ $("#izmeniPrijatelja").on("click", function () {
 
 
 /**
+ * Dohvata sve tipove koji postoje u bazi podatka.
+ * Za prikazivanje rezultata je neophodno pridružiti klasu "Tip" odgovarajucem <select> elementu.
+ */
+
+function ucitaj_tipove_svih(){
+    $.ajax({
+        url: '../sql/info.php',
+        method: 'post',
+        data: {akcija: 'citaj_tipove'},
+        success: function(rezultat) {
+            var tipovi = rezultat.split("::");
+
+            var $tip =  $("select.Tip");
+            $tip.empty();
+            $tip.append("<option value=''></option>");
+            // popunjanje select liste podacima
+            for(var i=0; i<tipovi.length-1; i++){
+                $tip.append("<option value='"+tipovi[i]+"'>"+ tipovi[i] +"</option>");
+            }
+            console.log("Dohvaceni su tipovi prijatelja");
+        },
+        error: function (rezultat) {
+            console.log("Javila se greška pri dohvatanju podataka o tipovima prijatelja!");
+            console.log(rezultat);
+        }
+
+    });
+
+    $podaciOPrijatelju.fadeOut("fast");
+}
+
+/**
+ * Dohvata sve podtipove, za odabrani tip, koji postoje u bazi podatka.
+ * Za prikazivanje rezultata je neophodno pridružiti klasu "Tip" odgovarajucem <select> elementu.
+ */
+
+function ucitaj_podtipove_svih(){
+
+    // brisemo sadrzaj svih trenutnih vrednosti
+    var $listaPrijatelja =  $("select.listaSvihPrijatelja");
+    $listaPrijatelja.empty();
+    $listaPrijatelja.append("<option value=''></option>");
+    $podaciOPrijatelju.fadeOut("fast");
+    $podaciOPrijatelju.find('input').val('');
+    $listaPrijatelja.val('');
+    $(".Podtip").val('');
+
+
+    var tip = $(".Tip").val();
+    $.ajax({
+        url: '../sql/info.php',
+        method: 'post',
+        data: {akcija: 'citaj_podtipove', tip: tip},
+        success: function(rezultat) {
+            var podtipovi = rezultat.split("::");
+
+            var $podtip =  $("select.Podtip");
+            $podtip.empty();
+            $podtip.append("<option value=''></option>");
+            // popunjanje select liste podacima
+            for(var i=0; i<podtipovi.length-1; i++){
+                $podtip.append("<option value='"+podtipovi[i]+"'>"+ podtipovi[i] +"</option>");
+            }
+            console.log("Dohvaceni su podtipovi prijatelja");
+        },
+        error: function (rezultat) {
+            console.log("Javila se greška pri dohvatanju podataka o tipovima prijatelja!");
+            console.log(rezultat);
+        }
+
+    });
+}
+
+
+/**
+ * Dohvata prijatelje sa zadatim tipom i podtipom koji postoje u bazi podataka.
+ * Za prikazivanje rezultata je neophodno pridružiti klasu "listaPrijatelja" odgovarajućem <select> elementu.
+ */
+function ucitaj_sve_prijatelje(){
+
+    // brisemo sadrzaj svih trenutnih vrednosti
+    $(".listaSvihPrijatelja").val('');
+    // sklanjamo polja sa podacima ukoliko su prikazana
+    $podaciOPrijatelju.fadeOut("fast");
+    $podaciOPrijatelju.find('input').val('');
+
+    var tip = $(".Tip").val();
+    var podtip = $(".Podtip").val();
+
+    $.ajax({
+        url: '../sql/info.php',
+        method: 'post',
+        data: {akcija: 'citaj_sve_prijatelje', tip: tip, podtip: podtip},
+        success: function(rezultat) {
+            var prijatelji = rezultat.split("::");
+
+            var $listaPrijatelja =  $("select.listaSvihPrijatelja");
+            $listaPrijatelja.empty();
+            $listaPrijatelja.append("<option value=''></option>");
+            // popunjanje select liste podacima
+            for(var i=0; i<prijatelji.length-1; i++){
+                var prijatelj = prijatelji[i].split("+");
+                var id = prijatelj[0];
+                var naziv = prijatelj[1];
+                $listaPrijatelja.append("<option value='"+id+"'>"+ naziv +"</option>");
+            }
+            console.log("Dohvaceni su nazivi prijatelja");
+        },
+        error: function (rezultat) {
+            console.log("Javila se greška pri dohvatanju podataka o prijateljima!");
+            console.log(rezultat);
+        }
+    });
+
+}
+
+
+/**
  * Prikazuje formu za izmenu podataka o prijatelju.
  */
 function prikazi_podatke_prijatelji(){
+    // brisemo podatke koji su vec upisani i ispisujemo podatke iz baze
+    $podaciOPrijatelju.find('input').val('');
     $podaciOPrijatelju.fadeIn("fast");
-    var id = $(".listaPrijatelja").val();
+
+    var id = $(".listaSvihPrijatelja").val();
     // zahtev za popunjavanje podataka o odabranom prijatelju
     $.ajax({
         url: '../sql/info.php',
@@ -200,7 +323,7 @@ function prikazi_podatke_prijatelji(){
         success: function(rezultat) {
             // naziv, broj_telefona, email, veb_sajt, ime_kontakta, adresa
             var podaci = rezultat.split("::");
-
+            console.log(rezultat);
             $("#BrojTelefonaPrijatelja1").val(podaci[1]);
             $("#EmailPrijatelja1").val(podaci[2]);
             $("#VebSajtPrijatelja1").val(podaci[3]);
