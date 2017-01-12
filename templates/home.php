@@ -30,18 +30,84 @@
     <div class="small-12 medium-9 columns">
 
         <ul class="tabs" data-tabs id="home-tabs">
-            <li class="tabs-title is-active"><a href="#tab-obavestenja">Obaveštenja</a></li>
+            <li class="tabs-title"><a href="#tab-obavestenja">Obaveštenja</a></li>
+            <li class="tabs-title is-active"><a href="#tab-sanduce">Sanduče</a></li>
             {% if session['Tip'] == 'u' %}
             <li class="tabs-title"><a href="#tab-administracija">Administracija</a></li>
             {% endif %}
-            <li class="tabs-title"><a href="#tab-sanduce">Sanduče</a></li>
         </ul>
         <div class="tabs-content" data-tabs-content="home-tabs">
-            <div class="tabs-panel is-active" id="tab-obavestenja">
+            <div class="tabs-panel " id="tab-obavestenja">
                 <div class="listaObavestenja">
 
                 </div>
                 <button id="ucitajJosObavestenja" class="expanded button">Učitaj još obaveštenja</button>
+            </div>
+        </div>
+        <div class="tabs-content" data-tabs-content="home-tabs">
+            <div class="tabs-panel is-active" id="tab-sanduce">
+                <div class="row">
+                    <div class="small-12 medium-4 large-4 columns" id="dugmici">
+                        <button type="button" class="button" name="osveziSadrzaj" id="osveziSadrzaj">Osveži sadržaj</button>
+                        <br/>
+                        <button type="button" class="button" name="posaljiNovu" id="posaljiNovu">Pošalji novu poruku</button>
+
+                        <ul class="accordion" id="primljeneAcc" data-accordion="primljeneAcc" data-allow-all-closed="true" data-multi-expand="true">
+                            <li class="accordion-navigation is-active" data-accordion-item="" role="presentation">
+                                <a href="#primljeneData" role="tab" class="accordion-title" id="primljene-heading" aria-controls="primljeneData">Primljene poruke</a>
+                                <div id="primljeneData" class="accordion-content" role="tabpanel" data-tab-content aria-labelledby="primljene-heading">
+                                    <div class="primljenePoruke">
+                                        <a href="#" onclick="prikazi_poruku()">Prikazi poruku</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="accordion" id="poslateAcc" data-accordion="poslateAcc" data-allow-all-closed="true" data-multi-expand="true">
+                            <li class="accordion-navigation" data-accordion-item="" role="presentation">
+                                <a href="#poslateData" role="tab" class="accordion-title" id="poslate-heading" aria-controls="poslateData">Poslate poruke</a>
+                                <div id="poslateData" class="accordion-content" role="tabpanel" data-tab-content aria-labelledby="poslate-heading">
+                                    <div class="PoslatePoruke">
+                                        <a href="#" onclick="prikazi_poruku()">Prikazi poruku</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="small-12 medium-8 large-8 columns">
+                        <div id="formular-novaPoruka" style='display: none;'>
+                            <form id="forma-novaPoruka" data-abide novalidate action="../sql/send_message.php" method="post">
+                                <label>
+                                    Primalac
+                                    <input type='text' id='nadimakPrimaoca' name='nadimakPrimaoca' required>
+                                </label>
+                                <label>
+                                    Naslov poruke
+                                    <input type='text' id='naslovPoruke' name='naslovPoruke' >
+                                </label>
+                                <label> Poruka
+                                    <textarea id="tekstPoruke" name="tekstPoruke" rows="10" cols="5" required>
+                                    </textarea>
+                                </label>
+
+                                <button type='submit' name='posaljiPoruku' id='posaljiPoruku' class='expanded button'>Pošalji</button>
+                                <a href='#0' id='odustaniOdNovePoruke' class='expanded button'>Odustani</a>
+                            </form>
+                        </div>
+                        <div id="prikazPoruke" style='display: none;'>
+                            <label> Naslov:
+                                <span id="naslovPoruke"> JobPrep </span>
+                            </label>
+                            <label> Posiljaoc:
+                                <span id="posiljaoc"> Ajzen </span>
+                            </label>
+                            <label> Primalac:
+                                <span id="primalac"> Ana </span>
+                            </label>
+                            <p id="tekstPoruke">Tekst poruke ......................</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         {% if session['Tip'] == 'u' %}
@@ -70,18 +136,6 @@
                     </div>
                 </label>
 
-            </div>
-        </div>
-        <div class="tabs-content" data-tabs-content="home-tabs">
-            <div class="tabs-panel" id="tab-sanduce">
-                <ul class="accordion" id="primljeno" data-accordion="primljeno" role="tablist" data-allow-all-closed="true" data-multi-expand="true">
-                    <li class="accordion-item" data-accordion-item="" role="presentation">
-                        <a href="#primljenoData" class="accordion-title" role="tab"  id="primljeno-heading" aria-controls="primljenoData">Primljeno</a>
-                        <div id="primljenoData" data-tab-content=""  class="accordion-content" role="tabpanel" aria-labelledby="primljeno-heading">
-
-                        </div>
-                    </li>
-                </ul>
             </div>
         </div>
 
