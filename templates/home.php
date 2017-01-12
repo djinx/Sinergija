@@ -34,6 +34,7 @@
             {% if session['Tip'] == 'u' %}
             <li class="tabs-title"><a href="#tab-administracija">Administracija</a></li>
             {% endif %}
+            <li class="tabs-title"><a href="#tab-sanduce">Sanduče</a></li>
         </ul>
         <div class="tabs-content" data-tabs-content="home-tabs">
             <div class="tabs-panel is-active" id="tab-obavestenja">
@@ -69,6 +70,18 @@
                     </div>
                 </label>
 
+            </div>
+        </div>
+        <div class="tabs-content" data-tabs-content="home-tabs">
+            <div class="tabs-panel" id="tab-sanduce">
+                <ul class="accordion" id="primljeno" data-accordion="primljeno" role="tablist" data-allow-all-closed="true" data-multi-expand="true">
+                    <li class="accordion-item" data-accordion-item="" role="presentation">
+                        <a href="#primljenoData" class="accordion-title" role="tab"  id="primljeno-heading" aria-controls="primljenoData">Primljeno</a>
+                        <div id="primljenoData" data-tab-content=""  class="accordion-content" role="tabpanel" aria-labelledby="primljeno-heading">
+
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
 
