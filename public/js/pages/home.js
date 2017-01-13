@@ -372,12 +372,21 @@ $("#ucitajJosObavestenja").on('click', function () {
     ucitaj_obavestenja();
 });
 
+/*
+ * Zatvara sve otvorene forme i brise njihov sadrzaj
+ * i ucitava poslate i primljene poruke
+ */
 $("#osveziSadrzaj").on('click', function () {
     $formaNovaPoruka.fadeOut("fast");
+    $('#forma-novaPoruka')[0].reset();
     $prikazPoruke.fadeOut("fast");
-    // TODO: ajax zahtev ucitavanje svih poruke iz baze
+    dohvati_primljene();
+    dohvati_poslate();
 });
 
+/*
+ * Otvara formu za slanje nove poruke
+ */
 $("#posaljiNovu").on('click', function(){
     $formaNovaPoruka.fadeIn("fast");
     $prikazPoruke.fadeOut("fast");
@@ -388,13 +397,30 @@ $("#posaljiNovu").on('click', function(){
     });
 });
 
+/*
+ * Dohvata sve poruke koje je primio ulogovan korisnik.
+ */
+function dohvati_primljene(){
+    // TODO: ajax zahtev za dohvatanje primljenih poruka, poslati na info.php
+    // podatak akcija: 'citaj_primljene'
+}
 
+/*
+ * Dohvata sve poruke koje je poslao ulogovan korisnik
+ */
+function dohvati_poslate(){
+    // TODO: ajax zahtev za dohvatanje poslatih poruka, poslati na info.php
+    // podatak akcija: 'citaj_poslate'
+}
+
+/*
+ * Prikazuje podatke o poruci.
+ */
 function prikazi_poruku(){
     $formaNovaPoruka.fadeOut("fast");
     $prikazPoruke.fadeIn("fast");
 
-    // TODO: ajax zahtev za podacima o poruci
-    // TODO: dodati parametar id kako bi se lakse odredilo koja je porua u pitanju
+    // TODO: procitati sva polja iz diva
 }
 
 /*
@@ -411,4 +437,6 @@ $(document).ready(function () {
 
     podesi_photo_ikonicu();
     ucitaj_obavestenja();
+    dohvati_primljene();
+    dohvati_poslate();
 });

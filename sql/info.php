@@ -340,6 +340,17 @@ switch($akcija){
         $preparedQuery->execute();
         $preparedQuery->close();
         break;
+    case 'citaj_primljene':
+        // TODO: obraditi ovaj slucaj
+        // TODO: napraviti neki div koji ce sadrzati sve podatke o poruci
+        // neka budu prikazani samo posiljaoc, naslov i vreme slanja
+        // ostali podaci neka budu skriveni
+        break;
+    case 'citaj_poslate':
+        // TODO: obraditi ovaj slucaj
+        // neka budu prikazani samo primalac, naslov i vreme slanja
+        // ostali podaci neka budu skriveni
+        break;
     default:
         break;
 
