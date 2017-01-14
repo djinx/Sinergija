@@ -401,16 +401,49 @@ $("#posaljiNovu").on('click', function(){
  * Dohvata sve poruke koje je primio ulogovan korisnik.
  */
 function dohvati_primljene(){
-    // TODO: ajax zahtev za dohvatanje primljenih poruka, poslati na info.php
     // podatak akcija: 'citaj_primljene'
+    $.ajax({
+        url: '../sql/info.php',
+        data: {akcija: 'citaj_primljene'},
+        method: 'post',
+        success: function(rezultat) {
+            var $listaPrimljenih =  $("div.primljenePoruke");
+            $listaPrimljenih.empty();
+            $listaPrimljenih.append(rezultat);
+            console.log("Dohvacene su poruke");
+            //console.log(rezultat);
+            $listaPrimljenih.foundation();
+        },
+        error: function (rezultat) {
+            console.log("Javila se greška pri dohvatanju poruka!");
+            console.log(rezultat);
+        }
+    });
+
 }
 
 /*
  * Dohvata sve poruke koje je poslao ulogovan korisnik
  */
 function dohvati_poslate(){
-    // TODO: ajax zahtev za dohvatanje poslatih poruka, poslati na info.php
     // podatak akcija: 'citaj_poslate'
+    $.ajax({
+        url: '../sql/info.php',
+        data: {akcija: 'citaj_poslate'},
+        method: 'post',
+        success: function(rezultat) {
+            var $listaPrimljenih =  $("div.poslatePoruke");
+            $listaPrimljenih.empty();
+            $listaPrimljenih.append(rezultat);
+            console.log("Dohvacene su poruke");
+            //console.log(rezultat);
+            $listaPrimljenih.foundation();
+        },
+        error: function (rezultat) {
+            console.log("Javila se greška pri dohvatanju poruka!");
+            console.log(rezultat);
+        }
+    });
 }
 
 /*

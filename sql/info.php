@@ -341,15 +341,62 @@ switch($akcija){
         $preparedQuery->close();
         break;
     case 'citaj_primljene':
-        // TODO: obraditi ovaj slucaj
-        // TODO: napraviti neki div koji ce sadrzati sve podatke o poruci
-        // neka budu prikazani samo posiljaoc, naslov i vreme slanja
-        // ostali podaci neka budu skriveni
+        $idPrimaoca = $_SESSION['username']['idKorisnika'];
+        $query = "SELECT `idPoruke`, `Nadimak`, `poruka`, `naslov`, `datum`
+                  FROM `privatna_poruka` JOIN `korisnik` ON idPrimaoca=idKorisnika 
+                  WHERE idPrimaoca=?";
+        $preparedQuery = $db->prepare($query);
+        $preparedQuery->bind_param("i", $idPrimaoca);
+
+        if ($preparedQuery->execute()) {
+            $preparedQuery->bind_result($idPoruke, $posiljaoc, $poruka, $naslov, $datum);
+            while ($preparedQuery->fetch()){
+
+             echo  '<div id="m'.$idPoruke.'" class="message">
+                <a href="#" id="naslov'.$idPoruke.'" onclick="prikazi_poruku('.$idPoruke.')"> '.$naslov.' </a>
+                <br/>
+                <span  id="posiljaoc'.$idPoruke.'" > Poslao: '.$posiljaoc.' </span>
+                <br>
+                <span  id="datum'.$idPoruke.'"   style="display: none;"> '.$datum.' </span>
+                <br>
+                <p  id="tekstPoruke'.$idPoruke.'"  style="display: none;"> '.$poruka.' </p>
+                </div>';
+            }
+            $preparedQuery->close();
+        }
+        ?>
+
+
+        <?php
         break;
     case 'citaj_poslate':
-        // TODO: obraditi ovaj slucaj
-        // neka budu prikazani samo primalac, naslov i vreme slanja
-        // ostali podaci neka budu skriveni
+        $idPosiljaoca = $_SESSION['username']['idKorisnika'];
+        $query = "SELECT `idPoruke`, `Nadimak`, `poruka`, `naslov`, `datum`
+                  FROM `privatna_poruka` JOIN `korisnik` ON idPrimaoca=idKorisnika 
+                  WHERE idPosiljaoca=?";
+        $preparedQuery = $db->prepare($query);
+        $preparedQuery->bind_param("i", $idPosiljaoca);
+
+        if ($preparedQuery->execute()) {
+            $preparedQuery->bind_result($idPoruke, $primaoc, $poruka, $naslov, $datum);
+            while ($preparedQuery->fetch()){
+
+                echo  '<div id="m'.$idPoruke.'" class="message">
+                <a href="#" id="naslov'.$idPoruke.'" onclick="prikazi_poruku('.$idPoruke.')"> '.$naslov.' </a>
+                <br/>
+                <span  id="posiljaoc'.$idPoruke.'" > Primio: '.$primaoc.' </span>
+                <br>
+                <span  id="datum'.$idPoruke.'"   style="display: none;"> '.$datum.' </span>
+                <br>
+                <p  id="tekstPoruke'.$idPoruke.'"  style="display: none;"> '.$poruka.' </p>
+                </div>';
+            }
+            $preparedQuery->close();
+        }
+        ?>
+
+
+        <?php
         break;
     default:
         break;

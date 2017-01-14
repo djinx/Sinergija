@@ -53,11 +53,11 @@
                         <button type="button" class="button" name="posaljiNovu" id="posaljiNovu">Pošalji novu poruku</button>
 
                         <ul class="accordion" id="primljeneAcc" data-accordion="primljeneAcc" data-allow-all-closed="true" data-multi-expand="true">
-                            <li class="accordion-navigation is-active" data-accordion-item="" role="presentation">
+                            <li class="accordion-navigation" data-accordion-item="" role="presentation">
                                 <a href="#primljeneData" role="tab" class="accordion-title" id="primljene-heading" aria-controls="primljeneData">Primljene poruke</a>
                                 <div id="primljeneData" class="accordion-content" role="tabpanel" data-tab-content aria-labelledby="primljene-heading">
                                     <div class="primljenePoruke">
-                                        <a href="#" onclick="prikazi_poruku()">Prikazi poruku</a>
+
                                     </div>
                                 </div>
                             </li>
@@ -66,8 +66,7 @@
                             <li class="accordion-navigation" data-accordion-item="" role="presentation">
                                 <a href="#poslateData" role="tab" class="accordion-title" id="poslate-heading" aria-controls="poslateData">Poslate poruke</a>
                                 <div id="poslateData" class="accordion-content" role="tabpanel" data-tab-content aria-labelledby="poslate-heading">
-                                    <div class="PoslatePoruke">
-                                        <a href="#" onclick="prikazi_poruku()">Prikazi poruku</a>
+                                    <div class="poslatePoruke">
                                     </div>
                                 </div>
                             </li>
