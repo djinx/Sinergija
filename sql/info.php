@@ -227,7 +227,7 @@ switch($akcija){
         $idKorisnika = intval($_SESSION['username']['idKorisnika']);
         $prijatelji = array();
         $query =
-            "SELECT pr.Naziv AS Naziv_prijatelja, pr.Tip, pr.Podtip, COALESCE(pr.Broj_telefona, ' ') AS Broj_telefona, COALESCE(pr.Email, ' ') AS Email, COALESCE(pr.Veb_sajt, ' ') AS Veb_sajt, COALESCE(pr.Ime_Kontakta, ' ') AS Ime_kontakta, COALESCE(pr.Adresa, ' ') AS Adresa, p.naziv AS Naziv_projekta, COALESCE(z.Status, ' ') AS Status, COALESCE(z.Napomena, ' ') AS Napomena
+          "SELECT pr.Naziv AS Naziv_prijatelja, pr.Tip, pr.Podtip, COALESCE(pr.Broj_telefona, ' ') AS Broj_telefona, COALESCE(pr.Email, ' ') AS Email, COALESCE(pr.Veb_sajt, ' ') AS Veb_sajt, COALESCE(pr.Ime_Kontakta, ' ') AS Ime_kontakta, COALESCE(pr.Adresa, ' ') AS Adresa, p.naziv AS Naziv_projekta, COALESCE(z.Status, ' ') AS Status, COALESCE(z.Napomena, ' ') AS Napomena
           FROM zaduzen z
             JOIN prijatelji pr ON z.idSponzora = pr.idPrijatelja
             JOIN projekat p ON z.idProjekta = p.idProjekta
@@ -240,76 +240,76 @@ switch($akcija){
                 $prijatelji[$o->Tip][$o->Podtip][] = $o;
             }
             $preparedQuery->close();
-            ?>
+        ?>
             <ul class="accordion" id="prijateljiAcc" data-accordion="prijateljiAcc" data-allow-all-closed="true" data-multi-expand="true">
                 <?php
-                foreach ($prijatelji as $tip => $podtipOstalo){
+                    foreach ($prijatelji as $tip => $podtipOstalo){
                     ?>
-                    <li class="accordion-navigation is-active" data-accordion-item="" role="presentation">
-                        <a href="#<?php echo $tip; ?>Data" role="tab" class="accordion-title" id="<?php echo $tip; ?>-heading" aria-controls="<?php echo $tip; ?>Data"><?php echo $tip; ?></a>
-                        <div id="<?php echo $tip; ?>Data" class="accordion-content" role="tabpanel" data-tab-content aria-labelledby="<?php echo $tip; ?>-heading">
-                            <ul class="tabs" data-tabs id="<?php echo $tip; ?>-tabs">
-                                <?php
-                                foreach ($podtipOstalo as $podtip => $ostalo){
-                                    ?>
-                                    <li class="tabs-title"><a href="#tab-<?php echo $podtip; ?>"><?php echo $podtip; ?></a></li>
-                                    <?php
-                                }
-                                ?>
-                            </ul>
+                        <li class="accordion-navigation is-active" data-accordion-item="" role="presentation">
+                            <a href="#<?php echo $tip; ?>Data" role="tab" class="accordion-title" id="<?php echo $tip; ?>-heading" aria-controls="<?php echo $tip; ?>Data"><?php echo $tip; ?></a>
+                            <div id="<?php echo $tip; ?>Data" class="accordion-content" role="tabpanel" data-tab-content aria-labelledby="<?php echo $tip; ?>-heading">
+                                <ul class="tabs" data-tabs id="<?php echo $tip; ?>-tabs">
                             <?php
-                            foreach ($podtipOstalo as $podtip => $ostalo){
-                                ?>
-                                <div class="tabs-content" data-tabs-content="<?php echo $tip; ?>-tabs">
-                                    <div class="tabs-panel table-scroll" id="tab-<?php echo $podtip; ?>">
-                                        <table class="unstriped">
-                                            <thead>
-                                            <tr>
-                                                <th style="min-width: 150px;">Naziv</th>
-                                                <th style="min-width: 150px;">Broj telefona</th>
-                                                <th style="min-width: 250px;">Email</th>
-                                                <th style="min-width: 150px;">Veb sajt</th>
-                                                <th style="min-width: 250px;">Ime kontakta</th>
-                                                <th style="min-width: 250px;">Adresa</th>
-                                                <th style="min-width: 200px;">Naziv projekta</th>
-                                                <th style="min-width: 150px;">Status</th>
-                                                <th style="min-width: 300px;">Napomena</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <?php
-                                            foreach ($ostalo as $kljuc => $niz){
-                                                if($niz->Tip == $tip && $niz->Podtip == $podtip){
-                                                    ?>
-                                                    <tr>
-                                                        <td><?php echo $niz->Naziv_prijatelja; ?></td>
-                                                        <td><?php echo $niz->Broj_telefona; ?></td>
-                                                        <td><?php echo $niz->Email; ?></td>
-                                                        <td><a href="http://<?php echo $niz->Veb_sajt; ?>" target="_blank"><?php echo $niz->Veb_sajt; ?></a></td>
-                                                        <td><?php echo $niz->Ime_kontakta; ?></td>
-                                                        <td><?php echo $niz->Adresa; ?></td>
-                                                        <td><?php echo $niz->Naziv_projekta; ?></td>
-                                                        <td><?php echo $niz->Status; ?></td>
-                                                        <td><?php echo $niz->Napomena; ?></td>
-                                                    </tr>
-                                                    <?php
-                                                }
-                                            }
-                                            ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <?php
-                            }
+                                foreach ($podtipOstalo as $podtip => $ostalo){
                             ?>
-                        </div>
-                    </li>
+                                    <li class="tabs-title"><a href="#tab-<?php echo $podtip; ?>"><?php echo $podtip; ?></a></li>
+                            <?php
+                                }
+                            ?>
+                                </ul>
+                            <?php
+                                foreach ($podtipOstalo as $podtip => $ostalo){
+                            ?>
+                                    <div class="tabs-content" data-tabs-content="<?php echo $tip; ?>-tabs">
+                                        <div class="tabs-panel table-scroll" id="tab-<?php echo $podtip; ?>">
+                                            <table class="unstriped">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="min-width: 150px;">Naziv</th>
+                                                        <th style="min-width: 150px;">Broj telefona</th>
+                                                        <th style="min-width: 250px;">Email</th>
+                                                        <th style="min-width: 150px;">Veb sajt</th>
+                                                        <th style="min-width: 250px;">Ime kontakta</th>
+                                                        <th style="min-width: 250px;">Adresa</th>
+                                                        <th style="min-width: 200px;">Naziv projekta</th>
+                                                        <th style="min-width: 150px;">Status</th>
+                                                        <th style="min-width: 300px;">Napomena</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                            <?php
+                                                foreach ($ostalo as $kljuc => $niz){
+                                                    if($niz->Tip == $tip && $niz->Podtip == $podtip){
+                                            ?>
+                                                        <tr>
+                                                            <td><?php echo $niz->Naziv_prijatelja; ?></td>
+                                                            <td><?php echo $niz->Broj_telefona; ?></td>
+                                                            <td><?php echo $niz->Email; ?></td>
+                                                            <td><a href="http://<?php echo $niz->Veb_sajt; ?>" target="_blank"><?php echo $niz->Veb_sajt; ?></a></td>
+                                                            <td><?php echo $niz->Ime_kontakta; ?></td>
+                                                            <td><?php echo $niz->Adresa; ?></td>
+                                                            <td><?php echo $niz->Naziv_projekta; ?></td>
+                                                            <td><?php echo $niz->Status; ?></td>
+                                                            <td><?php echo $niz->Napomena; ?></td>
+                                                        </tr>
+                                            <?php
+                                                    }
+                                                }
+                                            ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                            <?php
+                                }
+                            ?>
+                            </div>
+                        </li>
                     <?php
-                }
+                    }
                 ?>
             </ul>
-            <?php
+        <?php
         }
         else{
             echo "Postoji problem sa dohvatanjem informacija. Pokušajte ponovo!";
@@ -343,12 +343,6 @@ switch($akcija){
     case 'citaj_primljene':
         $idPrimaoca = $_SESSION['username']['idKorisnika'];
         $query = "SELECT `idPoruke`, `Nadimak`, `poruka`, `naslov`, `datum`
-                  FROM `privatna_poruka` JOIN `korisnik` ON idPrimaoca=idKorisnika 
-                  WHERE idPrimaoca=?";
-
-    case 'citaj_primljene':
-        $idPrimaoca = $_SESSION['username']['idKorisnika'];
-        $query = "SELECT `idPoruke`, `Nadimak`, `poruka`, `naslov`, `datum`
                   FROM `privatna_poruka` JOIN `korisnik` ON idPosiljaoca=idKorisnika 
                   WHERE idPrimaoca=?
                   ORDER BY datum DESC";
@@ -358,7 +352,7 @@ switch($akcija){
         if ($preparedQuery->execute()) {
             $preparedQuery->bind_result($idPoruke, $posiljaoc, $poruka, $naslov, $datum);
             while ($preparedQuery->fetch()){
-                ?>
+        ?>
                 <div id="<?php echo "m".$idPoruke; ?>" class="message">
                     <a href="#" id="<?php echo "naslov".$idPoruke;?>" onclick="prikazi_poruku(<?php echo $idPoruke; ?>)">
                         <?php echo $naslov ?>
@@ -372,7 +366,7 @@ switch($akcija){
                         <p  id="<?php echo "tekstPoruke".$idPoruke;?>"  > <?php echo $poruka;?> </p>
                     </div>
                 </div>
-                <?php
+         <?php
             }
             $preparedQuery->close();
         }
@@ -393,7 +387,7 @@ switch($akcija){
         if ($preparedQuery->execute()) {
             $preparedQuery->bind_result($idPoruke, $primaoc, $poruka, $naslov, $datum);
             while ($preparedQuery->fetch()){
-                ?>
+        ?>
                 <div id="<?php echo "m".$idPoruke; ?>" class="message">
                     <a href="#" id="<?php echo "naslov".$idPoruke;?>" onclick="prikazi_poruku(<?php echo $idPoruke; ?>)">
                         <?php echo $naslov ?>
@@ -408,7 +402,7 @@ switch($akcija){
                         <p  id="<?php echo "tekstPoruke".$idPoruke;?>" > <?php echo $poruka;?> </p>
                     </div>
                 </div>
-                <?php
+        <?php
             }
             $preparedQuery->close();
         }
