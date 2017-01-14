@@ -345,22 +345,34 @@ switch($akcija){
         $query = "SELECT `idPoruke`, `Nadimak`, `poruka`, `naslov`, `datum`
                   FROM `privatna_poruka` JOIN `korisnik` ON idPrimaoca=idKorisnika 
                   WHERE idPrimaoca=?";
+
+    case 'citaj_primljene':
+        $idPrimaoca = $_SESSION['username']['idKorisnika'];
+        $query = "SELECT `idPoruke`, `Nadimak`, `poruka`, `naslov`, `datum`
+                  FROM `privatna_poruka` JOIN `korisnik` ON idPosiljaoca=idKorisnika 
+                  WHERE idPrimaoca=?
+                  ORDER BY datum DESC";
         $preparedQuery = $db->prepare($query);
         $preparedQuery->bind_param("i", $idPrimaoca);
 
         if ($preparedQuery->execute()) {
             $preparedQuery->bind_result($idPoruke, $posiljaoc, $poruka, $naslov, $datum);
             while ($preparedQuery->fetch()){
-
-             echo  '<div id="m'.$idPoruke.'" class="message">
-                <a href="#" id="naslov'.$idPoruke.'" onclick="prikazi_poruku('.$idPoruke.')"> '.$naslov.' </a>
-                <br/>
-                <span  id="posiljaoc'.$idPoruke.'" > Poslao: '.$posiljaoc.' </span>
-                <br>
-                <span  id="datum'.$idPoruke.'"   style="display: none;"> '.$datum.' </span>
-                <br>
-                <p  id="tekstPoruke'.$idPoruke.'"  style="display: none;"> '.$poruka.' </p>
-                </div>';
+        ?>
+                <div id="<?php echo "m".$idPoruke; ?>" class="message">
+                    <a href="#" id="<?php echo "naslov".$idPoruke;?>" onclick="prikazi_poruku(<?php echo $idPoruke; ?>)">
+                        <?php echo $naslov ?>
+                    </a>
+                    <br/>
+                    <span  id="<?php echo "posiljaoc".$idPoruke;?>" > <?php echo $posiljaoc;?> </span>
+                    <div  style='display: none;'>
+                        <span  id="<?php echo "primaoc".$idPoruke;?>" >
+                        <?php echo $_SESSION['username']['Nadimak'];?> </span>
+                        <span  id="<?php echo "datum".$idPoruke;?>" > <?php echo $datum;?> </span>
+                        <p  id="<?php echo "tekstPoruke".$idPoruke;?>"  > <?php echo $poruka;?> </p>
+                    </div>
+                </div>
+         <?php
             }
             $preparedQuery->close();
         }
@@ -373,23 +385,30 @@ switch($akcija){
         $idPosiljaoca = $_SESSION['username']['idKorisnika'];
         $query = "SELECT `idPoruke`, `Nadimak`, `poruka`, `naslov`, `datum`
                   FROM `privatna_poruka` JOIN `korisnik` ON idPrimaoca=idKorisnika 
-                  WHERE idPosiljaoca=?";
+                  WHERE idPosiljaoca=?
+                  ORDER BY datum DESC";
         $preparedQuery = $db->prepare($query);
         $preparedQuery->bind_param("i", $idPosiljaoca);
 
         if ($preparedQuery->execute()) {
             $preparedQuery->bind_result($idPoruke, $primaoc, $poruka, $naslov, $datum);
             while ($preparedQuery->fetch()){
-
-                echo  '<div id="m'.$idPoruke.'" class="message">
-                <a href="#" id="naslov'.$idPoruke.'" onclick="prikazi_poruku('.$idPoruke.')"> '.$naslov.' </a>
-                <br/>
-                <span  id="posiljaoc'.$idPoruke.'" > Primio: '.$primaoc.' </span>
-                <br>
-                <span  id="datum'.$idPoruke.'"   style="display: none;"> '.$datum.' </span>
-                <br>
-                <p  id="tekstPoruke'.$idPoruke.'"  style="display: none;"> '.$poruka.' </p>
-                </div>';
+        ?>
+                <div id="<?php echo "m".$idPoruke; ?>" class="message">
+                    <a href="#" id="<?php echo "naslov".$idPoruke;?>" onclick="prikazi_poruku(<?php echo $idPoruke; ?>)">
+                        <?php echo $naslov ?>
+                    </a>
+                    <br/>
+                    <span  id="<?php echo "primaoc".$idPoruke;?>" > <?php echo $primaoc;?> </span>
+                    <div  style='display: none;'>
+                        <span  id="<?php echo "posiljaoc".$idPoruke;?>" >
+                             <?php echo $_SESSION['username']['Nadimak'];?>
+                        </span>
+                        <span  id="<?php echo "datum".$idPoruke;?>" > <?php echo $datum;?> </span>
+                        <p  id="<?php echo "tekstPoruke".$idPoruke;?>" > <?php echo $poruka;?> </p>
+                    </div>
+                </div>
+        <?php
             }
             $preparedQuery->close();
         }
