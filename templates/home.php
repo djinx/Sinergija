@@ -95,15 +95,18 @@
                         </div>
                         <div id="prikazPoruke" style='display: none;'>
                             <label> Naslov:
-                                <span id="naslovPoruke"> JobPrep </span>
+                                <span id="naslov"></span>
                             </label>
                             <label> Posiljaoc:
-                                <span id="posiljaoc"> Ajzen </span>
+                                <span id="posiljaoc"></span>
                             </label>
                             <label> Primalac:
-                                <span id="primalac"> Ana </span>
+                                <span id="primalac"></span>
                             </label>
-                            <p id="tekstPoruke">Tekst poruke ......................</p>
+                            <label> Vreme:
+                                <span id="vreme"></span>
+                            </label>
+                            <p id="tekst"></p>
                         </div>
                     </div>
                 </div>

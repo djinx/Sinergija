@@ -41,3 +41,8 @@ a.image_effect, a.image_effect:hover {
 .imagemask.photo {
     background:url(../assets/profile_picture.png) center 30px no-repeat;
 }
+
+.message {
+    border:1px solid grey;
+    margin: 1px;
+}

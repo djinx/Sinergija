@@ -449,11 +449,28 @@ function dohvati_poslate(){
 /*
  * Prikazuje podatke o poruci.
  */
-function prikazi_poruku(){
+function prikazi_poruku(id){
+    // citanje odgovarajucih podataka
+    var naslov = $.trim($("a#naslov" + id + ":first").text());
+    var posiljaoc = $.trim($("#posiljaoc" + id).text());
+    var primaoc = $.trim($("#primaoc" + id).text());
+    var datum = $.trim($("#datum" + id).text());
+    var tekstPoruke = $.trim($("#tekstPoruke" + id).text());
+
+    // upis procitaanih podataka u odgovarajuce elemente
+    $("#naslov").empty();
+    $("#naslov").append(naslov);
+    $("#posiljaoc").empty();
+    $("#posiljaoc").append(posiljaoc);
+    $("#primalac").empty();
+    $("#primalac").append(primaoc);
+    $("#vreme").empty();
+    $("#vreme").append(datum);
+    $("#tekst").empty();
+    $("#tekst").append(tekstPoruke);
+
     $formaNovaPoruka.fadeOut("fast");
     $prikazPoruke.fadeIn("fast");
-
-    // TODO: procitati sva polja iz diva
 }
 
 /*
