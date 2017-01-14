@@ -260,7 +260,7 @@ CREATE TABLE IF NOT EXISTS `sinergija`.`privatna_poruka` (
   `idPrimaoca` INT(11) NOT NULL,
   `poruka` VARCHAR(4096) NULL,
   `naslov` VARCHAR(45) NOT NULL,
-  `datum` DATE NOT NULL,
+  `datum` TIMESTAMP NOT NULL,
   PRIMARY KEY (`idPosiljaoca`, `idPrimaoca`),
   INDEX `fk_korisnik_has_korisnik_korisnik2_idx` (`idPrimaoca` ASC),
   INDEX `fk_korisnik_has_korisnik_korisnik1_idx` (`idPosiljaoca` ASC),
