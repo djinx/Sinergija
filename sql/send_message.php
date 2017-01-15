@@ -49,7 +49,7 @@ $db = Database::getInstance();
 
      echo $posiljaoc;
 
-     $query = "INSERT INTO privatna_poruka (idPoruke, idPosiljaoca, idPrimaoca, poruka, naslov, datum) VALUES (null,?, ?, ?, ?, NOW())";
+     $query = "INSERT INTO `privatna poruka` (idPoruke, idPosiljaoca, idPrimaoca, poruka, naslov, datum) VALUES (null,?, ?, ?, ?, NOW())";
      $preparedQuery = $db->prepare($query);
      $preparedQuery->bind_param("iiss", $posiljaoc, $idPrimaoca, $poruka, $naslov);
 
