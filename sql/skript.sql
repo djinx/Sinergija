@@ -266,6 +266,7 @@ CREATE TABLE IF NOT EXISTS `sinergija`.`privatna poruka` (
   `poruka` VARCHAR(4096) NULL,
   `naslov` VARCHAR(45) NOT NULL,
   `datum` TIMESTAMP NOT NULL,
+  `procitana` TINYINT(1) NOT NULL,
   INDEX `fk_korisnik_has_korisnik_korisnik2_idx` (`idPrimaoca` ASC),
   INDEX `fk_korisnik_has_korisnik_korisnik1_idx` (`idPosiljaoca` ASC),
   PRIMARY KEY (`idPoruke`),
