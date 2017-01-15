@@ -14,62 +14,96 @@ $db = Database::getInstance();
 
 if(isset($_SESSION['username'])){
 
-    $idKorisnika = intval($_SESSION['username']['idKorisnika']);
-    $num = $_POST['num'];
-    $query =
-        " SELECT p.idProjekta, p.naziv, p.pocetak_dogadjaja, t.naziv 
-          FROM projekat p, ucestvuje u, tim t 
-          WHERE u.idKorisnika = ? AND p.idProjekta = u.idProjekta 
-          AND t.idTima = u.idTima AND p.kraj_rada IS NULL  ";
+    $akcija = (isset($_POST['akcija'])) ? $_POST['akcija'] : '';
 
-    if(intval($_POST['num']) != -1){
-        $query = $query." LIMIT ?";
-    }
-    if($preparedQuery = $db->prepare($query)){
-        if(intval($_POST['num']) != -1){
-            $preparedQuery->bind_param("ii", $idKorisnika, $num);
-        }else{
+    switch ($akcija){
+
+        case 'select lista':
+            $idKorisnika = intval($_SESSION['username']['idKorisnika']);
+            $query =
+                " SELECT p.idProjekta, p.naziv
+                  FROM projekat p
+                    JOIN ucestvuje u ON p.idProjekta = u.idProjekta 
+                  WHERE u.idKorisnika = ? 
+                    AND p.kraj_rada IS NULL;";
+            $preparedQuery = $db->prepare($query);
             $preparedQuery->bind_param("i", $idKorisnika);
-        }
-
-        if($preparedQuery->execute()){
-            $preparedQuery->bind_result($idProjekta, $nazivP, $pocetakD, $nazivT);
-            while($preparedQuery->fetch()){
-                $type = "";
-                $date1 = new DateTime($pocetakD);
-                $date2 = new DateTime(date('Y-m-d'));
-                if(date_diff($date1, $date2, true)->format('%a') < 7){
-                    $type = "alert";
-                }else if(date_diff($date1, $date2, true)->format('%a') < 14){
-                    $type = "warning";
-                }
+            if($preparedQuery->execute()){
+                $preparedQuery->bind_result($idProjekta, $nazivP);
+                while($preparedQuery->fetch()){
                 ?>
-                <div class="callout <?php echo $type; ?>">
-                    <h4><?php echo $nazivP; ?></h4>
-                    <h5>Tim: <?php echo $nazivT; ?></h5>
-                    <?php
-                        if(isset($_SESSION['pages']['projects']) && $_SESSION['pages']['projects']) {
-                            ?>
-                            <div class="button-group">
-                                <button type="button" class="button"
-                                        onclick="procitaj_detalje_projekta(<?php echo $idProjekta; ?>)">Pročitaj detalje
-                                </button>
-                            </div>
-                            <?php
-                        }
-                    ?>
-                </div>
+                    <option value="<?php echo $idProjekta ?>"><?php echo $nazivP; ?></option>
                 <?php
+                }
+                $preparedQuery->close();
+                return true;
+            }else{
+                var_dump($db->error);
+                die();
             }
-            $preparedQuery->close();
-            return true;
-        }else{
-            var_dump($db->error);
-            die();
-        }
-    }else{
-        var_dump($db->error);
-        die();
+            break;
+
+        default:
+            $idKorisnika = intval($_SESSION['username']['idKorisnika']);
+            $num = $_POST['num'];
+            $query =
+                " SELECT p.idProjekta, p.naziv, p.pocetak_dogadjaja, t.naziv 
+                  FROM projekat p, ucestvuje u, tim t 
+                  WHERE u.idKorisnika = ? 
+                    AND p.idProjekta = u.idProjekta 
+                    AND t.idTima = u.idTima 
+                    AND p.kraj_rada IS NULL;";
+
+            if(intval($_POST['num']) != -1){
+                $query = $query." LIMIT ?";
+            }
+            if($preparedQuery = $db->prepare($query)){
+                if(intval($_POST['num']) != -1){
+                    $preparedQuery->bind_param("ii", $idKorisnika, $num);
+                }else{
+                    $preparedQuery->bind_param("i", $idKorisnika);
+                }
+
+                if($preparedQuery->execute()){
+                    $preparedQuery->bind_result($idProjekta, $nazivP, $pocetakD, $nazivT);
+                    while($preparedQuery->fetch()){
+                        $type = "";
+                        $date1 = new DateTime($pocetakD);
+                        $date2 = new DateTime(date('Y-m-d'));
+                        if(date_diff($date1, $date2, true)->format('%a') < 7){
+                            $type = "alert";
+                        }else if(date_diff($date1, $date2, true)->format('%a') < 14){
+                            $type = "warning";
+                        }
+                        ?>
+                        <div class="callout <?php echo $type; ?>">
+                            <h4><?php echo $nazivP; ?></h4>
+                            <h5>Tim: <?php echo $nazivT; ?></h5>
+                            <?php
+                            if(isset($_SESSION['pages']['projects']) && $_SESSION['pages']['projects']) {
+                                ?>
+                                <div class="button-group">
+                                    <button type="button" class="button"
+                                            onclick="procitaj_detalje_projekta(<?php echo $idProjekta; ?>)">Pročitaj detalje
+                                    </button>
+                                </div>
+                                <?php
+                            }
+                            ?>
+                        </div>
+                        <?php
+                    }
+                    $preparedQuery->close();
+                    return true;
+                }else{
+                    var_dump($db->error);
+                    die();
+                }
+            }else{
+                var_dump($db->error);
+                die();
+            }
+            break;
     }
 
 }else{
