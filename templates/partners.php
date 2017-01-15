@@ -19,6 +19,8 @@
     </div>
 </div>
 
+{{ include('friend_report.html') }}
+
 <script src="../public/js/pages/partners.js"></script>
 
 {% endblock %}
