@@ -253,12 +253,13 @@ CREATE TABLE IF NOT EXISTS `sinergija`.`Log` (
   PRIMARY KEY (`idKorisnika`, `TipAkcije`, `OpisAkcije`, `VremeDatum`))
 ENGINE = InnoDB;
 
--- -----------------------------------------------------
--- Table `sinergija`.`privatna_poruka`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `sinergija`.`privatna_poruka` ;
 
-CREATE TABLE IF NOT EXISTS `sinergija`.`privatna_poruka` (
+-- -----------------------------------------------------
+-- Table `sinergija`.`privatna poruka`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `sinergija`.`privatna poruka` ;
+
+CREATE TABLE IF NOT EXISTS `sinergija`.`privatna poruka` (
   `idPoruke` INT NOT NULL AUTO_INCREMENT,
   `idPosiljaoca` INT(11) NOT NULL,
   `idPrimaoca` INT(11) NOT NULL,
