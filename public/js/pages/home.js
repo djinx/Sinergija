@@ -13,6 +13,9 @@ var $formaNoviPrijatelj = $("#formular-noviPrijatelj");
 var $formaIzmenaPrijatelja = $("#formular-izmenaPrijatelja");
 var $podaciOPrijatelju = $("#podaciOPrijatelju");
 
+var $formaNovaPoruka = $("#formular-novaPoruka");
+var $prikazPoruke = $("#prikazPoruke");
+
 /*
  * Broj obaveštenja koji se dohvata u startu na ovoj stranici.
  */
@@ -370,6 +373,107 @@ $("#ucitajJosObavestenja").on('click', function () {
 });
 
 /*
+ * Zatvara sve otvorene forme i brise njihov sadrzaj
+ * i ucitava poslate i primljene poruke
+ */
+$("#osveziSadrzaj").on('click', function () {
+    $formaNovaPoruka.fadeOut("fast");
+    $('#forma-novaPoruka')[0].reset();
+    $prikazPoruke.fadeOut("fast");
+    dohvati_primljene();
+    dohvati_poslate();
+});
+
+/*
+ * Otvara formu za slanje nove poruke
+ */
+$("#posaljiNovu").on('click', function(){
+    $formaNovaPoruka.fadeIn("fast");
+    $prikazPoruke.fadeOut("fast");
+
+    $("#odustaniOdNovePoruke").on('click', function () {
+        $formaNovaPoruka.fadeOut("fast");
+        $('#forma-novaPoruka')[0].reset();
+    });
+});
+
+/*
+ * Dohvata sve poruke koje je primio ulogovan korisnik.
+ */
+function dohvati_primljene(){
+    // podatak akcija: 'citaj_primljene'
+    $.ajax({
+        url: '../sql/info.php',
+        data: {akcija: 'citaj_primljene'},
+        method: 'post',
+        success: function(rezultat) {
+            var $listaPrimljenih =  $("div.primljenePoruke");
+            $listaPrimljenih.empty();
+            $listaPrimljenih.append(rezultat);
+            console.log("Dohvacene su poruke");
+            //console.log(rezultat);
+            $listaPrimljenih.foundation();
+        },
+        error: function (rezultat) {
+            console.log("Javila se greška pri dohvatanju poruka!");
+            console.log(rezultat);
+        }
+    });
+
+}
+
+/*
+ * Dohvata sve poruke koje je poslao ulogovan korisnik
+ */
+function dohvati_poslate(){
+    // podatak akcija: 'citaj_poslate'
+    $.ajax({
+        url: '../sql/info.php',
+        data: {akcija: 'citaj_poslate'},
+        method: 'post',
+        success: function(rezultat) {
+            var $listaPrimljenih =  $("div.poslatePoruke");
+            $listaPrimljenih.empty();
+            $listaPrimljenih.append(rezultat);
+            console.log("Dohvacene su poruke");
+            //console.log(rezultat);
+            $listaPrimljenih.foundation();
+        },
+        error: function (rezultat) {
+            console.log("Javila se greška pri dohvatanju poruka!");
+            console.log(rezultat);
+        }
+    });
+}
+
+/*
+ * Prikazuje podatke o poruci.
+ */
+function prikazi_poruku(id){
+    // citanje odgovarajucih podataka
+    var naslov = $.trim($("a#naslov" + id + ":first").text());
+    var posiljaoc = $.trim($("#posiljaoc" + id).text());
+    var primaoc = $.trim($("#primaoc" + id).text());
+    var datum = $.trim($("#datum" + id).text());
+    var tekstPoruke = $.trim($("#tekstPoruke" + id).text());
+
+    // upis procitaanih podataka u odgovarajuce elemente
+    $("#naslov").empty();
+    $("#naslov").append(naslov);
+    $("#posiljaoc").empty();
+    $("#posiljaoc").append(posiljaoc);
+    $("#primalac").empty();
+    $("#primalac").append(primaoc);
+    $("#vreme").empty();
+    $("#vreme").append(datum);
+    $("#tekst").empty();
+    $("#tekst").append(tekstPoruke);
+
+    $formaNovaPoruka.fadeOut("fast");
+    $prikazPoruke.fadeIn("fast");
+}
+
+/*
  * Pozivanje funkcija koje su neophodne za ovu stranicu.
  */
 $(document).ready(function () {
@@ -383,4 +487,6 @@ $(document).ready(function () {
 
     podesi_photo_ikonicu();
     ucitaj_obavestenja();
+    dohvati_primljene();
+    dohvati_poslate();
 });

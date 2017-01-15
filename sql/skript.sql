@@ -253,6 +253,34 @@ CREATE TABLE IF NOT EXISTS `sinergija`.`Log` (
   PRIMARY KEY (`idKorisnika`, `TipAkcije`, `OpisAkcije`, `VremeDatum`))
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `sinergija`.`privatna_poruka`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `sinergija`.`privatna_poruka` ;
+
+CREATE TABLE IF NOT EXISTS `sinergija`.`privatna_poruka` (
+  `idPoruke` INT NOT NULL AUTO_INCREMENT,
+  `idPosiljaoca` INT(11) NOT NULL,
+  `idPrimaoca` INT(11) NOT NULL,
+  `poruka` VARCHAR(4096) NULL,
+  `naslov` VARCHAR(45) NOT NULL,
+  `datum` TIMESTAMP NOT NULL,
+  INDEX `fk_korisnik_has_korisnik_korisnik2_idx` (`idPrimaoca` ASC),
+  INDEX `fk_korisnik_has_korisnik_korisnik1_idx` (`idPosiljaoca` ASC),
+  PRIMARY KEY (`idPoruke`),
+  CONSTRAINT `fk_korisnik_has_korisnik_korisnik1`
+    FOREIGN KEY (`idPosiljaoca`)
+    REFERENCES `sinergija`.`korisnik` (`idKorisnika`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_korisnik_has_korisnik_korisnik2`
+    FOREIGN KEY (`idPrimaoca`)
+    REFERENCES `sinergija`.`korisnik` (`idKorisnika`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
 SET SQL_MODE = '';
 GRANT USAGE ON *.* TO omikron;
  DROP USER omikron;
