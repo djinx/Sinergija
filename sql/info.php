@@ -454,7 +454,7 @@ switch($akcija){
     case 'citaj_primljene':
         $idPrimaoca = $_SESSION['username']['idKorisnika'];
         $query = "SELECT `idPoruke`, `Nadimak`, `poruka`, `naslov`, `datum`
-                  FROM `privatna_poruka` JOIN `korisnik` ON idPosiljaoca=idKorisnika 
+                  FROM `privatna poruka` JOIN `korisnik` ON idPosiljaoca=idKorisnika 
                   WHERE idPrimaoca=?
                   ORDER BY datum DESC";
         $preparedQuery = $db->prepare($query);
@@ -489,7 +489,7 @@ switch($akcija){
     case 'citaj_poslate':
         $idPosiljaoca = $_SESSION['username']['idKorisnika'];
         $query = "SELECT `idPoruke`, `Nadimak`, `poruka`, `naslov`, `datum`
-                  FROM `privatna_poruka` JOIN `korisnik` ON idPrimaoca=idKorisnika 
+                  FROM `privatna poruka` JOIN `korisnik` ON idPrimaoca=idKorisnika 
                   WHERE idPosiljaoca=?
                   ORDER BY datum DESC";
         $preparedQuery = $db->prepare($query);
