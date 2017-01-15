@@ -1,0 +1,56 @@
+<div id='formular-pohraniIzvestaj' style="display: none;">
+    <div class='row column'>
+        <form id="forma-pohraniIzvestaj" data-abide novalidate action="../sql/submit_friend_report.php"  method="post">
+            <div data-abide-error class='alert callout' style='display: none;'>
+                <p><i class='fi-alert'></i> Postoje greške u formularu.</p>
+            </div>
+
+            <div class='small-12 medium-6 columns'>
+                <label>
+                    Odaberi projekat:
+                    <select class='listaProjekata' name='Projekat' onchange="ucitaj_zaduzene_tipove()" required>
+                        <option value=''></option>
+                    </select>
+                </label>
+                <label>
+                    Odaberi tip prijatelja:
+                    <select class='Tip' name='Tip' onchange="ucitaj_zaduzene_podtipove()" required>
+                        <option value=''></option>
+                    </select>
+                </label>
+                <label>
+                    Odaberi podtip prijatelja:
+                    <select class='Podtip' name='Podtip' onchange="ucitaj_zaduzene_prijatelje_select()" required>
+                        <option value=''></option>
+                    </select>
+                </label>
+                <label>
+                    Odaberi prijatelja:
+                    <select class='listaZaduzenihPrijatelja' name='Prijatelj' onchange="ucitaj_podatke_o_prijatelju()" required>
+                        <option value=''></option>
+                    </select>
+                </label>
+            </div>
+
+            <div class='small-12 medium-6 columns'>
+                <label>
+                    Promeni status:
+                    <select name='Status' id="Status" required>
+                        <option value=''></option>
+                        <option value='U pregovorima'>U pregovorima</option>
+                        <option value='Odobreno'>Odobreno</option>
+                        <option value='Odbijeno'>Odbijeno</option>
+                    </select>
+                </label>
+                <label>
+                    Napomena
+                    <textarea rows="9" cols="50" id='Napomena' name='Napomena' required></textarea>
+                </label>
+            </div>
+
+            <button type='submit' name='pohraniIzvestaj' id='pohraniIzvestaj' class='expanded button'>Napiši izveštaj</button>
+            <a href='#0' id='odustaniOdIzvestaja' name='odustaniOdIzvestaja' class='expanded button'>Odustani</a>
+
+        </form>
+    </div>
+</div>
