@@ -75,7 +75,7 @@
 
                     <div class="small-12 medium-8 large-8 columns">
                         <div id="formular-novaPoruka" style='display: none;'>
-                            <form id="forma-novaPoruka" data-abide novalidate action="../sql/send_message.php" method="post">
+                            <form id="forma-novaPoruka" data-abide novalidate>
                                 <label>
                                     Primalac
                                     <input type='text' id='nadimakPrimaoca' name='nadimakPrimaoca' required>
@@ -89,7 +89,7 @@
                                     </textarea>
                                 </label>
 
-                                <button type='submit' name='posaljiPoruku' id='posaljiPoruku' class='expanded button'>Pošalji</button>
+                                <button type='button' name='posaljiPoruku' id='posaljiPoruku' class='expanded button'>Pošalji</button>
                                 <a href='#0' id='odustaniOdNovePoruke' class='expanded button'>Odustani</a>
                             </form>
                         </div>

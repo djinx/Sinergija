@@ -377,11 +377,35 @@ $("#ucitajJosObavestenja").on('click', function () {
  * i ucitava poslate i primljene poruke
  */
 $("#osveziSadrzaj").on('click', function () {
+    osvezi();
+});
+
+function osvezi() {
     $formaNovaPoruka.fadeOut("fast");
     $('#forma-novaPoruka')[0].reset();
     $prikazPoruke.fadeOut("fast");
     dohvati_primljene();
     dohvati_poslate();
+
+}
+
+$("#posaljiPoruku").on("click", function(){
+    var primaoc = $("#nadimakPrimaoca").val();
+    var tekstPoruke = $.trim($("#tekstPoruke").val());
+    var naslovPoruke = $("#naslovPoruke").val();
+    $.ajax({
+        url: '../sql/send_message.php',
+        data: {posaljiPoruku: 'posaljiPoruku', nadimakPrimaoca: primaoc, naslovPoruke: naslovPoruke, tekstPoruke: tekstPoruke},
+        method: 'post',
+        success: function(rezultat) {
+            osvezi();
+        },
+        error: function (rezultat) {
+            console.log("Javila se greška pri slanju poruke!");
+            console.log(rezultat);
+        }
+    });
+
 });
 
 /*

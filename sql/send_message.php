@@ -49,7 +49,7 @@ $db = Database::getInstance();
 
      echo $posiljaoc;
 
-     $query = "INSERT INTO `privatna poruka` (idPoruke, idPosiljaoca, idPrimaoca, poruka, naslov, datum) VALUES (null,?, ?, ?, ?, NOW())";
+     $query = "INSERT INTO `privatna poruka` (idPoruke, idPosiljaoca, idPrimaoca, poruka, naslov, datum, procitana) VALUES (null,?, ?, ?, ?, NOW(), false)";
      $preparedQuery = $db->prepare($query);
      $preparedQuery->bind_param("iiss", $posiljaoc, $idPrimaoca, $poruka, $naslov);
 
@@ -57,4 +57,4 @@ $db = Database::getInstance();
      $preparedQuery->close();
  }
 
-header("Location: ../public/");
+//header("Location: ../public/");
