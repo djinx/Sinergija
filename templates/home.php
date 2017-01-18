@@ -22,6 +22,7 @@
             <tr><td id="telefon"> {{ session['Telefon'] }}  </td></tr>
             <tr><td id="email"> {{ session['Email'] }}  </td></tr>
         </table>
+        <button type="button" class="expanded button" id="promeniPodatkeClan">Promeni podatke</button>
         <form action="../sql/odjavljivanje.php" method="post">
             <button type="submit" class="expanded button">Odjavi se</button>
         </form>
@@ -153,6 +154,8 @@
 </div>
 
 {{ include('create_user.html') }}
+
+{{ include('update_user.html') }}
 
 {{ include('create_task.html') }}
 

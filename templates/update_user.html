@@ -1,0 +1,32 @@
+<div id='formular-izmenaClana' style="display: none;">
+    <div class='row column'>
+        <form id="forma-izmenaClana" data-abide novalidate action="../sql/update_user.php" method="post">
+
+            <div data-abide-error class='alert callout' style='display: none;'>
+                <p><i class='fi-alert'></i> Postoje greške u formularu.</p>
+            </div>
+
+            <div class='small-12 medium-6 columns'>
+                <label>
+                    Broj telefona
+                    <input type='text' id='BrojTelefonaClana1' name='BrojTelefonaClana1' required>
+                </label>
+                <label>
+                    Nadimak
+                    <input type='text' id='NadimakClana1' name='NadimakClana1' required>
+                </label>
+            </div>
+
+            <div class='small-12 medium-6 columns'>
+                <label>
+                    E-mail
+                    <input type='email' id='EmailClana1' name='EmailClana1' required>
+                </label>
+            </div>
+
+            <button type='submit' name="izmeniClana" class='expanded button'>Potvrdi izmene</button>
+            <a href='#0' id='odustaniOdIzmeniClana' class='expanded button'>Odustani</a>
+
+        </form>
+    </div>
+</div>
