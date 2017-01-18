@@ -40,14 +40,6 @@
                     </li>
                 </ul>
             </div>
-
-            <div class="off-canvas position-right" id="offCanvasRight" data-off-canvas data-position="right">
-                <button class="close-button" aria-label="Close menu" type="button" data-close>
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <!-- Off-canvas content goes here -->
-				<a href="../templates/chat.php" target="_blank">Grupno ćaskanje</a>
-            </div>
         </div>
     </div>
 
@@ -57,7 +49,7 @@
             <span class="title-bar-title">Sinergija</span>
         </div>
         <div class="title-bar-right">
-            <button class="menu-icon" type="button" data-toggle="offCanvasRight"></button>
+            <a class="chat-icon" type="button" href="../templates/chat.php" target="_blank"></a>
         </div>
     </div>
 
