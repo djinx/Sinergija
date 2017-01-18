@@ -398,12 +398,12 @@ function osvezi() {
  * Salje ajax zahtev za upis poruke u bazu.
  */
 $("#posaljiPoruku").on("click", function(){
-    var primaoc = $("#nadimakPrimaoca").val();
+    var primaoc = $("#primalac option:selected").val();
     var tekstPoruke = $.trim($("#tekstPoruke").val());
     var naslovPoruke = $("#naslovPoruke").val();
     $.ajax({
         url: '../sql/send_message.php',
-        data: {posaljiPoruku: 'posaljiPoruku', nadimakPrimaoca: primaoc, naslovPoruke: naslovPoruke, tekstPoruke: tekstPoruke},
+        data: {posaljiPoruku: 'posaljiPoruku', idPrimaoca: primaoc, naslovPoruke: naslovPoruke, tekstPoruke: tekstPoruke},
         method: 'post',
         success: function(rezultat) {
             osvezi();

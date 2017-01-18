@@ -78,7 +78,9 @@
                             <form id="forma-novaPoruka" data-abide novalidate>
                                 <label>
                                     Primalac
-                                    <input type='text' id='nadimakPrimaoca' name='nadimakPrimaoca' required>
+                                    <select id="primalac" class="listaKorisnika" name='Korisnik' required>
+                                        <option value=''></option>
+                                    </select>
                                 </label>
                                 <label>
                                     Naslov poruke
