@@ -440,7 +440,7 @@ function osvezi() {
  * Salje ajax zahtev za upis poruke u bazu.
  */
 $("#posaljiPoruku").on("click", function(){
-    var primaoc = $("#primalac option:selected").val();
+    var primaoc = $("select#primalac").val();
     var tekstPoruke = $.trim($("#tekstPoruke").val());
     var naslovPoruke = $("#naslovPoruke").val();
     $.ajax({
@@ -475,7 +475,6 @@ $("#posaljiNovu").on('click', function(){
  * Dohvata sve poruke koje je primio ulogovan korisnik.
  */
 function dohvati_primljene(){
-    // podatak akcija: 'citaj_primljene'
     $.ajax({
         url: '../sql/info.php',
         data: {akcija: 'citaj_primljene'},
@@ -500,7 +499,6 @@ function dohvati_primljene(){
  * Dohvata sve poruke koje je poslao ulogovan korisnik
  */
 function dohvati_poslate(){
-    // podatak akcija: 'citaj_poslate'
     $.ajax({
         url: '../sql/info.php',
         data: {akcija: 'citaj_poslate'},
@@ -537,12 +535,15 @@ function prikazi_poruku(id){
     $("#naslov").append(naslov);
     $("#posiljaoc").empty();
     $("#posiljaoc").append(posiljaoc);
-    $("#primalac").empty();
-    $("#primalac").append(primaoc);
+    $("span#primalac").empty();
+    $("span#primalac").append(primaoc);
     $("#vreme").empty();
     $("#vreme").append(datum);
     $("#tekst").empty();
     $("#tekst").append(tekstPoruke);
+
+
+    console.log(primaoc);
 
     $formaNovaPoruka.fadeOut("fast");
     $prikazPoruke.fadeIn("fast");
@@ -586,8 +587,9 @@ function prikazi_poslatu(id, read){
 
     // ukoliko je procitana poruka prikazujemo checkmark
     // kako bismo naglasili korisniku da je primalac procitao poruku
-    if(read)
+    if(read) {
         $("div.wrapper").show();
+    }
 }
 
 $("#zatvoriPoruku").on("click", function () {

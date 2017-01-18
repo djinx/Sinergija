@@ -102,7 +102,7 @@
                             <label> Naslov:
                                 <span id="naslov"></span>
                             </label>
-                            <label> Posiljaoc:
+                            <label> Pošiljalac:
                                 <span id="posiljaoc"></span>
                             </label>
                             <label> Primalac:
