@@ -478,35 +478,36 @@ switch($akcija){
                   FROM `privatna poruka` JOIN `korisnik` ON idPosiljaoca=idKorisnika 
                   WHERE idPrimaoca=?
                   ORDER BY datum DESC";
-        $preparedQuery = $db->prepare($query);
-        $preparedQuery->bind_param("i", $idPrimaoca);
+        if($preparedQuery = $db->prepare($query)){
+            $preparedQuery->bind_param("i", $idPrimaoca);
 
-        if ($preparedQuery->execute()) {
-            $preparedQuery->bind_result($idPoruke, $posiljaoc, $poruka, $naslov, $datum, $procitana);
-            while ($preparedQuery->fetch()){
-                $poruka = str_replace(array("\\r\\n", "\\r", "\\n"), "<br/>", $poruka);
-        ?>
-                <div id="<?php echo "m".$idPoruke; ?>" class="message <?php if(!$procitana) echo "unread"?> ">
-                    <a href="#" id="<?php echo "naslov".$idPoruke;?>" onclick="prikazi_primljenu(<?php echo $idPoruke; ?>)">
-                        <?php echo $naslov ?>
-                    </a>
-                    <br/>
-                    <span  id="<?php echo "posiljaoc".$idPoruke;?>" > <?php echo $posiljaoc;?> </span>
-                    <div  style='display: none;'>
+            if ($preparedQuery->execute()) {
+                $preparedQuery->bind_result($idPoruke, $posiljaoc, $poruka, $naslov, $datum, $procitana);
+                while ($preparedQuery->fetch()){
+                    $poruka = str_replace(array("\\r\\n", "\\r", "\\n"), "<br/>", $poruka);
+                    ?>
+                    <div id="<?php echo "m".$idPoruke; ?>" class="message <?php if(!$procitana) echo "unread"?> ">
+                        <a href="#" id="<?php echo "naslov".$idPoruke;?>" onclick="prikazi_primljenu(<?php echo $idPoruke; ?>)">
+                            <?php echo $naslov ?>
+                        </a>
+                        <br/>
+                        <span  id="<?php echo "posiljaoc".$idPoruke;?>" > <?php echo $posiljaoc;?> </span>
+                        <div  style='display: none;'>
                         <span  id="<?php echo "primaoc".$idPoruke;?>" >
                         <?php echo $_SESSION['username']['Nadimak'];?> </span>
-                        <span  id="<?php echo "datum".$idPoruke;?>" > <?php echo $datum;?> </span>
-                        <p  id="<?php echo "tekstPoruke".$idPoruke;?>"  > <?php echo $poruka;?> </p>
+                            <span  id="<?php echo "datum".$idPoruke;?>" > <?php echo $datum;?> </span>
+                            <p  id="<?php echo "tekstPoruke".$idPoruke;?>"  > <?php echo $poruka;?> </p>
+                        </div>
                     </div>
-                </div>
-         <?php
+                    <?php
+                }
+                $preparedQuery->close();
             }
-            $preparedQuery->close();
+        }else{
+            die("Postoji problem sa dohvatanjem informacija: ".$db->error);
         }
-        ?>
 
 
-        <?php
         break;
     case 'citaj_poslate':
         $idPosiljaoca = $_SESSION['username']['idKorisnika'];
@@ -557,9 +558,47 @@ switch($akcija){
         $preparedQuery->execute();
         $preparedQuery->close();
         break;
+    case 'promeni sifru':
+        $idKorisnika = intval($_SESSION['username']['idKorisnika']);
+        $errors = array();
+
+        // provera lozinke
+        $lozinka = null;
+        if(!empty($_POST["password"])){
+            $lozinka = $db->real_escape_string(trim($_POST["password"]));
+        }else{
+            $errors[] = "Molimo unesite lozinku!";
+        }
+
+        // provera ponovljene lozinke
+        if(!empty($_POST["passwordAgain"])){
+            $lozinkaPonovo = $db->real_escape_string(trim($_POST["passwordAgain"]));
+            if($lozinka != $lozinkaPonovo){
+                $errors[] = "Lozinke se ne poklapaju!";
+            }
+        }else{
+            $errors[] = "Molimo ponovite lozinku!";
+        }
+
+        if(empty($errors)){
+            $query = "UPDATE korisnik SET Sifra = ? WHERE idKorisnika = ?";
+            if($preparedQuery = $db->prepare($query)){
+                $preparedQuery->bind_param("si", $lozinka, $idKorisnika);
+                if($preparedQuery->execute()){
+                    $message = "Lozinka je promenjena!";
+                }else{
+                    $message = "Postoji problem sa promenom lozinke!";
+                }
+            }else{
+                $message = "Postoji problem sa ispunjenjem zahteva!";
+            }
+        }else{
+            $message = implode("; ", $errors);
+        }
+
+        break;
     default:
         break;
-
 }
 
 echo $message;
