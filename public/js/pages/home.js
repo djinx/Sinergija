@@ -8,6 +8,7 @@
 var $formaNoviClan = $("#formular-noviClan");
 var $formaBrisanjeClana = $("#formular-brisanjeClana");
 var $formaIzmenaClana = $("#formular-izmenaClana");
+var $formaIzmenaLozinke = $("#formular-izmenaLozinke");
 
 var $formaNovProjekat = $("#formular-novProjekat");
 var $formaNoviPrijatelj = $("#formular-noviPrijatelj");
@@ -160,6 +161,18 @@ $("#promeniPodatkeClan").on("click", function(){
 
 });
 
+$("#promeniLozinkuClan").on("click", function(){
+
+    $formaIzmenaLozinke.fadeIn("fast");
+
+    // Dugme za odustajanje
+    $("#odustaniOdIzmeniLozinku").on("click", function () {
+        $formaIzmenaLozinke.fadeOut("fast");
+        $('#forma-izmenaLozinke')[0].reset();
+    });
+
+});
+
 $("#kreirajObavezu").on("click", function () {
 
     $formaNovaObaveza.fadeIn("fast");
@@ -223,12 +236,10 @@ $("#izmeniPrijatelja").on("click", function () {
     })
 });
 
-
 /**
  * Dohvata sve tipove koji postoje u bazi podatka.
  * Za prikazivanje rezultata je neophodno pridružiti klasu "Tip" odgovarajucem <select> elementu.
  */
-
 function ucitaj_tipove_svih(){
     $.ajax({
         url: '../sql/info.php',
@@ -423,9 +434,7 @@ function osvezi() {
     $prikazPoruke.fadeOut("fast");
     dohvati_primljene();
     dohvati_poslate();
-
 }
-
 
 /*
  * Salje ajax zahtev za upis poruke u bazu.
@@ -449,7 +458,7 @@ $("#posaljiPoruku").on("click", function(){
 
 });
 
-/*
+/**
  * Otvara formu za slanje nove poruke
  */
 $("#posaljiNovu").on('click', function(){
@@ -462,7 +471,7 @@ $("#posaljiNovu").on('click', function(){
     });
 });
 
-/*
+/**
  * Dohvata sve poruke koje je primio ulogovan korisnik.
  */
 function dohvati_primljene(){
@@ -487,7 +496,7 @@ function dohvati_primljene(){
 
 }
 
-/*
+/**
  * Dohvata sve poruke koje je poslao ulogovan korisnik
  */
 function dohvati_poslate(){
@@ -511,7 +520,7 @@ function dohvati_poslate(){
     });
 }
 
-/*
+/**
  * Prikazuje podatke o poruci.
  * @param id: identifikator poruke koja se prikazuje
  */
@@ -541,7 +550,7 @@ function prikazi_poruku(id){
 }
 
 
-/*
+/**
  * Prikazuje podatke o poruci.
  * @param id: identifikator poruke koja se prikazuje
  */
@@ -567,8 +576,7 @@ function prikazi_primljenu(id){
     prikazi_poruku(id);
 }
 
-
-/*
+/**
  * Prikazuje podatke o poslatoj poruci.
  * @param id: identifikator poruke koja se prikazuje
  * @param read: sadrzi vrednost 0 ili 1 u zavisnosti od toga da li je procitana
@@ -595,6 +603,7 @@ $(document).ready(function () {
     $formaNoviClan.css(stilSkrivenihFormulara);
     $formaBrisanjeClana.css(stilSkrivenihFormulara);
     $formaIzmenaClana.css(stilSkrivenihFormulara);
+    $formaIzmenaLozinke.css(stilSkrivenihFormulara);
 
     $formaNovProjekat.css(stilSkrivenihFormulara);
     $formaNoviPrijatelj.css(stilSkrivenihFormulara);

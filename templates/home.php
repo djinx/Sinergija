@@ -23,6 +23,7 @@
             <tr><td id="email"> {{ session['Email'] }}  </td></tr>
         </table>
         <button type="button" class="expanded button" id="promeniPodatkeClan">Promeni podatke</button>
+        <button type="button" class="expanded button" id="promeniLozinkuClan">Promeni lozinku</button>
         <form action="../sql/odjavljivanje.php" method="post">
             <button type="submit" class="expanded button">Odjavi se</button>
         </form>
@@ -87,8 +88,7 @@
                                     <input type='text' id='naslovPoruke' name='naslovPoruke' >
                                 </label>
                                 <label> Poruka
-                                    <textarea id="tekstPoruke" name="tekstPoruke" rows="10" cols="5" required>
-                                    </textarea>
+                                    <textarea id="tekstPoruke" name="tekstPoruke" rows="10" cols="5" required></textarea>
                                 </label>
 
                                 <button type='button' name='posaljiPoruku' id='posaljiPoruku' class='expanded button'>Pošalji</button>
@@ -156,6 +156,8 @@
 {{ include('create_user.html') }}
 
 {{ include('update_user.html') }}
+
+{{ include('update_password.html') }}
 
 {{ include('create_task.html') }}
 
