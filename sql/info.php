@@ -558,45 +558,6 @@ switch($akcija){
         $preparedQuery->execute();
         $preparedQuery->close();
         break;
-    case 'promeni sifru':
-        $idKorisnika = intval($_SESSION['username']['idKorisnika']);
-        $errors = array();
-
-        // provera lozinke
-        $lozinka = null;
-        if(!empty($_POST["password"])){
-            $lozinka = $db->real_escape_string(trim($_POST["password"]));
-        }else{
-            $errors[] = "Molimo unesite lozinku!";
-        }
-
-        // provera ponovljene lozinke
-        if(!empty($_POST["passwordAgain"])){
-            $lozinkaPonovo = $db->real_escape_string(trim($_POST["passwordAgain"]));
-            if($lozinka != $lozinkaPonovo){
-                $errors[] = "Lozinke se ne poklapaju!";
-            }
-        }else{
-            $errors[] = "Molimo ponovite lozinku!";
-        }
-
-        if(empty($errors)){
-            $query = "UPDATE korisnik SET Sifra = ? WHERE idKorisnika = ?";
-            if($preparedQuery = $db->prepare($query)){
-                $preparedQuery->bind_param("si", $lozinka, $idKorisnika);
-                if($preparedQuery->execute()){
-                    $message = "Lozinka je promenjena!";
-                }else{
-                    $message = "Postoji problem sa promenom lozinke!";
-                }
-            }else{
-                $message = "Postoji problem sa ispunjenjem zahteva!";
-            }
-        }else{
-            $message = implode("; ", $errors);
-        }
-
-        break;
     default:
         break;
 }
