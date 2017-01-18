@@ -13,6 +13,7 @@ $db = Database::getInstance();
 
 $idKorisnika = intval($_SESSION['username']['idKorisnika']);
 $errors = array();
+$message = "";
 
 // provera lozinke
 $lozinka = null;
@@ -35,17 +36,20 @@ if(!empty($_POST["novaLozinkaAgain"])){
 if(empty($errors)){
     $query = "UPDATE korisnik SET Sifra = ? WHERE idKorisnika = ?";
     if($preparedQuery = $db->prepare($query)){
+        $lozinka = password_hash($lozinka, PASSWORD_BCRYPT);
         $preparedQuery->bind_param("si", $lozinka, $idKorisnika);
         if($preparedQuery->execute()){
             $message = "Lozinka je promenjena!";
         }else{
             $message = "Postoji problem sa promenom lozinke!";
+            die(var_dump($db->error));
         }
     }else{
         $message = "Postoji problem sa ispunjenjem zahteva!";
+        die(var_dump($db->error));
     }
 }else{
-    $message = implode("; ", $errors);
+    die(implode("; ", $errors));
 }
 
 header("Location: ../public/");
