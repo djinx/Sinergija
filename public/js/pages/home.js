@@ -7,6 +7,7 @@
  */
 var $formaNoviClan = $("#formular-noviClan");
 var $formaBrisanjeClana = $("#formular-brisanjeClana");
+var $formaIzmenaClana = $("#formular-izmenaClana");
 
 var $formaNovProjekat = $("#formular-novProjekat");
 var $formaNoviPrijatelj = $("#formular-noviPrijatelj");
@@ -125,6 +126,38 @@ $("#obrisiClana").on("click", function () {
     /*$("#forma-noviClan").on("submit", function (e) {
      e.preventDefault();
      })*/
+});
+
+$("#promeniPodatkeClan").on("click", function(){
+
+    $.ajax({
+        url: '../sql/info.php',
+        method: 'post',
+        data: {akcija: 'citaj_podatke_o_korisniku'},
+        success: function(rezultat){
+            console.log("Dohvaceni podaci o korisniku");
+            console.log(rezultat);
+            // telefon, email, nadimak
+            var podaci = rezultat.split("::");
+            $("#BrojTelefonaClana1").val(podaci[0]);
+            $("#EmailClana1").val(podaci[1]);
+            $("#NadimakClana1").val(podaci[2]);
+        },
+        error: function(rezultat){
+            console.log("Javila se greska pri dohvatanju podataka o korisniku");
+            console.log(rezultat);
+        }
+    });
+
+
+    $formaIzmenaClana.fadeIn("fast");
+
+    // Dugme za odustajanje
+    $("#odustaniOdIzmeniClana").on("click", function () {
+        $formaIzmenaClana.fadeOut("fast");
+        $('#forma-izmenaClana')[0].reset();
+    });
+
 });
 
 $("#kreirajObavezu").on("click", function () {
@@ -561,6 +594,7 @@ $(document).ready(function () {
 
     $formaNoviClan.css(stilSkrivenihFormulara);
     $formaBrisanjeClana.css(stilSkrivenihFormulara);
+    $formaIzmenaClana.css(stilSkrivenihFormulara);
 
     $formaNovProjekat.css(stilSkrivenihFormulara);
     $formaNoviPrijatelj.css(stilSkrivenihFormulara);
