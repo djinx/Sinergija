@@ -113,7 +113,7 @@
                             </label>
                             <p id="tekst"></p>
                             <div  class="wrapper" style="display: none;">
-                                <img src="../checkmark.png" class="read" />
+                                <img src="../public/assets/checkmark.png" class="read" />
                             </div>
                         </div>
                     </div>

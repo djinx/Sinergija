@@ -100,6 +100,10 @@ function ucitaj_timove(){
     });
 }
 
+function grupno_caskanje(){
+
+}
+
 /*
  * Pozivanje funkcija koje su neophodne za svaku stranicu.
  */

@@ -79,3 +79,28 @@ img.read{
     height: 110px;
     overflow: auto;
 }
+
+.chat-icon{
+    width:30px;
+    display:block;
+    height:25px;
+    text-decoration:none;
+}
+.chat-icon:before{
+    content: '';
+    background:url('../assets/chat_icon.png');
+    background-size:cover;
+    position:absolute;
+    width:30px;
+    height:25px;
+    margin-left:-30px;
+}
+.chat-icon:hover:before{
+    content: '';
+    background:url('../assets/chat_icon_hover.png');
+    background-size:cover;
+    position:absolute;
+    width:30px;
+    height:25px;
+    margin-left:-30px;
+}
