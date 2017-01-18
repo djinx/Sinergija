@@ -46,3 +46,21 @@ a.image_effect, a.image_effect:hover {
     border:1px solid grey;
     margin: 1px;
 }
+
+.unread{
+    font-size: 110%;
+    font-weight: bold;
+    font-style: italic;
+}
+
+div.read{
+    width: 90%;
+}
+
+img.read{
+    position: relative;
+    bottom: 0px;
+    right: 0px;
+    width: 30px;
+    height: 30px;
+}
