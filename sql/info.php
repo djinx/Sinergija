@@ -466,7 +466,7 @@ switch($akcija){
                 $poruka = str_replace(array("\\r\\n", "\\r", "\\n"), "<br/>", $poruka);
         ?>
                 <div id="<?php echo "m".$idPoruke; ?>" class="message <?php if(!$procitana) echo "unread"?> ">
-                    <a href="#" id="<?php echo "naslov".$idPoruke;?>" onclick="prikazi_poruku(<?php echo $idPoruke; ?>)">
+                    <a href="#" id="<?php echo "naslov".$idPoruke;?>" onclick="prikazi_primljenu(<?php echo $idPoruke; ?>)">
                         <?php echo $naslov ?>
                     </a>
                     <br/>
@@ -489,7 +489,7 @@ switch($akcija){
         break;
     case 'citaj_poslate':
         $idPosiljaoca = $_SESSION['username']['idKorisnika'];
-        $query = "SELECT `idPoruke`, `Nadimak`, `poruka`, `naslov`, `datum`
+        $query = "SELECT `idPoruke`, `Nadimak`, `poruka`, `naslov`, `datum`, `procitana`
                   FROM `privatna poruka` JOIN `korisnik` ON idPrimaoca=idKorisnika 
                   WHERE idPosiljaoca=?
                   ORDER BY datum DESC";
@@ -497,13 +497,13 @@ switch($akcija){
         $preparedQuery->bind_param("i", $idPosiljaoca);
 
         if ($preparedQuery->execute()) {
-            $preparedQuery->bind_result($idPoruke, $primaoc, $poruka, $naslov, $datum);
+            $preparedQuery->bind_result($idPoruke, $primaoc, $poruka, $naslov, $datum, $procitana);
             while ($preparedQuery->fetch()){
                 $poruka = str_replace(array("\\r\\n", "\\r", "\\n"), "<br/>", $poruka);
 
         ?>
                 <div id="<?php echo "m".$idPoruke; ?>" class="message">
-                    <a href="#" id="<?php echo "naslov".$idPoruke;?>" onclick="prikazi_poruku(<?php echo $idPoruke; ?>)">
+                    <a href="#" id="<?php echo "naslov".$idPoruke;?>" onclick="prikazi_poslatu(<?php echo $idPoruke; ?>, <?php echo $procitana; ?>)">
                         <?php echo $naslov ?>
                     </a>
                     <br/>
@@ -524,6 +524,17 @@ switch($akcija){
 
 
         <?php
+        break;
+    case 'procitaj_poruku':
+        $id = $_POST['id'];
+        $query =
+            " UPDATE `privatna poruka`
+              SET procitana = 1 
+              WHERE idPoruke = ?";
+        $preparedQuery = $db->prepare($query);
+        $preparedQuery->bind_param("i", $id);
+        $preparedQuery->execute();
+        $preparedQuery->close();
         break;
     default:
         break;

@@ -442,7 +442,7 @@ function dohvati_primljene(){
             var $listaPrimljenih =  $("div.primljenePoruke");
             $listaPrimljenih.empty();
             $listaPrimljenih.append(rezultat);
-            console.log("Dohvacene su poruke");
+            console.log("Dohvacene su primljene poruke");
             //console.log(rezultat);
             $listaPrimljenih.foundation();
         },
@@ -467,7 +467,7 @@ function dohvati_poslate(){
             var $listaPrimljenih =  $("div.poslatePoruke");
             $listaPrimljenih.empty();
             $listaPrimljenih.append(rezultat);
-            console.log("Dohvacene su poruke");
+            console.log("Dohvacene su poslate poruke");
             //console.log(rezultat);
             $listaPrimljenih.foundation();
         },
@@ -480,6 +480,7 @@ function dohvati_poslate(){
 
 /*
  * Prikazuje podatke o poruci.
+ * @param id: identifikator poruke koja se prikazuje
  */
 function prikazi_poruku(id){
     // citanje odgovarajucih podataka
@@ -501,10 +502,51 @@ function prikazi_poruku(id){
     $("#tekst").empty();
     $("#tekst").append(tekstPoruke);
 
-    $("#m"+id).removeClass("unread");
-
     $formaNovaPoruka.fadeOut("fast");
     $prikazPoruke.fadeIn("fast");
+    $("div.read").hide();
+}
+
+
+/*
+ * Prikazuje podatke o poruci.
+ * @param id: identifikator poruke koja se prikazuje
+ */
+function prikazi_primljenu(id){
+
+    // poruka je procitana i oduzimamo klasu unred odgovarajucem div-u
+    $("#m"+id).removeClass("unread");
+
+    //salje se zajax zahtev da se u bazu unese da je procitana poruka
+    $.ajax({
+        url: '../sql/info.php',
+        method: 'post',
+        data: {akcija: 'procitaj_poruku', id: id},
+        success: function(){
+            console.log("Uspesno procitana poruka");
+        },
+        error: function(rezultat){
+            console.log("Neuspesno procitana poruka");
+            console.log(rezultat);
+        }
+    });
+
+    prikazi_poruku(id);
+}
+
+
+/*
+ * Prikazuje podatke o poslatoj poruci.
+ * @param id: identifikator poruke koja se prikazuje
+ * @param read: sadrzi vrednost 0 ili 1 u zavisnosti od toga da li je procitana
+ */
+function prikazi_poslatu(id, read){
+    prikazi_poruku(id);
+
+    // ukoliko je procitana poruka prikazujemo checkmark
+    // kako bismo naglasili korisniku da je primalac procitao poruku
+    if(read)
+        $("div.read").show();
 }
 
 /*
