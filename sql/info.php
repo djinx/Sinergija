@@ -53,25 +53,7 @@ switch($akcija){
         $preparedQuery->close();
         break;
     case 'citaj_podatke_o_korisniku':
-        $id = $_SESSION['username']['idKorisnika'];
-        $query =
-            " SELECT `Telefon`, `E-mail`, `Nadimak`
-              FROM `korisnik`
-              WHERE `idKorisnika` = ?";
-        $preparedQuery = $db->prepare($query);
-        $preparedQuery->bind_param("i", $id);
-        if($preparedQuery->execute()){
-            $preparedQuery->bind_result($telefon, $email, $nadimak);
-            if($preparedQuery->fetch())
-                $message = $_SESSION['username']['Telefon'] . "::" . $_SESSION['username']['Email'] . "::" . $_SESSION['username']['Nadimak'];
-            else
-                echo "Nema rezultata";
-
-        }
-        else{
-            echo "Greska pri dohvatanju podataka o korisniku! Pokusajte ponovo!";
-        }
-
+        $message = $_SESSION['username']['Telefon'] . "::" . $_SESSION['username']['Email'] . "::" . $_SESSION['username']['Nadimak'];
         break;
     case 'citaj_neucesnike':
         $idProjekta = $_POST['id'];
