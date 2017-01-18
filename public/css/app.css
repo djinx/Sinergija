@@ -74,3 +74,8 @@ img.read{
 #zatvoriPoruku{
     position: absolute;
 }
+
+.poslatePoruke, .primljenePoruke{
+    height: 110px;
+    overflow: auto;
+}
