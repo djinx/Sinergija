@@ -26,9 +26,13 @@ $db = Database::getInstance();
      $preparedQuery = $db->prepare($fetch);
      $preparedQuery->bind_param("s", $primaoc);
 
-     $preparedQuery->execute();
-     $preparedQuery->bind_result($idPrimaoca);
-     $preparedQuery->fetch();
+     if($preparedQuery->execute()){
+         $preparedQuery->bind_result($idPrimaoca);
+         $preparedQuery->fetch();
+     }else{
+         echo "Postoji problem sa dohvatanjem informacija. Pokušajte ponovo!";
+     }
+
      $preparedQuery->close();
 
      echo $idPrimaoca;
@@ -53,7 +57,11 @@ $db = Database::getInstance();
      $preparedQuery = $db->prepare($query);
      $preparedQuery->bind_param("iiss", $posiljaoc, $idPrimaoca, $poruka, $naslov);
 
-     $preparedQuery->execute();
+     if($preparedQuery->execute()){
+
+     }else{
+         echo "Postoji problem sa slanjem poruke. Pokušajte ponovo!";
+     }
      $preparedQuery->close();
  }
 
