@@ -453,7 +453,7 @@ switch($akcija){
         break;
     case 'citaj_primljene':
         $idPrimaoca = $_SESSION['username']['idKorisnika'];
-        $query = "SELECT `idPoruke`, `Nadimak`, `poruka`, `naslov`, `datum`
+        $query = "SELECT `idPoruke`, `Nadimak`, `poruka`, `naslov`, `datum`, `procitana`
                   FROM `privatna poruka` JOIN `korisnik` ON idPosiljaoca=idKorisnika 
                   WHERE idPrimaoca=?
                   ORDER BY datum DESC";
@@ -461,10 +461,11 @@ switch($akcija){
         $preparedQuery->bind_param("i", $idPrimaoca);
 
         if ($preparedQuery->execute()) {
-            $preparedQuery->bind_result($idPoruke, $posiljaoc, $poruka, $naslov, $datum);
+            $preparedQuery->bind_result($idPoruke, $posiljaoc, $poruka, $naslov, $datum, $procitana);
             while ($preparedQuery->fetch()){
+                $poruka = str_replace(array("\\r\\n", "\\r", "\\n"), "<br/>", $poruka);
         ?>
-                <div id="<?php echo "m".$idPoruke; ?>" class="message">
+                <div id="<?php echo "m".$idPoruke; ?>" class="message <?php if(!$procitana) echo "unread"?> ">
                     <a href="#" id="<?php echo "naslov".$idPoruke;?>" onclick="prikazi_poruku(<?php echo $idPoruke; ?>)">
                         <?php echo $naslov ?>
                     </a>
@@ -498,6 +499,8 @@ switch($akcija){
         if ($preparedQuery->execute()) {
             $preparedQuery->bind_result($idPoruke, $primaoc, $poruka, $naslov, $datum);
             while ($preparedQuery->fetch()){
+                $poruka = str_replace(array("\\r\\n", "\\r", "\\n"), "<br/>", $poruka);
+
         ?>
                 <div id="<?php echo "m".$idPoruke; ?>" class="message">
                     <a href="#" id="<?php echo "naslov".$idPoruke;?>" onclick="prikazi_poruku(<?php echo $idPoruke; ?>)">

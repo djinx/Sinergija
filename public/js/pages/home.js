@@ -380,6 +380,10 @@ $("#osveziSadrzaj").on('click', function () {
     osvezi();
 });
 
+/*
+ * Ponovo ucitava sve poruke iz baze, brise sadrzaj
+ * forme za slanje poruke i sakriva tu formu i prikaz poruke.
+ */
 function osvezi() {
     $formaNovaPoruka.fadeOut("fast");
     $('#forma-novaPoruka')[0].reset();
@@ -389,6 +393,10 @@ function osvezi() {
 
 }
 
+
+/*
+ * Salje ajax zahtev za upis poruke u bazu.
+ */
 $("#posaljiPoruku").on("click", function(){
     var primaoc = $("#nadimakPrimaoca").val();
     var tekstPoruke = $.trim($("#tekstPoruke").val());
@@ -479,9 +487,9 @@ function prikazi_poruku(id){
     var posiljaoc = $.trim($("#posiljaoc" + id).text());
     var primaoc = $.trim($("#primaoc" + id).text());
     var datum = $.trim($("#datum" + id).text());
-    var tekstPoruke = $.trim($("#tekstPoruke" + id).text());
+    var tekstPoruke = $("#tekstPoruke" + id).html();
 
-    // upis procitaanih podataka u odgovarajuce elemente
+    // upis procitanih podataka u odgovarajuce elemente
     $("#naslov").empty();
     $("#naslov").append(naslov);
     $("#posiljaoc").empty();
@@ -492,6 +500,8 @@ function prikazi_poruku(id){
     $("#vreme").append(datum);
     $("#tekst").empty();
     $("#tekst").append(tekstPoruke);
+
+    $("#m"+id).removeClass("unread");
 
     $formaNovaPoruka.fadeOut("fast");
     $prikazPoruke.fadeIn("fast");
