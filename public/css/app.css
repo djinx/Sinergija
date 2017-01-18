@@ -53,12 +53,13 @@ a.image_effect, a.image_effect:hover {
     font-style: italic;
 }
 
-div.read{
+div.wrapper{
+    position: relative;
     width: 90%;
 }
 
 img.read{
-    position: relative;
+    position: absolute;
     bottom: 0px;
     right: 0px;
     width: 30px;

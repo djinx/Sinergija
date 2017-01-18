@@ -107,7 +107,7 @@
                                 <span id="vreme"></span>
                             </label>
                             <p id="tekst"></p>
-                            <div  class="read" style="display: none;">
+                            <div  class="wrapper" style="display: none;">
                                 <img src="../checkmark.png" class="read" />
                             </div>
                         </div>

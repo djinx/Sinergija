@@ -504,7 +504,7 @@ function prikazi_poruku(id){
 
     $formaNovaPoruka.fadeOut("fast");
     $prikazPoruke.fadeIn("fast");
-    $("div.read").hide();
+    $("div.wrapper").hide();
 }
 
 
@@ -546,7 +546,7 @@ function prikazi_poslatu(id, read){
     // ukoliko je procitana poruka prikazujemo checkmark
     // kako bismo naglasili korisniku da je primalac procitao poruku
     if(read)
-        $("div.read").show();
+        $("div.wrapper").show();
 }
 
 /*
