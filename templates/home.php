@@ -95,7 +95,10 @@
                                 <a href='#0' id='odustaniOdNovePoruke' class='expanded button'>Odustani</a>
                             </form>
                         </div>
-                        <div id="prikazPoruke" style='display: none;'>
+                        <div id="prikazPoruke">
+                            <button type="button" class="close-button" id="zatvoriPoruku">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                             <label> Naslov:
                                 <span id="naslov"></span>
                             </label>

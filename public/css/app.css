@@ -55,13 +55,22 @@ a.image_effect, a.image_effect:hover {
 
 div.wrapper{
     position: relative;
-    width: 90%;
+    width: 100%;
 }
 
 img.read{
     position: absolute;
     bottom: 0px;
-    right: 0px;
+    right: 15px;
     width: 30px;
     height: 30px;
+}
+
+#prikazPoruke{
+    position: relative;
+    display: none;
+}
+
+#zatvoriPoruku{
+    position: absolute;
 }

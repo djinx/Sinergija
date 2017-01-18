@@ -549,6 +549,11 @@ function prikazi_poslatu(id, read){
         $("div.wrapper").show();
 }
 
+$("#zatvoriPoruku").on("click", function () {
+    $prikazPoruke.fadeOut("fast");
+});
+
+
 /*
  * Pozivanje funkcija koje su neophodne za ovu stranicu.
  */
