@@ -456,29 +456,45 @@ switch($akcija){
         break;
     case 'citaj_primljene':
         $idPrimaoca = $_SESSION['username']['idKorisnika'];
-        $query = "SELECT `idPoruke`, `Nadimak`, `poruka`, `naslov`, `datum`, `procitana`
-                  FROM `privatna poruka` JOIN `korisnik` ON idPosiljaoca=idKorisnika 
-                  WHERE idPrimaoca=?
-                  ORDER BY datum DESC";
+        $query = 
+            "SELECT `idPoruke`, `Nadimak`, `poruka`, `naslov`, `datum`, `procitana`, `Slika`
+                FROM `privatna poruka` 
+                    JOIN `korisnik` ON idPosiljaoca = idKorisnika 
+                WHERE idPrimaoca = ?
+                ORDER BY datum DESC";
         if($preparedQuery = $db->prepare($query)){
             $preparedQuery->bind_param("i", $idPrimaoca);
 
             if ($preparedQuery->execute()) {
-                $preparedQuery->bind_result($idPoruke, $posiljaoc, $poruka, $naslov, $datum, $procitana);
+                $preparedQuery->bind_result($idPoruke, $posiljaoc, $poruka, $naslov, $datum, $procitana, $slika);
                 while ($preparedQuery->fetch()){
                     $poruka = str_replace(array("\\r\\n", "\\r", "\\n"), "<br/>", $poruka);
                     ?>
-                    <div id="<?php echo "m".$idPoruke; ?>" class="message <?php if(!$procitana) echo "unread"?> ">
-                        <a href="#" id="<?php echo "naslov".$idPoruke;?>" onclick="prikazi_primljenu(<?php echo $idPoruke; ?>)">
-                            <?php echo $naslov ?>
-                        </a>
-                        <br/>
-                        <span  id="<?php echo "posiljaoc".$idPoruke;?>" > <?php echo $posiljaoc;?> </span>
-                        <div  style='display: none;'>
-                        <span  id="<?php echo "primaoc".$idPoruke;?>" >
-                        <?php echo $_SESSION['username']['Nadimak'];?> </span>
-                            <span  id="<?php echo "datum".$idPoruke;?>" > <?php echo $datum;?> </span>
-                            <p  id="<?php echo "tekstPoruke".$idPoruke;?>"  > <?php echo $poruka;?> </p>
+                    <div id="<?php echo "m".$idPoruke; ?>" class="message <?php 
+                                                                    if(!$procitana){
+                                                                        echo "alert unread";
+                                                                    }else{
+                                                                        echo "success";
+                                                                    }
+                                                                  ?> callout clearfix">
+                        <img class="float-left" src="<?php echo $slika; ?>" width="51px;"/>
+                        <div class="float-left" style="padding-left: 5px;">
+                            <span id="<?php echo "naslov".$idPoruke;?>" onclick="prikazi_primljenu(<?php echo $idPoruke; ?>)" style="cursor: pointer;">
+                                <?php echo $naslov; ?>
+                            </span>
+                            <br>
+                            <span class="secondary label" id="<?php echo "posiljaoc".$idPoruke; ?>"><?php echo $posiljaoc; ?></span>
+                            <div style='display: none;'>
+                                <span id="<?php echo "primaoc".$idPoruke;?>">
+                                    <?php echo $_SESSION['username']['Nadimak'];?>
+                                </span>
+                                <span id="<?php echo "datum".$idPoruke;?>">
+                                    <?php echo $datum;?>
+                                </span>
+                                <p id="<?php echo "tekstPoruke".$idPoruke;?>">
+                                    <?php echo $poruka;?>
+                                </p>
+                            </div>
                         </div>
                     </div>
                     <?php
@@ -493,31 +509,42 @@ switch($akcija){
         break;
     case 'citaj_poslate':
         $idPosiljaoca = $_SESSION['username']['idKorisnika'];
-        $query = "SELECT `idPoruke`, `Nadimak`, `poruka`, `naslov`, `datum`, `procitana`
-                  FROM `privatna poruka` JOIN `korisnik` ON idPrimaoca=idKorisnika 
-                  WHERE idPosiljaoca=?
-                  ORDER BY datum DESC";
+        $query = 
+            "SELECT `idPoruke`, `Nadimak`, `poruka`, `naslov`, `datum`, `procitana`, `Slika`
+                FROM `privatna poruka` 
+                    JOIN `korisnik` ON idPrimaoca = idKorisnika
+                WHERE idPosiljaoca = ?
+                ORDER BY datum DESC";
         $preparedQuery = $db->prepare($query);
         $preparedQuery->bind_param("i", $idPosiljaoca);
 
         if ($preparedQuery->execute()) {
-            $preparedQuery->bind_result($idPoruke, $primaoc, $poruka, $naslov, $datum, $procitana);
+            $preparedQuery->bind_result($idPoruke, $primaoc, $poruka, $naslov, $datum, $procitana, $slika);
             while ($preparedQuery->fetch()){
                 $poruka = str_replace(array("\\r\\n", "\\r", "\\n"), "<br/>", $poruka);
 
         ?>
-                <div id="<?php echo "m".$idPoruke; ?>" class="message">
-                    <a href="#" id="<?php echo "naslov".$idPoruke;?>" onclick="prikazi_poslatu(<?php echo $idPoruke; ?>, <?php echo $procitana; ?>)">
-                        <?php echo $naslov ?>
-                    </a>
-                    <br/>
-                    <span  id="<?php echo "primaoc".$idPoruke;?>" > <?php echo $primaoc;?> </span>
-                    <div  style='display: none;'>
-                        <span  id="<?php echo "posiljaoc".$idPoruke;?>" >
-                             <?php echo $_SESSION['username']['Nadimak'];?>
+                <div id="<?php echo "m".$idPoruke; ?>" class="message callout clearfix">
+                    <img class="float-left" src="<?php echo $slika; ?>" width="51px;"/>
+                    <div class="float-left" style="padding-left: 5px;">
+                        <span href="#" id="<?php echo "naslov".$idPoruke;?>" onclick="prikazi_poslatu(<?php echo $idPoruke; ?>, <?php echo $procitana; ?>)">
+                            <?php echo $naslov ?>
                         </span>
-                        <span  id="<?php echo "datum".$idPoruke;?>" > <?php echo $datum;?> </span>
-                        <p  id="<?php echo "tekstPoruke".$idPoruke;?>" > <?php echo $poruka;?> </p>
+                        <br>
+                        <span class="secondary label" id="<?php echo "primaoc".$idPoruke; ?>">
+                            <?php echo $primaoc; ?>
+                        </span>
+                        <div style='display: none;'>
+                            <span id="<?php echo "posiljaoc".$idPoruke; ?>">
+                                 <?php echo $_SESSION['username']['Nadimak']; ?>
+                            </span>
+                            <span id="<?php echo "datum".$idPoruke; ?>">
+                                <?php echo $datum; ?>
+                            </span>
+                            <p id="<?php echo "tekstPoruke".$idPoruke;?>">
+                                <?php echo $poruka;?>
+                            </p>
+                        </div>
                     </div>
                 </div>
         <?php

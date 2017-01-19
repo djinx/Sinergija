@@ -49,9 +49,11 @@
         <div class="tabs-content" data-tabs-content="home-tabs">
             <div class="tabs-panel is-active" id="tab-sanduce">
                 <div class="row">
-                    <div class="small-12 medium-4 large-4 columns" id="dugmici">
-                        <button type="button" class="button" name="osveziSadrzaj" id="osveziSadrzaj">Osveži sadržaj</button>
-                        <button type="button" class="button" name="posaljiNovu" id="posaljiNovu">Pošalji poruku</button>
+                    <div class="small-12 medium-12 large-5 columns" id="dugmici">
+                        <div class="button-group">
+                            <button type="button" class="button" name="osveziSadrzaj" id="osveziSadrzaj">Osveži sadržaj</button>
+                            <button type="button" class="button" name="posaljiNovu" id="posaljiNovu">Pošalji poruku</button>
+                        </div>
 
                         <ul class="accordion" id="primljeneAcc" data-accordion="primljeneAcc" data-allow-all-closed="true" data-multi-expand="true">
                             <li class="accordion-navigation" data-accordion-item="" role="presentation">
@@ -74,7 +76,7 @@
                         </ul>
                     </div>
 
-                    <div class="small-12 medium-8 large-8 columns">
+                    <div class="small-12 medium-12 large-7 columns">
                         <div id="formular-novaPoruka" style='display: none;'>
                             <form id="forma-novaPoruka" data-abide novalidate>
                                 <label>
@@ -96,22 +98,30 @@
                             </form>
                         </div>
                         <div id="prikazPoruke">
-                            <button type="button" class="close-button" id="zatvoriPoruku">
+                            <button style="display:block;" type="button" class="close-button" id="zatvoriPoruku">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                            <label> Naslov:
-                                <span id="naslov"></span>
-                            </label>
-                            <label> Pošiljalac:
-                                <span id="posiljaoc"></span>
-                            </label>
-                            <label> Primalac:
-                                <span id="primalac"></span>
-                            </label>
-                            <label> Vreme:
-                                <span id="vreme"></span>
-                            </label>
-                            <p id="tekst"></p>
+                            <table class="hover">
+                                <tr>
+                                    <td>Naslov:</td>
+                                    <td><span id="naslov"></span></td>
+                                </tr>
+                                <tr>
+                                    <td>Pošiljalac:</td>
+                                    <td><span id="posiljaoc"></span></td>
+                                </tr>
+                                <tr>
+                                    <td>Primalac:</td>
+                                    <td><span id="primalac"></span></td>
+                                </tr>
+                                <tr>
+                                    <td>Vreme:</td>
+                                    <td><span id="vreme"></span></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><span id="tekst"></span></td>
+                                </tr>
+                            </table>
                             <div  class="wrapper" style="display: none;">
                                 <img src="../public/assets/checkmark.png" class="read" />
                             </div>
@@ -145,7 +155,7 @@
                         <button type="button" class="button" name="izmeniPrijatelja" id="izmeniPrijatelja">Izmeni</button>
                     </div>
                 </label>
-
+                
             </div>
         </div>
 

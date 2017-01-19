@@ -558,7 +558,7 @@ function prikazi_poruku(id){
 function prikazi_primljenu(id){
 
     // poruka je procitana i oduzimamo klasu unred odgovarajucem div-u
-    $("#m"+id).removeClass("unread");
+    $("#m"+id).removeClass("alert").removeClass("unread").addClass("success");
 
     //salje se zajax zahtev da se u bazu unese da je procitana poruka
     $.ajax({
