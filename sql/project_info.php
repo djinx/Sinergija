@@ -80,14 +80,14 @@ if(isset($_POST['idP']) && isset($_SESSION['username']['idKorisnika'])){
     $preparedQuery->close();
 
     $query =
-        " SELECT concat(ime, \" \", prezime, \" (\", nadimak, \")\") 
+        " SELECT ko.idKorisnika, concat(ime, \" \", prezime, \" (\", nadimak, \")\") 
           FROM korisnik k JOIN koordinira ko ON k.idKorisnika = ko.idKorisnika 
           WHERE ko.idTima = ? AND ko.idProjekta = ?  ";
     $preparedQuery = $db->prepare($query);
     $preparedQuery->bind_param("ii", $idTima, $idProjekta);
 
     if($preparedQuery->execute()){
-        $preparedQuery->bind_result($koordinator);
+        $preparedQuery->bind_result($idKoordinatora, $koordinator);
         $preparedQuery->fetch();
     }else{
         echo "Postoji problem sa dohvatanjem informacija. Pokušajte ponovo!";
@@ -99,7 +99,11 @@ if(isset($_POST['idP']) && isset($_SESSION['username']['idKorisnika'])){
     <h4>Naziv projekta: <?php echo $nazivProjekta; ?></h4>
 
     <h5>Tim: <?php echo $nazivTima; ?></h5>
-    <p>Koordinator tima: <?php echo $koordinator; ?></p>
+    <p>Koordinator tima: <?php  if($koordinator)
+                                    echo $koordinator;
+                                else
+                                    echo "Tim trenutno nema koordinatora na ovom projektu!";
+                        ?></p>
 
     <p> <?php echo $opis; ?> </p>
     <p> Datum početka rada na projektu: <?php echo $pocetakRada; ?> </p>
@@ -107,13 +111,17 @@ if(isset($_POST['idP']) && isset($_SESSION['username']['idKorisnika'])){
     <p> Datum kraja događaja: <?php echo $krajDogadjaja; ?> </p>
 
     <p>Koordinatori: <?php echo substr($koordinatori, 0, strlen($koordinatori)-2); ?></p>
+    <?php if(($_SESSION['username']['Tip'] == 'u') || ($_SESSION['username']['idKorisnika'] == $idKoordinatora)){ ?>
     <div class="button-group">
         <button type="button" class="button" onclick="dodaj_ucesnika(<?php echo $idProjekta; ?>)" >Dodaj učesnika</button>
         <button type="button" class="button" onclick="dodaj_koordinatora(<?php echo $idProjekta; ?>)" >Dodaj koordinatora</button>
         <button type="button" class="button" onclick="dodaj_prijatelja(<?php echo $idProjekta; ?>)" >Dodaj prijatelja</button>
         <button type="button" class="button" onclick="dodaj_obavezu(<?php echo $idProjekta; ?>)" > Dodaj obavezu </button>
+        <button type="button" class="button" onclick="zavrsi_projekat(<?php echo $idProjekta; ?>)" >Završi projekat</button>
     </div>
-    <button type="button" class="button" onclick="zavrsi_projekat(<?php echo $idProjekta; ?>)" >Završi projekat</button>
+    <?php
+    }
+    ?>
     <button class="expanded button" onclick="$('#informacije-Projekat').empty()">Sakrij</button>
 
 <?php
