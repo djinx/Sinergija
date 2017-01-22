@@ -524,7 +524,7 @@ function dohvati_poslate(){
  */
 function prikazi_poruku(id){
     // citanje odgovarajucih podataka
-    var naslov = $.trim($("a#naslov" + id + ":first").text());
+    var naslov = $.trim($("span#naslov" + id + ":first").text());
     var posiljaoc = $.trim($("#posiljaoc" + id).text());
     var primaoc = $.trim($("#primaoc" + id).text());
     var datum = $.trim($("#datum" + id).text());
@@ -541,9 +541,6 @@ function prikazi_poruku(id){
     $("#vreme").append(datum);
     $("#tekst").empty();
     $("#tekst").append(tekstPoruke);
-
-
-    console.log(primaoc);
 
     $formaNovaPoruka.fadeOut("fast");
     $prikazPoruke.fadeIn("fast");
