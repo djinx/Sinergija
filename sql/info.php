@@ -527,9 +527,9 @@ switch($akcija){
                 <div id="<?php echo "m".$idPoruke; ?>" class="message callout clearfix">
                     <img class="float-left" src="<?php echo $slika; ?>" width="51px;"/>
                     <div class="float-left" style="padding-left: 5px;">
-                        <span href="#" id="<?php echo "naslov".$idPoruke;?>" onclick="prikazi_poslatu(<?php echo $idPoruke; ?>, <?php echo $procitana; ?>)">
+                        <a href="#" id="<?php echo "naslov".$idPoruke;?>" onclick="prikazi_poslatu(<?php echo $idPoruke; ?>, <?php echo $procitana; ?>)">
                             <?php echo $naslov ?>
-                        </span>
+                        </a>
                         <br>
                         <span class="secondary label" id="<?php echo "primaoc".$idPoruke; ?>">
                             <?php echo $primaoc; ?>

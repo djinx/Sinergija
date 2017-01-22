@@ -119,7 +119,7 @@
                                     <td><span id="vreme"></span></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="2"><span id="tekst"></span></td>
+                                    <td colspan="2" class="tekstPoruke" ><span id="tekst"></span></td>
                                 </tr>
                             </table>
                             <div  class="wrapper" style="display: none;">
