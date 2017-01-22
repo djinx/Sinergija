@@ -32,14 +32,14 @@
     <div class="small-12 medium-9 columns">
 
         <ul class="tabs" data-tabs id="home-tabs">
-            <li class="tabs-title"><a href="#tab-obavestenja">Obaveštenja</a></li>
-            <li class="tabs-title is-active"><a href="#tab-sanduce">Sanduče</a></li>
+            <li class="tabs-title is-active"><a href="#tab-obavestenja">Obaveštenja</a></li>
+            <li class="tabs-title"><a href="#tab-sanduce">Sanduče</a></li>
             {% if session['Tip'] == 'u' %}
             <li class="tabs-title"><a href="#tab-administracija">Administracija</a></li>
             {% endif %}
         </ul>
         <div class="tabs-content" data-tabs-content="home-tabs">
-            <div class="tabs-panel " id="tab-obavestenja">
+            <div class="tabs-panel is-active" id="tab-obavestenja">
                 <div class="listaObavestenja">
 
                 </div>
@@ -47,7 +47,7 @@
             </div>
         </div>
         <div class="tabs-content" data-tabs-content="home-tabs">
-            <div class="tabs-panel is-active" id="tab-sanduce">
+            <div class="tabs-panel" id="tab-sanduce">
                 <div class="row">
                     <div class="small-12 medium-12 large-5 columns" id="dugmici">
                         <div class="button-group">
