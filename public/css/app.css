@@ -104,3 +104,10 @@ img.read{
     height:25px;
     margin-left:-30px;
 }
+
+td.tekstPoruke{
+    border: 2px solid silver;
+    border-radius: 5px;
+    heigth: 150px;
+    overflow: visible;
+}
