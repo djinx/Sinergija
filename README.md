@@ -1,7 +1,7 @@
 <p align="center"><img src="./public/assets/logo.png" width="300" ></p>
 
 ## Opis
-Sinergija je veb aplikacija čija je namena ubrzanje i poboljšanje praćenja rada u [Studentskoj organizaciji Matematičkog fakulteta OMIKRON](http://omikron.org.rs) (u daljem tekstu: OMIKRON). Omogućava članovima OMIKRON-a da na jednostavan način upravljaju svojim obavezama, kao i da ih pregledaju, čime se čitava komunikacija među članovima svodi na jedno mesto.
+Sinergija je veb aplikacija čija je namena ubrzanje i poboljšanje praćenja rada u [Studentskoj organizaciji Matematičkog fakulteta OMIKRON](http://omikron.org.rs) (u daljem tekstu: OMIKRON). Omogućava članovima OMIKRON-a da na jednostavan način upravljaju svojim obavezama, da ih pregledaju i da međusobno komuniciraju.
 
 ## Ciljevi
 1. Ubrzanje i poboljšanje rada u OMIKRON-u.
